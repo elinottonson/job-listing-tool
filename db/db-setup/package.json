@@ -1,0 +1,16 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db-init.js",
+  "scripts": {
+    "start": "node db-init.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.1",
+    "pg": "^8.7.1",
+    "sequelize": "^6.6.5"
+  }
+}
