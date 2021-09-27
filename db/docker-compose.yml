@@ -14,16 +14,16 @@ services:
 
   db_setup:
     container_name: db-setup
-    build: 
-      context: .
-      dockerfile: db-setup/Dockerfile
+    image: node:alpine
+    working_dir: /db_setup
     depends_on: 
       - db
     restart: "no"
     volumes:
-      - ./db-setup:/var/db-setup
+      - .:/db_setup
     links:
       - db  
+    command: /bin/sh -c "npm install | npm start"
 
   db_manager:
     container_name: db_manager
