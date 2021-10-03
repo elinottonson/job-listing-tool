@@ -14,10 +14,18 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
+function emailIsValid (email) {
+  return /\S+@\S+\.\S+/.test(email)
+}
+
 app.post('/api/login', bodyParser.json(), (req, res) => {
-  //let email = req.body.email;
-  //let password = request.body.password;
-  console.log(req.body);
-  //res.send(`Email: ${email} Password: ${password}`);
-  //res.send({ email: email, password: password }).then(() => console.log(`Received email: ${email}, password: ${password}`));
+  let email = req.body.email;
+  let password = req.body.password;
+
+  if (emailIsValid(email)) {
+    res.send({ email: email, password: password });
+  } else {
+    res.send(null);
+  }
+  console.log(`Received email: ${email}, password: ${password}`);
 });
