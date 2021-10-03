@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express()
 //For if a port is supplied as an enviroment variable
 const port = process.env.PORT || 3001
@@ -13,9 +14,10 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
-app.post('/api/login', (req, res) => {
-  let email = req.body.email;
-  let password = request.body.password;
+app.post('/api/login', bodyParser.json(), (req, res) => {
+  //let email = req.body.email;
+  //let password = request.body.password;
+  console.log(req.body);
   //res.send(`Email: ${email} Password: ${password}`);
-  res.send({ email: email, password: password }).then(() => console.log(`Received email: ${email}, password: ${password}`));
+  //res.send({ email: email, password: password }).then(() => console.log(`Received email: ${email}, password: ${password}`));
 });
