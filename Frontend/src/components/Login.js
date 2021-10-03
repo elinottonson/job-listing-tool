@@ -1,7 +1,15 @@
 import React from "react";
 
-const Login = () => {    
-    const [data, setData] = React.useState({ email: '', password: '' });
+const Login = ( setUser ) => {    
+    
+    const [ userInput, setUserInput ] = React.useState({ email: '', password: '' });
+
+    const validateAndSetUser = (user) => {
+        // TODO: validate user object
+
+        // set user if valid
+        setUser(user);
+    };
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -13,10 +21,12 @@ const Login = () => {
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
+            body: JSON.stringify(userInput)
         };
+
         console.log(`Sending request...`);
         console.log(options.body);
+
         fetch("/api/login", options)
             .then((res) => res.json())
             .then((data) => {
