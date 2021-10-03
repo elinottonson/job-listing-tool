@@ -13,6 +13,6 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
-app.get('/api/login', (req,res) => {
+app.post('/api/login', (req,res) => {
 
 });
