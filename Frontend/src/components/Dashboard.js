@@ -1,7 +1,7 @@
-const Dashboard = () => {
+const Dashboard = ( user ) => {
     return (
         <div>
-            
+            <p value={user} />
         </div>
     )
 }

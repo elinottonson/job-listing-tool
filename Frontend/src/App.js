@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 import React from 'react';
@@ -6,6 +5,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
   Link
 } from "react-router-dom";
 
@@ -14,17 +14,19 @@ import Dashboard from './components/Dashboard';
 
 function App() {
 
-  const [ user, setUser ] = React.useState(null);
+  const [ user, setUser ] = React.useState({});
 
   return (
     <Router>
-      <div className="App">
-        <Route exact path='/'>
-          {user === null ? <Redirect to='/dashboard'/> : <Login setUser={setUser}/>}
-        </Route>
-        <Route path='/dashboard'>
-          <Dashboard user={user} />
-        </Route>
+      <div className='App'>
+        <Switch>
+          <Route exact path='/'>
+            {Object.keys(user).length ? <Redirect to='/dashboard'/> : <Login setUser={setUser}/>}
+          </Route>
+          <Route path='/dashboard'>
+            {user === null ? <Redirect to='/' /> : <Dashboard user={user} />}
+          </Route>
+        </Switch>
       </div>
     </Router>
   );

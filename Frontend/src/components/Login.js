@@ -1,6 +1,6 @@
 import React from "react";
 
-const Login = ( setUser ) => {    
+const Login = ({ setUser }) => {    
     
     const [ userInput, setUserInput ] = React.useState({ email: '', password: '' });
 
@@ -14,13 +14,16 @@ const Login = ( setUser ) => {
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        setData(values => ({...values, [name]: value}));
+        setUserInput(values => ({...values, [name]: value}));
     }
 
     const handleSubmit = (event) => {
         const options = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(userInput)
         };
 
@@ -28,11 +31,16 @@ const Login = ( setUser ) => {
         console.log(options.body);
 
         fetch("/api/login", options)
-            .then((res) => res.json())
+            .then((res) =>  {
+                console.log(res);
+                res.json()
+            })
             .then((data) => {
-                setData(data.message)
+                console.log("Received Response:")
                 console.log(data)
-            });
+                validateAndSetUser(data)
+            })
+            .catch(e => { throw e; });
         event.preventDefault();
     };
 
