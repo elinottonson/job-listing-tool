@@ -6,7 +6,10 @@ const Login = () => {
     React.useEffect(() => {
         fetch("/api/login")
             .then((res) => res.json())
-            .then((data) => setData(data.message));
+            .then((data) => {
+                setData(data.message)
+                console.log(data)
+            });
     }, [])
 
     return (

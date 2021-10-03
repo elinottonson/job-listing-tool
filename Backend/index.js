@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 //For if a port is supplied as an enviroment variable
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -14,5 +14,5 @@ app.listen(port, () => {
 })
 
 app.post('/api/login', (req,res) => {
-
+  
 });
