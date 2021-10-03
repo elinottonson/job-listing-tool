@@ -16,5 +16,5 @@ app.listen(port, () => {
 app.post('/api/login', (req,res) => {
   let email = req.label.email;
   let password = req.label.password;
-  res.send(`Username: ${username} Password: ${password}`);
+  res.send(`Email: ${email} Password: ${password}`);
 });
