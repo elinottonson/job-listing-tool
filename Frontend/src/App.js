@@ -11,7 +11,6 @@ function App() {
       <header className="App-header">
         <Login/>
         <br/>
-        <button>Submit</button>
       </header>
     </div>
   );

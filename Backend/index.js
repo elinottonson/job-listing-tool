@@ -13,8 +13,9 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
-app.post('/api/login', (req,res) => {
-  let email = req.label.email;
-  let password = req.label.password;
-  res.send(`Email: ${email} Password: ${password}`);
+app.post('/api/login', (req, res) => {
+  let email = req.body.email;
+  let password = request.body.password;
+  //res.send(`Email: ${email} Password: ${password}`);
+  res.send({ email: email, password: password }).then(() => console.log(`Received email: ${email}, password: ${password}`));
 });
