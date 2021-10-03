@@ -19,13 +19,22 @@ function emailIsValid (email) {
 }
 
 app.post('/api/login', (req, res) => {
+  console.log('Received request:');
+  console.log(req.body);
+
   let email = req.body.email;
   let password = req.body.password;
 
   if (emailIsValid(email)) {
-    res.json({ email: email, password: password });
+    console.log("Email is valid.");
+    let obj = 
+    res.send(
+      { 
+        email: email, 
+        password: password 
+      }
+    );
   } else {
     res.send(null);
   }
-  console.log(`Received email: ${email}, password: ${password}`);
 });

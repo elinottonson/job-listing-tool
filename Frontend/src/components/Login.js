@@ -38,7 +38,7 @@ const Login = ({ setUser }) => {
             .then((data) => {
                 console.log("Received Response:")
                 console.log(data)
-                validateAndSetUser(data)
+                //validateAndSetUser(data)
             })
             .catch(e => { throw e; });
         event.preventDefault();
