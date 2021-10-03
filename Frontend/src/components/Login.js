@@ -1,4 +1,14 @@
+import React from "react";
+
 const Login = () => {    
+    const [data, setData] = React.useState(null);
+
+    React.useEffect(() => {
+        fetch("/api/login")
+            .then((res) => res.json())
+            .then((data) => setData(data.message));
+    }, [])
+
     return (
         <div>
             <form>
