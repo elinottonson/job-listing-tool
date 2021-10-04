@@ -33,12 +33,12 @@ const Login = ({ setUser }) => {
         fetch("/api/login", options)
             .then((res) =>  {
                 console.log(res);
-                res.json()
+                return res.json()
             })
             .then((data) => {
                 console.log("Received Response:")
                 console.log(data)
-                //validateAndSetUser(data)
+                validateAndSetUser(data)
             })
             .catch(e => { throw e; });
         event.preventDefault();
