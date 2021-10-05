@@ -1,5 +1,6 @@
-const { Sequelize } = require('sequelize');
+// WARNING: running this file resets the "Employees" and "Positions" table in the heroku db
 
+const { Sequelize } = require('sequelize');
 const  {PostionSchema, EmployeeSchema} = require('./schemas')
 
 // get json files for raw data
@@ -20,8 +21,18 @@ positions = [
  
 // initialize connection with sql server
 const sequelize = new Sequelize(
-    'postgres://root:root@db:5432/test_db',
-    {logging: false})
+    'postgres://ateoqtukwcosay:518fff8bf0cb7f7b787ee5c3d6ab708aae528a021a700b8ed17d14cbdc0ca6b2@ec2-44-199-26-122.compute-1.amazonaws.com:5432/d85nkorsu3068a',
+    {
+        logging: false,
+        dialect: 'postgres',
+        sqlConnectionSsl: true,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
+    })
 
 // Create models for each table
 const Position = sequelize.define('Positions', PostionSchema)
