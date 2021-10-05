@@ -1,4 +1,4 @@
-const modal = require('../db/db-init.js')
+const model = require('../db/db-init.js')
 
 /**
  * Finds a user from a given username/password
@@ -7,10 +7,10 @@ const modal = require('../db/db-init.js')
  * @returns the user object, if found, otherwise false
  */
 async function doCredentialsMatch(email, password) {
-  const isSetup = await modal.isSetup();
+  const isSetup = await model.isSetup();
   console.log('x', isSetup)
   if (!isSetup) return false;
-  const employees = await modal.Employee.findAll({
+  const employees = await model.Employee.findAll({
     where: {
       email: email,
       password: password,
