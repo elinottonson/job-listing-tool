@@ -1,7 +1,7 @@
 const Dashboard = ( user ) => {
     return (
         <div>
-            <p value={user} />
+            <p>{JSON.stringify(user)}</p>
         </div>
     )
 }

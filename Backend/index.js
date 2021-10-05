@@ -27,13 +27,7 @@ app.post('/api/login', (req, res) => {
 
   if (emailIsValid(email)) {
     console.log("Email is valid.");
-    let obj = 
-    res.send(
-      { 
-        email: email, 
-        password: password 
-      }
-    );
+    res.send({ email: email, password: password });
   } else {
     res.send(null);
   }
