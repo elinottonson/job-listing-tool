@@ -22,7 +22,7 @@ const Login = ({ setUser }) => {
     event.preventDefault();
 
     //checks to see if email or password have invalid characters such as quotations
-    if (!(/^(?!.*['"*&^%$#!]).*/.test(userInput['email'])) || !(/^(?!.*['"])/.test(userInput['password']))) {
+    if (!(/^(?!.*['"]).*/.test(userInput['email'])) || !(/^(?!.*['"])/.test(userInput['password']))) {
       console.log(/^(?!.*['"*&^%$#!]).*/.test(userInput['email']));
       alert("Invalid Characters Entered!");
     }
