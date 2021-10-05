@@ -55,17 +55,18 @@ const Login = ({ setUser }) => {
         })
         .catch(e => { throw e; });
     }
-
-
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='login-container'>
+      <form onSubmit={handleSubmit} className='login-form'>
         <label for="email">Email:</label><br />
-        <input type="text" onChange={handleChange} id="fname" name="email" /><br />
-        <label for="password">Password:</label><br />
+        <input type="text" onChange={handleChange} id="fname" name="email" />
+        <br/>
+        <label for="password">Password:</label>
+        <br/>
         <input type="password" onChange={handleChange} id="lname" name="password" />
+        <br/>
         <input type='submit' value='Submit' />
       </form>
     </div>
