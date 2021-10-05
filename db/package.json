@@ -5,6 +5,7 @@
   "main": "db-init.js",
   "scripts": {
     "upload-raw-data": "node db-init.js"
+    "start": "node db-init.js"
   },
   "author": "",
   "license": "ISC",

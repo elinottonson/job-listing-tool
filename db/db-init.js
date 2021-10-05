@@ -1,7 +1,6 @@
 // WARNING: running this file resets the "Employees" and "Positions" table in the heroku db
 
 const { Sequelize } = require('sequelize');
-
 const  {PostionSchema, EmployeeSchema} = require('./schemas')
 
 // get json files for raw data
@@ -42,6 +41,7 @@ const Employee = sequelize.define('Employees', EmployeeSchema)
 
 // Connects to SQL server, inserts raw data and closes connection
 async function main(){
+    // try authenticating 10 times, waiting 200 ms between each retry
      sequelize.authenticate()
     .then(() => console.log("\nConnected with SQL server! ⚡\n"))
     .then(createEmployeeTable)
