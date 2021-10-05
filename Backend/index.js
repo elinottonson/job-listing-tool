@@ -1,4 +1,5 @@
 const express = require('express')
+const { doCredentialsMatch } = require('./databaseInterface')
 const app = express()
 //For if a port is supplied as an enviroment variable
 const port = process.env.PORT || 3001
@@ -18,7 +19,7 @@ function emailIsValid (email) {
   return /\S+@\S+\.\S+/.test(email)
 }
 
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
   console.log('Received request:');
   console.log(req.body);
 
@@ -27,8 +28,15 @@ app.post('/api/login', (req, res) => {
 
   if (emailIsValid(email)) {
     console.log("Email is valid.");
-    res.send({ email: email, password: password });
+    const user = await doCredentialsMatch(email,password);
+    if(user){
+      res.send({ user:user });
+    } else {
+      res.status(400)
+      res.send({Error:'Invalid username and/or password'});
+    }
   } else {
-    res.send(null);
+    res.status(400)
+    res.send({Error:'Invalid email'});
   }
 });
