@@ -19,6 +19,7 @@ input {
 }
 #email-invalid {
     border: 1px solid red;
+    border-radius: 2px;
 }
 
 label {
@@ -28,4 +29,10 @@ label {
 
 #submit {
     margin: 10px 60px;
+}
+
+#err-msg {
+    text-align: left;
+    color: red;
+    margin: 0;
 }

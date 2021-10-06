@@ -24,7 +24,7 @@ function App() {
             {Object.keys(user).length ? <Redirect to='/dashboard'/> : <Login setUser={setUser}/>}
           </Route>
           <Route path='/dashboard'>
-            {user === null ? <Redirect to='/' /> : <Dashboard user={user} />}
+            {!Object.keys(user).length ? <Redirect to='/' /> : <Dashboard user={user} />}
           </Route>
         </Switch>
       </div>

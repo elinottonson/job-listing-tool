@@ -8,6 +8,7 @@ const Login = ({ setUser }) => {
   const emailText = React.useRef(null); // for auto-fill workaround
   const [userInput, setUserInput] = React.useState({ email: '', password: '' });
   const [validEmail, setValidEmail] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState({ error: false, msg: '' });
   const [loading, setLoading] = React.useState(false);
 
   const validateAndSetUser = (user) => {
@@ -48,6 +49,7 @@ const Login = ({ setUser }) => {
     event.preventDefault();
 
     if(!validEmail) {
+      setErrorMsg({ error: true, msg: 'Please enter a valid email.'});
       setLoading(false);
     }
     else {
@@ -84,7 +86,6 @@ const Login = ({ setUser }) => {
     Credit to this guy: https://flaviocopes.com/react-form-browser-autofill/
   */
   React.useEffect(() => {
-
     let interval = setInterval(() => {
       if(emailText.current) {
         setUserInput(v => ({ ...v, email: emailText.current.value }));
@@ -103,16 +104,14 @@ const Login = ({ setUser }) => {
   return (
     <div className='login-container'>
       <form onSubmit={handleSubmit} className='login-form'>
-        <label for='email'>Email:</label><br />
-        <input type='email' name='email' ref={emailText} id={
+        <label for='email'>Email:</label>
+        <input type='text' name='email' ref={emailText} id={
           validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'
         } />
-        <br/>
         <label for='password'>Password:</label>
-        <br/>
         <input type='password' onChange={handleChange} id='password' name='password' />
-        <br/>
-        <input type='submit' value='Submit' id='submit'/>
+        {errorMsg.error ? <p id='err-msg'>{ errorMsg.msg }</p> : <></>}
+        <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit'/>
       </form>
     </div>
   );
