@@ -103,6 +103,7 @@ const Login = ({ setUser }) => {
   */
   return (
     <div className='login-container'>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit} className='login-form'>
         <label for='email'>Email:</label>
         <input type='text' name='email' ref={emailText} id={
