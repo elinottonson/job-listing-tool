@@ -1,15 +1,17 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 
 
 const EmployeeSchema = {
+    id:{
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+    },
     firstName : {
         type: DataTypes.STRING,
         },
     lastName : {
         type: DataTypes.STRING,
-        },
-    employeeId : {
-        type: DataTypes.INTEGER,
         },
     email : {
         type: DataTypes.STRING,
@@ -21,7 +23,7 @@ const EmployeeSchema = {
         type: DataTypes.STRING,
         },
     managerId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         },
     positionTitle : {
         type: DataTypes.STRING,
@@ -38,6 +40,14 @@ const EmployeeSchema = {
 }
 
 const PostionSchema = {
+        id:{
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
+        },
+        hiringManagerId:{
+            type: DataTypes.UUID,
+        },
         title : {
             type: DataTypes.STRING,
             },
@@ -58,4 +68,35 @@ const PostionSchema = {
             },
         }
 
-module.exports =   {PostionSchema, EmployeeSchema}
+const ReferralSchema = {
+    id:{
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+    },
+    fname: {
+        type: DataTypes.STRING
+    },
+    lname: {
+        type:DataTypes.STRING
+    },
+    email: {
+        type:DataTypes.STRING
+    },
+    description:{
+        type: DataTypes.STRING,
+    },
+    authorId: {
+        type:DataTypes.UUID
+    },
+    companyId: {
+        type:DataTypes.INTEGER
+    },
+    postingId: {
+        type:DataTypes.UUID
+    },
+
+}
+
+
+module.exports =   {PostionSchema, EmployeeSchema, ReferralSchema}
