@@ -21,7 +21,7 @@ const positions = [
  
 // initialize connection with sql server
 const sequelize = new Sequelize(
-    'postgres://ateoqtukwcosay:518fff8bf0cb7f7b787ee5c3d6ab708aae528a021a700b8ed17d14cbdc0ca6b2@ec2-44-199-26-122.compute-1.amazonaws.com:5432/d85nkorsu3068a',
+    'postgres://root:root@0.0.0.0:5432/test_db',
     {
         logging: false,
         dialect: 'postgres',

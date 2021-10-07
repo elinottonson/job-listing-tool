@@ -1,6 +1,6 @@
 // demo to connect the Sequelize
 
-const { Sequelize } = require('sequelize');
+const { Sequelize, Op } = require('sequelize');
 const  {PostionSchema, EmployeeSchema} = require('./schemas')
 
 // initialize connection with sql server
@@ -16,18 +16,33 @@ const Employee = sequelize.define('Employees', EmployeeSchema)
 // change this function to find the data
 // "node db/demo.js"
 async function main(){
-     sequelize.authenticate()
-    .then(() => console.log("\nConnected with SQL server! ⚡\n"))
-    .then(() => {
-        return Position.findAll({
+    await sequelize.authenticate()
+    console.log("\nConnected with SQL server! ⚡\n")
+    console.log("\nFinding one Software Engineer I position\n")
+
+    result = await Position.findOne({
             where: {
                 title:'Software Engineer I'
-            }
+            },
+            raw: true
+
         })
-    })
-    .then(console.log)
-    .then(() => {sequelize.close()})
-    .catch(console.error)
+    console.log(result)
+    console.log("\nFinding all positions with salary less than 70,000 or exactly 100,000\n")
+    result = await Position.findAll({
+            where: {
+                salary:
+{                [Op.or]: {
+                    [Op.lt]: 70000,
+                    [Op.eq]: 100000
+                }}
+            },
+            raw: true
+        })
+
+    console.log(result)
+    await sequelize.close()
 }
+    
 
 main()
