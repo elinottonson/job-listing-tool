@@ -1,0 +1,38 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 300px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+input {
+    outline: none;
+    padding: 10px;
+}
+#email-valid:focus {
+    
+}
+#email-invalid {
+    border: 1px solid red;
+    border-radius: 2px;
+}
+
+label {
+    text-align: left;
+    margin-top: 10px;
+}
+
+#submit {
+    margin: 10px 60px;
+}
+
+#err-msg {
+    text-align: left;
+    color: red;
+    margin: 0;
+}
