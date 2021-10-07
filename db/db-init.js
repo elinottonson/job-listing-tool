@@ -3,6 +3,8 @@
 const { Sequelize } = require('sequelize');
 const  {PostionSchema, EmployeeSchema} = require('./schemas')
 
+let _is_setup = false;
+
 // get json files for raw data
 const employees_birdseye = require("./raw_data/Birdseye_Entertainment-employees.json")
 const employees_fuzzy = require("./raw_data/Fuzzy_Alpaca_Consulting-employees.json")
@@ -40,14 +42,14 @@ const Employee = sequelize.define('Employees', EmployeeSchema)
 
 
 // Connects to SQL server, inserts raw data and closes connection
-async function main(){
+function main(){
     // try authenticating 10 times, waiting 200 ms between each retry
-     sequelize.authenticate()
+    return sequelize.authenticate()
     .then(() => console.log("\nConnected with SQL server! ⚡\n"))
     .then(createEmployeeTable)
     .then(createPositionsTable)
     .then(() => console.log("Success, data is live now! 🚀\n"))
-    .then(() => {sequelize.close()})
+    .then(() => {_is_setup = true})
     .catch(console.error)
 }
 
@@ -80,9 +82,9 @@ function addField(l, name, value){
  * false otherwise 
  */
 async function isSetup(){
-    //TODO for database team
-    await main();
-    return true;
+    if(!_is_setup)
+        await main()
+    return _is_setup;
 }
 
 /**
@@ -92,7 +94,7 @@ async function isSetup(){
  */
  async function reset(){
     //TODO for database team
-    await main();
+    // await main();
     return true;
 }
 
