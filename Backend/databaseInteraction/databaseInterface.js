@@ -7,14 +7,15 @@ const {models} = require('../sequelizeSetup/sequalizeConstructor')
  * @returns the user object, if found, otherwise false
  */
 async function doCredentialsMatch(email, password) {
-  const employees = await models.Employee.findAll({
+  const employee = await models.Employee.findOne({
+    raw:true,
     attributes: { exclude: ['password','email'] },
     where: {
       email: email,
       password: password,
     }
   });
-  if (employees.length) return employees[0].dataValues;
+  if (employee) return employee;
   return false;
 }
 
