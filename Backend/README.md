@@ -13,3 +13,10 @@
 - Specify where the public folder is in the `index.js` file so the files can be served 
     (currently set to the public forlder in backend, likely will have to change based on frontend's public folder)
 
+## sequelizeSetup Folder
+- Contains the files that setup the sequelize ORM in the backend. A copy of the structure of the database is stored here split into tables in the `Models` folder. This is neccessary for queries so as the database structure is updated these models also need to be updated.
+- Also contains the `sequalizeConstructor.js` file which is the file that will be imported when you want to make a call to the database. To make a call, import the sequalize object, and run `sequalize.models.[the modelName]` and then the sequalize query of choice (go to [link](https://sequelize.org/master/manual/model-querying-basics.html) to read up on possible queries)
+
+## databaseInteraction Folder
+- Contains the files that interact with the sequalize ORM, as well as the associated unit tests for them. The tests can be run with the command `npm test` in the Backend folder.
+

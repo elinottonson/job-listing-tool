@@ -18,7 +18,7 @@ describe('doCredentialsMatch testing', () => {
     return expect(doCredentialsMatch(Email, 'fake')).resolves.toBe(false);
   })
 
-  it('Correct Credentials', async () => {
+  it('Correct Credentials', () => {
     return expect(doCredentialsMatch(Email, Password)).resolves.toEqual(
       expect.objectContaining({
         "id": expect.any(Number),

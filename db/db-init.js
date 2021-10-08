@@ -73,34 +73,4 @@ function addField(l, name, value){
     return l.map(obj=> ({ ...obj, [name]: value }))
 }
 
-/**
- * Sets up the database if it isn't already setup, and returns a boolean value
- * if it is setup correctly
- * @returns true if the database was setup correctly, or was already setup, 
- * false otherwise 
- */
-async function isSetup(){
-    //TODO for database team
-    await main();
-    return true;
-}
-
-/**
- * Resets the database for testing
- * @returns A promise that evalutes to true if the database has been reset
- * successfully for test, otherwise false
- */
- async function reset(){
-    //TODO for database team
-    await main();
-    return true;
-}
-
-/**
- * Exports to be used in the databaseInterface file, currently uses the 
- * following:
- *  isSetup: Determining if the db is setup
- *  Employee: for getting the user for login
- *  reset: reset database for testing
- */
 module.exports = {isSetup,Employee,reset}
