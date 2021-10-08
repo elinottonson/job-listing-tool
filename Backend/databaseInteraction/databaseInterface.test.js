@@ -15,7 +15,7 @@ describe('doCredentialsMatch testing', () => {
   })
 
   it('Invalid Password', () => {
-    return expect(doCredentialsMatch('fake', Password)).resolves.toBe(false);
+    return expect(doCredentialsMatch(Email, 'fake')).resolves.toBe(false);
   })
 
   it('Correct Credentials', async () => {
