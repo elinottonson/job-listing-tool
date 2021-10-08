@@ -72,5 +72,3 @@ async function createPositionsTable(){
 function addField(l, name, value){
     return l.map(obj=> ({ ...obj, [name]: value }))
 }
-
-module.exports = {isSetup,Employee,reset}
