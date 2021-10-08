@@ -1,5 +1,5 @@
 const express = require('express')
-const { doCredentialsMatch } = require('./databaseInterface')
+const { doCredentialsMatch } = require('./databaseInteraction/databaseInterface')
 const app = express()
 //For if a port is supplied as an enviroment variable
 const port = process.env.PORT || 3001
