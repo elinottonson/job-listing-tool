@@ -19,7 +19,7 @@ module.exports = {
     'linebreak-style': ['warn', 'windows'],
     'quotes': ['warn', 'single'],
     'semi': ['warn', 'always'],
-    'max-len': ['warn', { code: 80 }],
+    'max-len': ['warn', { code: 120 }],
     'object-property-newline':['warn'],
     'quote-props': ['warn','consistent-as-needed'],
     'space-infix-ops':['warn']
