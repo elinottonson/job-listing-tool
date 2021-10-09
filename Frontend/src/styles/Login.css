@@ -36,4 +36,17 @@ label {
     text-align: left;
     color: red;
     margin: 0;
+    font-size: 0.8rem;
+}
+
+#forgot-password {
+    text-align: right;
+    width: max-content;
+    align-self: flex-end;
+    margin: 0;
+    font-size: 0.8rem;
+}
+#forgot-password:hover {
+    cursor: pointer;
+    color: #666666;
 }

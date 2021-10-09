@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './../styles/Login.css';
 
@@ -155,7 +156,8 @@ const Login = ({ setUser }) => {
         } />
         <label for='password'>Password:</label>
         <input type='password' onChange={handleChange} id='password' name='password' />
-        {errorMsg.error ? <p id='err-msg'>{ errorMsg.msg }</p> : <></>}
+        <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
+        <p id='forgot-password'>Forgot Password?</p>
         <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit'/>
       </form>
     </div>
