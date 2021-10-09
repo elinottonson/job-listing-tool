@@ -5,10 +5,10 @@ const {models} = require('../sequelizeSetup/sequalizeConstructor');
  *
  * @param {string} email the email address of the user trying to be found
  * @param {string} password the password of the user trying to be found
- * @returns {boolean | object} the user object, if found, otherwise false
+ * @returns {object?} the user object, if found, otherwise null
  */
-async function doCredentialsMatch(email, password) {
-  const employee = await models.Employee.findOne({
+function doCredentialsMatch(email, password) {
+  return models.Employee.findOne({
     raw:true,
     attributes: { exclude: ['password','email'] },
     where: {
@@ -16,8 +16,6 @@ async function doCredentialsMatch(email, password) {
       password: password,
     }
   });
-  if (employee) return employee;
-  return false;
 }
 
 module.exports = { doCredentialsMatch };

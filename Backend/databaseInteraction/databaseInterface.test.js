@@ -11,11 +11,11 @@ describe('doCredentialsMatch testing', () => {
   const Password = 'larsenel';
 
   it('Invalid Email', () => {
-    return expect(doCredentialsMatch('fake', Password)).resolves.toBe(false);
+    return expect(doCredentialsMatch('fake', Password)).resolves.toBe(null);
   });
 
   it('Invalid Password', () => {
-    return expect(doCredentialsMatch(Email, 'fake')).resolves.toBe(false);
+    return expect(doCredentialsMatch(Email, 'fake')).resolves.toBe(null);
   });
 
   it('Correct Credentials', () => {
