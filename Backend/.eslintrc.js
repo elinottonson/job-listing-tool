@@ -22,20 +22,6 @@ module.exports = {
     'max-len': ['warn', { code: 80 }],
     'object-property-newline':['warn'],
     'quote-props': ['warn','consistent-as-needed'],
-    'space-infix-ops':['warn'],
-    'array-element-newline': [
-      'warn',
-      {
-        minItems: 3,
-        multiline: true
-      }
-    ],
-    'array-bracket-newline': [
-      'warn',
-      {
-        minItems: 3,
-        multiline: true
-      }
-    ]
+    'space-infix-ops':['warn']
   }
 };
