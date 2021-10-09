@@ -1,7 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
 import './../styles/Login.css';
+
+import React from 'react';
 
 /*
   email/pw for testing:
@@ -37,12 +36,12 @@ const Login = ({ setUser }) => {
   const [loading, setLoading] = React.useState(false);
 
   const validateAndSetUser = (user) => {
-    // TODO: validate user object
     let userObj = user.user;
     let validUser = false;
     let userKeys = Object.keys(userObj);
     
-    validUser = userKeys.includes("id") && userKeys.includes("employeeId") && userKeys.includes("companyId") && userKeys.includes("managerId") && userKeys.includes("isManager");
+    validUser = userKeys.includes("id") && userKeys.includes("employeeId") && userKeys.includes("companyId") && 
+                userKeys.includes("managerId") && userKeys.includes("isManager");
 
     // set user if valid
     if(validUser) {
