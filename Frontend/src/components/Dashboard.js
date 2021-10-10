@@ -1,9 +1,19 @@
+import Header from './Header';
+import DashboardNav from './DashboardNav';
+import JobListings from './JobListings';
+
 const Dashboard = ( user ) => {
     return (
         <div>
-            <p>{JSON.stringify(user)}</p>
+            <Header />
+            <DashboardNav />
+            <JobListings />
+            <p>{
+                // Temp
+                JSON.stringify(user)
+            }</p>
         </div>
     )
 }
 
-export default Dashboard
+export default Dashboard;
