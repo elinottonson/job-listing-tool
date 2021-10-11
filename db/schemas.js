@@ -23,7 +23,7 @@ const EmployeeSchema = {
         type: DataTypes.STRING,
         },
     managerId: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         },
     positionTitle : {
         type: DataTypes.STRING,
@@ -40,33 +40,33 @@ const EmployeeSchema = {
 }
 
 const PostionSchema = {
-        id:{
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            primaryKey: true
-        },
-        hiringManagerId:{
-            type: DataTypes.UUID,
-        },
-        title : {
-            type: DataTypes.STRING,
-            },
-        companyName:{
-            type: DataTypes.STRING,
-        },
-        description : {
-            type: DataTypes.STRING,
-        },
-        minYearsExperience : {
-            type: DataTypes.INTEGER,
-            },
-        salary : {
-            type: DataTypes.INTEGER,
-            },
-        tags : {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            },
-        }
+    id:{
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+    },
+    managerId:{
+        type: DataTypes.INTEGER,
+    },
+    title : {
+        type: DataTypes.STRING,
+    },
+    companyName:{
+        type: DataTypes.STRING,
+    },
+    description : {
+        type: DataTypes.STRING,
+    },
+    minYearsExperience : {
+        type: DataTypes.INTEGER,
+    },
+    salary : {
+        type: DataTypes.INTEGER,
+    },
+    tags : {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+    },
+}
 
 const ReferralSchema = {
     id:{
