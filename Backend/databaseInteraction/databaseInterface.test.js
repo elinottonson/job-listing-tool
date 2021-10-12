@@ -1,4 +1,5 @@
-const { doCredentialsMatch } = require('./databaseInterface');
+const doCredentialsMatch = require('./doCredentialsMatch');
+const getPositions = require('./getPositions');
 
 afterAll(() => {return new Promise(done => {
   // Closing the DB connection allows Jest to exit successfully.
@@ -10,16 +11,16 @@ describe('doCredentialsMatch testing', () => {
   const Email = 'Elise_Larsen@techgenix.com';
   const Password = 'larsenel';
 
-  it('Invalid Email', () => {
-    return expect(doCredentialsMatch('fake', Password)).resolves.toBe(null);
+  test('Invalid Email', async () => {
+    expect(await doCredentialsMatch('fake', Password)).toBe(null);
   });
 
-  it('Invalid Password', () => {
-    return expect(doCredentialsMatch(Email, 'fake')).resolves.toBe(null);
+  test('Invalid Password', async () => {
+    expect(await doCredentialsMatch(Email, 'fake')).toBe(null);
   });
 
-  it('Correct Credentials', () => {
-    return expect(doCredentialsMatch(Email, Password)).resolves.toEqual(
+  test('Correct Credentials', async () => {
+    expect(await doCredentialsMatch(Email, Password)).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
         firstName: expect.any(String),
@@ -34,5 +35,36 @@ describe('doCredentialsMatch testing', () => {
         createdAt: expect.any(Date),
         updatedAt: expect.any(Date)
       }));
+  });
+});
+
+describe('getPositions testing', () => {
+  const ValidCompany = 'Techgenix';
+
+  test('Invalid Company', async () => {
+    expect(await getPositions('fake')).toEqual([]);
+  });
+
+  test('Valid Company', async () => {
+    const res = await getPositions(ValidCompany);
+    expect(res).toEqual(expect.any(Array));
+    for(const entry of res){
+      expect(entry).toEqual(
+        expect.objectContaining({
+          id: expect.any(Number),
+          title: expect.any(String),
+          companyName: expect.any(String),
+          description: expect.any(String),
+          minYearsExperience: expect.any(Number),
+          salary: expect.any(Number),
+          tags: expect.any(Array),
+          createdAt: expect.any(Date),
+          updatedAt: expect.any(Date)
+        })
+      );
+      for(const tag of entry.tags){
+        expect(tag).toEqual(expect.any(String));
+      }
+    }
   });
 });
