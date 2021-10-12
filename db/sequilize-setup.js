@@ -23,8 +23,8 @@ async function main(){
         Employee.hasMany(Referal, {foreignKey: 'authorId'})
         Referal.belongsTo(Employee)
 
-        Employee.hasMany(Position, {as: 'postings', foreignKey: 'hiringManagerId'})
-        Position.belongsTo(Employee, {as: 'hiringManager'})
+        Employee.hasMany(Position, {as: 'postings', foreignKey: 'managerId'})
+        Position.belongsTo(Employee, {as: 'manager'})
 
         Employee.hasMany(Employee,  {as: 'team', foreignKey: 'managerId'})
         Employee.belongsTo(Employee, {as: 'manager'})
@@ -42,7 +42,7 @@ async function main(){
 
         CoolJob = await Position.create({
             "title" : "Database engineer",
-            "hiringManagerId": Gordon.id
+            "managerId": Gordon.id
           })
 
         await Referal.bulkCreate([
@@ -59,7 +59,7 @@ async function main(){
         console.log(result)
 
         // Getting the hiring manager of a given job
-        result = await CoolJob.getHiringManager({raw: true, attributes: ['firstName']})
+        result = await CoolJob.getManager({raw: true, attributes: ['firstName']})
 
         // Getting all referals of a given employee
         console.log("\nGetting all referals of a given employee:\n")
@@ -84,9 +84,6 @@ async function main(){
     catch(e){
         console.error(e)
     }
-    
-
 }
-
 
 main()

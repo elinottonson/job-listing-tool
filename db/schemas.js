@@ -23,7 +23,7 @@ const EmployeeSchema = {
         type: DataTypes.STRING,
         },
     managerId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         },
     positionTitle : {
         type: DataTypes.STRING,
@@ -46,7 +46,7 @@ const PostionSchema = {
         primaryKey: true
     },
     managerId:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
     },
     title : {
         type: DataTypes.STRING,
