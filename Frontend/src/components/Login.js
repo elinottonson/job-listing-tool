@@ -1,7 +1,31 @@
-import React from 'react';
-
 import './../styles/Login.css';
 
+import React from 'react';
+
+/*
+  email/pw for testing:
+    email:  Elise_Larsen@techgenix.com
+    pw:     larsenel
+  user object from the backend:
+    {
+      "user": {
+        "user": {
+          "id": 10,
+          "firstName": "Elise",
+          "lastName": "Larsen",
+          "employeeId": 10,
+          "companyId": 3,
+          "companyName": "Techgenix",
+          "managerId": 4,
+          "positionTitle": "Engineering Manager",
+          "startDate": "1994-04-17",
+          "isManager": true,
+          "createdAt": "2021-10-08T02:23:25.064Z",
+          "updatedAt": "2021-10-08T02:23:25.064Z"
+        }
+      }
+    }
+*/
 const Login = ({ setUser }) => {
 
   // State Varaibles
@@ -12,10 +36,17 @@ const Login = ({ setUser }) => {
   const [loading, setLoading] = React.useState(false);
 
   const validateAndSetUser = (user) => {
-    // TODO: validate user object
+    let userObj = user.user;
+    let validUser = false;
+    let userKeys = Object.keys(userObj);
+    
+    validUser = userKeys.includes("id") && userKeys.includes("employeeId") && userKeys.includes("companyId") && 
+                userKeys.includes("managerId") && userKeys.includes("isManager");
 
     // set user if valid
-    setUser(user);
+    if(validUser) {
+      setUser(userObj);
+    }
     setLoading(false);
   };
 
@@ -63,19 +94,23 @@ const Login = ({ setUser }) => {
       };
 
       console.log(`Sending request...`);
-      console.log(options.body);
-
       setLoading(true);
 
       fetch("/api/login", options)
         .then((res) => {
           console.log(res);
+          console.log(res.status);
           return res.json();
         })
         .then((data) => {
           console.log("Received Response:");
           console.log(data);
-          validateAndSetUser(data);
+          if(Object.keys(data).includes("Error")) {
+            setErrorMsg({ error: true, msg: data.Error });
+          }
+          else {
+            validateAndSetUser(data);
+          }
         })
         .catch(e => { throw e; });
     }
@@ -111,7 +146,8 @@ const Login = ({ setUser }) => {
         } />
         <label for='password'>Password:</label>
         <input type='password' onChange={handleChange} id='password' name='password' />
-        {errorMsg.error ? <p id='err-msg'>{ errorMsg.msg }</p> : <></>}
+        <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
+        <p id='forgot-password'>Forgot Password?</p>
         <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit'/>
       </form>
     </div>

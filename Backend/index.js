@@ -39,7 +39,7 @@ app.post('/api/login', async (req, res) => {
     if(user){
       res.send({ user:user });
     } else {
-      res.status(400);
+      res.status(404)
       res.send({Error:'Invalid username and/or password'});
     }
   } else {
