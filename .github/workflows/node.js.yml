@@ -18,10 +18,6 @@ jobs:
       matrix:
         node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    defaults:
-      run:
-        working-directory: Backend
         
     steps:
     - uses: actions/checkout@v2
@@ -31,9 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: ./Backend/package-lock.json
-    - run: npm install
-      working-directory: Backend
-    - run: npm run build --if-present
+    - run: npm ci
       working-directory: Backend
     - run: npm test
       working-directory: Backend
