@@ -34,11 +34,13 @@ async function main(){
         Gordon = await Employee.create({
             "firstName" : "Gordon",
         })
-        
+
         Eli = await Employee.create({
             "firstName" : "Eli",
             "managerId" : Gordon.id
         })
+
+        
 
         CoolJob = await Position.create({
             "title" : "Database engineer",
