@@ -1,24 +1,24 @@
 const { DataTypes } = require('sequelize');
 
 const PostionSchema = {
-        title : {
-            type: DataTypes.STRING,
-            },
-        companyName:{
-            type: DataTypes.STRING,
-        },
-        description : {
-            type: DataTypes.STRING,
-        },
-        minYearsExperience : {
-            type: DataTypes.INTEGER,
-            },
-        salary : {
-            type: DataTypes.INTEGER,
-            },
-        tags : {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            },
-        }
+  title : {
+    type: DataTypes.STRING,
+  },
+  companyName:{
+    type: DataTypes.STRING,
+  },
+  description : {
+    type: DataTypes.STRING,
+  },
+  minYearsExperience : {
+    type: DataTypes.INTEGER,
+  },
+  salary : {
+    type: DataTypes.INTEGER,
+  },
+  tags : {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+  },
+};
 
-module.exports =   ['Position',PostionSchema]
+module.exports =   ['Position',PostionSchema];
