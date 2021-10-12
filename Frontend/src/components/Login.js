@@ -100,24 +100,15 @@ const Login = ({ setUser }) => {
         .then((res) => {
           console.log(res);
           console.log(res.status);
-          switch(res.status) {
-            case 200:
-              setErrorMsg({ error: false, msg: '' });
-              return res.json();
-            case 400:
-              setErrorMsg({ error: true, msg: 'Please enter a valid email.'});
-              return {};
-            case 404:
-              setErrorMsg({ error: true, msg: 'Unknown email and/or password.'});
-              return {};
-            default:
-              return {};
-          }
+          return res.json();
         })
         .then((data) => {
           console.log("Received Response:");
           console.log(data);
-          if(!errorMsg.error) {
+          if(Object.keys(data).includes("Error")) {
+            setErrorMsg({ error: true, msg: data.Error });
+          }
+          else {
             validateAndSetUser(data);
           }
         })
