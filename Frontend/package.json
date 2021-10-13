@@ -30,11 +30,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3001",
-  "devDependencies": {
-    "eslint-plugin-jest": "^25.0.5",
-    "eslint-plugin-jest-dom": "^3.9.2",
-    "eslint-plugin-jsdoc": "^36.1.1",
-    "eslint-plugin-react": "^7.26.1"
-  }
+  "proxy": "http://localhost:3001"
 }
