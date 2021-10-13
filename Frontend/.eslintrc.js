@@ -27,6 +27,7 @@ module.exports = {
     'semi': ['warn', 'always'],
     'max-len': ['warn', { code: 120 }],
     'quote-props': ['warn','consistent-as-needed'],
-    'space-infix-ops':['warn']
+    'space-infix-ops':['warn'],
+    'react/prop-types': [0]
   }
 };
