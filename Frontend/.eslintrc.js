@@ -4,23 +4,28 @@ module.exports = {
     commonjs: true,
     es2021: true,
     node: true,
+    browser: true
   },
   parserOptions: {
     ecmaVersion: 12,
+    ecmaFeatures: {
+      jsx: true
+    },
+    sourceType: 'module'
   },
   extends: [
     'eslint:recommended',
+    'plugin:react/recommended',
     'plugin:jsdoc/recommended',
-    'plugin:jest/recommended'
+    'plugin:jest-dom/recommended'
   ],
-  plugins: ['jsdoc','jest'],
+  plugins: ['jsdoc','jest-dom','react'],
   rules: {
     'indent': ['warn', 2],
     'linebreak-style': ['warn', 'windows'],
     'quotes': ['warn', 'single'],
     'semi': ['warn', 'always'],
     'max-len': ['warn', { code: 120 }],
-    'object-property-newline':['warn'],
     'quote-props': ['warn','consistent-as-needed'],
     'space-infix-ops':['warn']
   }

@@ -40,8 +40,7 @@ const Login = ({ setUser }) => {
     let validUser = false;
     let userKeys = Object.keys(userObj);
     
-    validUser = userKeys.includes("id") && userKeys.includes("employeeId") && userKeys.includes("companyId") && 
-                userKeys.includes("managerId") && userKeys.includes("isManager");
+    validUser = userKeys.includes("id") && userKeys.includes("employeeId") && userKeys.includes("companyId") && userKeys.includes("managerId") && userKeys.includes("isManager");
 
     // set user if valid
     if(validUser) {
@@ -93,7 +92,7 @@ const Login = ({ setUser }) => {
         body: JSON.stringify(userInput)
       };
 
-      console.log(`Sending request...`);
+      console.log('Sending request...');
       setLoading(true);
 
       fetch("/api/login", options)
@@ -140,11 +139,11 @@ const Login = ({ setUser }) => {
     <div className='login-container'>
       <h1>Login</h1>
       <form onSubmit={handleSubmit} className='login-form'>
-        <label for='email'>Email:</label>
+        <label htmlFor='email'>Email:</label>
         <input type='text' name='email' ref={emailText} id={
           validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'
         } />
-        <label for='password'>Password:</label>
+        <label htmlFor='password'>Password:</label>
         <input type='password' onChange={handleChange} id='password' name='password' />
         <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
         <p id='forgot-password'>Forgot Password?</p>
@@ -152,6 +151,6 @@ const Login = ({ setUser }) => {
       </form>
     </div>
   );
-}
+};
 
 export default Login;
