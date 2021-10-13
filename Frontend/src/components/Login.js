@@ -106,6 +106,7 @@ const Login = ({ setUser }) => {
           console.log(data);
           if(Object.keys(data).includes('Error')) {
             setErrorMsg({ error: true, msg: data.Error });
+            setLoading(false);
           }
           else {
             validateAndSetUser(data);
