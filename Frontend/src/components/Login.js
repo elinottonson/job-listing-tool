@@ -40,8 +40,7 @@ const Login = ({ setUser }) => {
     let validUser = false;
     let userKeys = Object.keys(userObj);
     
-    validUser = userKeys.includes("id") && userKeys.includes("employeeId") && userKeys.includes("companyId") && 
-                userKeys.includes("managerId") && userKeys.includes("isManager");
+    validUser = userKeys.includes('id') && userKeys.includes('employeeId') && userKeys.includes('companyId') && userKeys.includes('managerId') && userKeys.includes('isManager');
 
     // set user if valid
     if(validUser) {
@@ -55,25 +54,25 @@ const Login = ({ setUser }) => {
     //checks to see if email or password have invalid characters such as quotations
     if (!(/^(?!.*['"]).*/.test(email)) || !(/^(?!.*['"])/.test(email))) {
       console.log(/^(?!.*['"*&^%$#!]).*/.test(userInput['email']));
-      console.log("Invalid Characters Entered!");
+      console.log('Invalid Characters Entered!');
       setValidEmail(false);
     }
     //basic check to see if email contains an @ sign surrounded by non-empty characters
     else if (!((/\S+@\S+\.\S+/.test(email)))) {
-      console.log("Invalid Email Entered!");
+      console.log('Invalid Email Entered!');
       setValidEmail(false);
     }
     else {
       setValidEmail(true);
     }
-  }
+  };
 
   // Called on every onChange event
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setUserInput(values => ({ ...values, [name]: value }));
-  }
+  };
 
   // Called on the onSubmit event
   const handleSubmit = (event) => {
@@ -93,20 +92,21 @@ const Login = ({ setUser }) => {
         body: JSON.stringify(userInput)
       };
 
-      console.log(`Sending request...`);
+      console.log('Sending request...');
       setLoading(true);
 
-      fetch("/api/login", options)
+      fetch('/api/login', options)
         .then((res) => {
           console.log(res);
           console.log(res.status);
           return res.json();
         })
         .then((data) => {
-          console.log("Received Response:");
+          console.log('Received Response:');
           console.log(data);
-          if(Object.keys(data).includes("Error")) {
+          if(Object.keys(data).includes('Error')) {
             setErrorMsg({ error: true, msg: data.Error });
+            setLoading(false);
           }
           else {
             validateAndSetUser(data);
@@ -140,11 +140,11 @@ const Login = ({ setUser }) => {
     <div className='login-container'>
       <h1>Login</h1>
       <form onSubmit={handleSubmit} className='login-form'>
-        <label for='email'>Email:</label>
+        <label htmlFor='email'>Email:</label>
         <input type='text' name='email' ref={emailText} id={
           validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'
         } />
-        <label for='password'>Password:</label>
+        <label htmlFor='password'>Password:</label>
         <input type='password' onChange={handleChange} id='password' name='password' />
         <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
         <p id='forgot-password'>Forgot Password?</p>
@@ -152,6 +152,6 @@ const Login = ({ setUser }) => {
       </form>
     </div>
   );
-}
+};
 
 export default Login;
