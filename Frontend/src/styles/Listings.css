@@ -1,0 +1,60 @@
+.job-listings-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 1366px;
+    border: 1px solid red;
+}
+
+.listings-filter {
+    display: flex;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.job-listing {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid blue;
+    border-radius: 10px;
+    margin: 20px 0px;
+    padding: 5px;
+}
+#title {
+
+}
+#salary {
+    margin: 0px 10px;
+    color: gray;
+}
+
+.listing-header {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    width: fit-content;
+    align-items: center;
+}
+
+.listing-desc {
+    text-align: left;
+}
+
+.listing-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tags {
+    display: flex;
+    flex-direction: row;
+}
+.tags li {
+    margin: 4px;
+}
