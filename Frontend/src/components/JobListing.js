@@ -32,7 +32,7 @@ const JobListing = ({ listingObj }) => {
             <ul className='tags'>
               {listingObj.tags.map(tag => <li>{tag}</li>)}
             </ul>
-            <p>{listingObj.createdAt}</p>
+            <p id='date'>{listingObj.createdAt}</p>
         </div>
       </li>
   );

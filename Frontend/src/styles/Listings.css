@@ -1,9 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .job-listings-container {
     display: flex;
     flex-direction: column;
     width: 50%;
     max-width: 1366px;
-    border: 1px solid red;
 }
 
 .listings-filter {
@@ -12,8 +16,6 @@
 
 ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
 }
 
 .job-listing {
@@ -23,12 +25,13 @@ ul {
     border-radius: 10px;
     margin: 20px 0px;
     padding: 5px;
+    height: fit-content;
 }
 #title {
 
 }
 #salary {
-    margin: 0px 10px;
+    margin: 0px 0px 0px 20px;
     color: gray;
 }
 
@@ -37,7 +40,7 @@ ul {
     flex-direction: row;
     border: 1px solid black;
     width: fit-content;
-    align-items: center;
+    align-items: baseline;
 }
 
 .listing-desc {
@@ -49,12 +52,22 @@ ul {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    border: 1px solid red;
 }
 
 .tags {
+    border: 1px solid green;
     display: flex;
     flex-direction: row;
 }
 .tags li {
-    margin: 4px;
+    margin: 0px 8px;
+    padding: 2px 8px;
+    font-size: small;
+    background-color: lightgray;
+    border-radius: 8px;
+}
+
+#date {
+    border: 1px solid black;
 }
