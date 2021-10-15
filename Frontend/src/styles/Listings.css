@@ -27,24 +27,40 @@ ul {
     padding: 5px;
     height: fit-content;
 }
-#title {
-
-}
-#salary {
-    margin: 0px 0px 0px 20px;
-    color: gray;
-}
 
 .listing-header {
     display: flex;
     flex-direction: row;
     border: 1px solid black;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-sal {
+    border: 1px solid red;
+    text-align: left;
+}
+#title {
+    border: 1px solid green;
+}
+#salary {
     width: fit-content;
-    align-items: baseline;
+    color: gray;
+}
+
+.manager-dep {
+
+}
+#manager-name {
+
+}
+#department {
+    color: gray;
 }
 
 .listing-desc {
     text-align: left;
+    margin: 10px 0px;
 }
 
 .listing-footer {

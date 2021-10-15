@@ -24,8 +24,16 @@ const JobListing = ({ listingObj }) => {
   return (
       <li className='job-listing'>
         <div className='listing-header'>
-          <h2 id='title'>{listingObj.title}</h2>
-          <p id='salary'>{`$${listingObj.salary}`}</p>
+          <div className='title-sal'>
+            <h2 id='title'>{listingObj.title}</h2>
+            <p id='salary'>
+              {`$${Math.floor(listingObj.salary/1000)},${listingObj.salary % 1000}`}
+            </p>
+          </div>
+          <div className='manager-dep'>
+            <p id='manager-name'>MANAGER_NAME</p>
+            <p id='department'>DEPARTMENT</p>
+          </div>
         </div>
         <p className='listing-desc'>{listingObj.description}</p>
         <div className='listing-footer'>
