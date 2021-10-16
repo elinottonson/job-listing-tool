@@ -24,10 +24,18 @@ ul {
     align-items: center;
 }
 
+@keyframes hover-scale {
+    from {
+        scale: 1;
+    }
+    to {
+        scale: 1.05;
+    }
+}
 .job-listing {
     display: flex;
     flex-direction: column;
-    width: 95%;
+    width: 100%;
     border-radius: 10px;
     margin: 15px 0px;
     padding: 10px 15px 15px 15px;
@@ -35,9 +43,11 @@ ul {
         -5px -5px 10px hsla(0, 0%, 100%, 1);
 }
 .job-listing-hover {
+    animation-duration: 300ms;
+    animation-name: hover-scale;
     display: flex;
     flex-direction: column;
-    width: 95%;
+    width: 100%;
     border-radius: 10px;
     margin: 15px 0px;
     padding: 10px 15px 15px 15px;
@@ -72,12 +82,6 @@ ul {
     margin: 0px 10px;
 }
 
-.manager-dep {
-
-}
-#manager-name {
-
-}
 #department {
     color: gray;
 }
