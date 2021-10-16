@@ -1,6 +1,5 @@
 * {
-    margin: 0;
-    padding: 0;
+    background-color: hsl(0, 0%, 95%);
 }
 
 .job-listings-container {
@@ -8,6 +7,7 @@
     flex-direction: column;
     width: 50%;
     max-width: 1366px;
+    min-width: 450px;
 }
 
 .listings-filter {
@@ -18,34 +18,58 @@ ul {
     list-style-type: none;
 }
 
+.job-listings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .job-listing {
     display: flex;
     flex-direction: column;
-    border: 1px solid blue;
+    width: 95%;
     border-radius: 10px;
-    margin: 20px 0px;
-    padding: 5px;
-    height: fit-content;
+    margin: 15px 0px;
+    padding: 10px 15px 15px 15px;
+    box-shadow: 5px 5px 8px hsla(0, 100%, 0%, 0.2),
+        -5px -5px 10px hsla(0, 0%, 100%, 1);
+}
+.job-listing-hover {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    border-radius: 10px;
+    margin: 15px 0px;
+    padding: 10px 15px 15px 15px;
+    box-shadow: 5px 5px 8px hsla(0, 100%, 0%, 0.2),
+        -5px -5px 10px hsla(0, 0%, 100%, 1);
+    scale: 1.05;
+    cursor: pointer;
 }
 
 .listing-header {
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
     align-items: center;
     justify-content: space-between;
 }
 
 .title-sal {
-    border: 1px solid red;
     text-align: left;
 }
 #title {
-    border: 1px solid green;
+    margin-bottom: -5px;
+}
+#subtitle {
+    display: flex;
+    flex-direction: row;
+    color: grey;
 }
 #salary {
     width: fit-content;
-    color: gray;
+}
+#st-break {
+    margin: 0px 10px;
 }
 
 .manager-dep {
@@ -60,7 +84,7 @@ ul {
 
 .listing-desc {
     text-align: left;
-    margin: 10px 0px;
+    margin: 10px 5px 20px 5px;
 }
 
 .listing-footer {
@@ -68,22 +92,25 @@ ul {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid red;
 }
 
 .tags {
-    border: 1px solid green;
     display: flex;
     flex-direction: row;
 }
 .tags li {
-    margin: 0px 8px;
+    margin-right: 16px;
     padding: 2px 8px;
     font-size: small;
-    background-color: lightgray;
+    background-color: hsl(0, 0%, 85%);
     border-radius: 8px;
+}
+.tags li:hover {
+    cursor: pointer;
+    background-color: hsl(0, 0%, 90%);
 }
 
 #date {
-    border: 1px solid black;
+    color: gray;
+    font-size: small;
 }

@@ -36,7 +36,7 @@ const JobListings = () => {
       <div className='listings-filter'>
         <p>Filter</p>
       </div>
-      <ul>
+      <ul className='job-listings'>
         {listings.map(listing => <JobListing listingObj={listing} />)}
       </ul>
     </div>
