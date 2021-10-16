@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFilter } from 'react-icons/fa';
 import './../styles/Listings.css';
 
 import JobListing from "./JobListing";
@@ -34,6 +35,7 @@ const JobListings = () => {
   return (
     <div className='job-listings-container'>
       <div className='listings-filter'>
+        <FaFilter id='filter-icon'/>
         <p>Filter</p>
       </div>
       <ul className='job-listings'>

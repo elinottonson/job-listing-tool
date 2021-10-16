@@ -1,17 +1,22 @@
-* {
-    background-color: hsl(0, 0%, 95%);
-}
-
 .job-listings-container {
     display: flex;
     flex-direction: column;
     width: 50%;
-    max-width: 1366px;
+    max-width: 900px;
     min-width: 450px;
 }
 
 .listings-filter {
     display: flex;
+    align-items: center;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 10px 20px;
+    box-shadow: 3px 3px 8px hsla(0, 100%, 0%, 0.2),
+        -3px -3px 10px hsla(0, 0%, 100%, 1);
+}
+#filter-icon {
+    margin-right: 5px;
 }
 
 ul {
