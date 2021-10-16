@@ -48,7 +48,7 @@ ul {
         -5px -5px 10px hsla(0, 0%, 100%, 1);
 }
 .job-listing-hover {
-    animation-duration: 300ms;
+    animation-duration: 200ms;
     animation-name: hover-scale;
     display: flex;
     flex-direction: column;
