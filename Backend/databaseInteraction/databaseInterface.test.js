@@ -57,6 +57,7 @@ describe('getPositions testing', () => {
           description: expect.any(String),
           minYearsExperience: expect.any(Number),
           salary: expect.any(Number),
+          managerId: expect.any(Number),
           tags: expect.any(Array),
           createdAt: expect.any(Date),
           updatedAt: expect.any(Date)
