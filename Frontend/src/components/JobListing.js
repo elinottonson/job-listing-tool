@@ -38,7 +38,7 @@ const JobListing = ({ listingObj }) => {
             <h2 id='title'>{listingObj.title}</h2>
             <div id='subtitle'>
               <p id='salary'>
-                {`$${Math.floor(listingObj.salary/1000)},${listingObj.salary % 1000}`}
+                {`$${listingObj.salary.toLocaleString()}`}
               </p>
               <p id='st-break'>•</p>
               <p id='exp-level'>
