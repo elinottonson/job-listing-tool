@@ -1,19 +1,14 @@
 import React from 'react';
-import './../styles/Navbar.css'
+import './../styles/Dashboard.css'
 
 const DashboardNav = () => {
     return (
-        <nav class='navbar'>
-            <div class='nav-left'>
-                <a>Home</a>
-                <a>Referrals</a>
-            </div>
-            <div class='nav-right'>
-                <a>Help</a>
-                <a>Notifications</a>
-                <a>User</a>
-            </div>
-        </nav>
+        <div>
+            <form class='dashboard-search'>
+                <input type='text' class='search' placeholder='Search...'></input>
+                <input type='submit' value='Search'></input>
+            </form>
+        </div>
     );
 }
 
