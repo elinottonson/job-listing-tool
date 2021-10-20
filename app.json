@@ -1,0 +1,9 @@
+{
+    "name": "Job Listing Tool",
+    "image": "heroku/nodejs",
+    "environments": {
+      "review": {
+        "addons": ["autoidle:hobby"]
+      }
+    }
+  }
