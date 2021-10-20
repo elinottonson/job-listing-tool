@@ -1,0 +1,19 @@
+{
+  "name": "job-listing-tool",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "cd Backend && node index.js",
+    "heroku-postbuild": "cd Backend && npm install && cd ../Frontend && npm install && npm run build && mv -v -f build ../Backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elinottonson/job-listing-tool.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elinottonson/job-listing-tool/issues"
+  },
+  "homepage": "https://github.com/elinottonson/job-listing-tool#readme"
+}
