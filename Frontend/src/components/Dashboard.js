@@ -5,12 +5,12 @@ import DashboardNav from './DashboardNav';
 import JobListings from './JobListings';
 import Footer from './Footer';
 
-const Dashboard = ( user ) => {
+const Dashboard = ({ user }) => {
     return (
         <div className='dashboard'>
             <Header />
             <DashboardNav />
-            <JobListings />
+            <JobListings user={user}/>
             <Footer />
         </div>
     )

@@ -4,7 +4,7 @@ import './../styles/Listings.css';
 
 import JobListing from "./JobListing";
 
-const JobListings = () => {
+const JobListings = ({ user }) => {
 
   const [ listings, setListings ] = React.useState([]);
 
@@ -15,7 +15,7 @@ const JobListings = () => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ company: 'Techgenix' })
+      body: JSON.stringify({ company: user.companyName })
     };
     
     console.log('Sending job listings request...');
