@@ -7,11 +7,11 @@ const { checkAuth } = require('../passport/checkAuth');
  * @param {Express} app The express instance to setup the endpoint on
  * @returns {void} Sets up the test endpoint
  */
-function testGet(app) {
-  app.get('/dashboard', checkAuth, (req, res) => {
+function getUser(app) {
+  app.get('/auth', checkAuth, (req, res) => {
     user = req.user;
     res.send(user);
   });
 }
 
-module.exports = testGet;
+module.exports = getUser;

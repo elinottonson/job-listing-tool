@@ -33,7 +33,7 @@ app.use(methodOverride('_method'));
 
 const endpoints = [
   require('./endpoints/testGet'),
-  require('./endpoints/testDash'),
+  require('./endpoints/getUser'),
   require('./endpoints/logout'),
   require('./endpoints/listingsPost')
 ];

@@ -8,7 +8,7 @@ const {Express} = require('express');
  */
 function loginPost(app, passport){
   app.post('/api/login', passport.authenticate('local', {
-    successRedirect: '/dashboard',
+    successRedirect: '/auth',
     failureRedirect: '/',
     failureFlash: true
   }));
