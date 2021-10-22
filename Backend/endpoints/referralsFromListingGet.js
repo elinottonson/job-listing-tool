@@ -9,10 +9,7 @@ const {Express} = require('express');
  */
 function referralsGet(app) {
   app.get('/api/referrals/:listingId', async (req, res) => {
-    const listingId = req.params.listingId;
-    const x = await getReferrals(listingId);
-    console.log('hi',x);
-    res.send(x);
+    res.send(await getReferrals(req.params.listingId));
   });
 }
 
