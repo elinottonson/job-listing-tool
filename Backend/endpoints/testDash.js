@@ -9,7 +9,8 @@ const { checkAuth } = require('../passport/checkAuth');
  */
 function testGet(app) {
   app.get('/dashboard', checkAuth, (req, res) => {
-    res.render('../dashboard.ejs', {name: req.user.firstName})
+    user = req.user;
+    res.send(user);
   });
 }
 

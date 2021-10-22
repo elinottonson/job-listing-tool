@@ -11,6 +11,12 @@ function emailIsValid (email) {
     return /\S+@\S+\.\S+/.test(email);
 }
 
+/**
+ * Initializes passport and authentication including serializing and deserialîzng
+ * 
+ * @param {*} passport passport object
+ * @param {*} getUserById function that takes id and returns user with that id from db
+ */
 function initialize(passport, getUserById) {
     const authenticateUser = async (email, password, done) => {
         if (emailIsValid(email)) {
@@ -33,7 +39,9 @@ function initialize(passport, getUserById) {
     }
 
     passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser));
-    passport.serializeUser((user, done) => done(null, user.id));
+    passport.serializeUser(async (user, done) => {
+        return await done(null, user.id);
+    });
     passport.deserializeUser(async (id, done) => {
         const user = await getUserById(id);
         return done(null, user);
