@@ -23,10 +23,10 @@ const storedReferrals = [
 ];
 
 /**
- * Gets Listings posted for a given company
+ * Gets Referrals created for a given listing
  * 
- * @param {string} listingId The name of the company you are trying to find listings on
- * @returns {Promise<Array>} a promise evaluating to the user object, if found, otherwise null
+ * @param {string} listingId The id of the listing that you want to get referrals for
+ * @returns {Promise<Array>} a promise evaluating to an array containing the referral objects
  */
 function getReferrals(listingId) {
   //TODO change to use sequelize to real Db when made
