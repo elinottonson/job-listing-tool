@@ -1,28 +1,32 @@
 import React from 'react';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 
 import { parseDate } from '../lib/ParseDate';
 
 /*
   Sample Job Listing Object
   {
-    "id": 51,
+    "id": 52,
     "title": "Software Engineer I",
     "companyName": "Techgenix",
     "description": "Entry level Software Engineering role on an Agile team",
     "minYearsExperience": 0,
-    "salary": 67848,
+    "managerId": 111,
+    "salary": 66880,
     "tags": [
-      "Kotlin", 
-      "React",
-      "MySQL",
-      "Git"
+      "Git",
+      "SQL",
+      "MongoDB",
+      "Jenkins"
     ],
-    "createdAt": "2021-10-08T02:23:26.911Z",
-    "updatedAt": "2021-10-08T02:23:26.911Z"
+    "createdAt": "2021-10-14T18:40:02.987Z",
+    "updatedAt": "2021-10-14T18:40:02.987Z"
   }
 */
 const JobListing = ({ listingObj }) => {
 
+  const history = useHistory();
+  const { url } = useRouteMatch();
   const [ hover, setHover ] = React.useState(false);
 
   const date = parseDate(listingObj.createdAt);
@@ -32,6 +36,7 @@ const JobListing = ({ listingObj }) => {
         className={hover ? 'job-listing-hover' : 'job-listing'} 
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        onClick={() => history.replace(`${url}job/${listingObj.id}`)}
       >
         <div className='listing-header'>
           <div className='title-sal'>

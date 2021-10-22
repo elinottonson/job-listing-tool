@@ -1,12 +1,12 @@
 import React from 'react';
-import './../styles/Dashboard.css'
+import './../styles/Nav.css'
 
 const DashboardNav = () => {
     return (
-        <div>
+        <div className='nav'>
             <form class='dashboard-search'>
-                <input type='text' class='search' placeholder='Search...'></input>
-                <input type='submit' value='Search'></input>
+                <input type='text' class='search' placeholder='Search...' id='searchbar'/>
+                <input type='submit' value='Search' id='search-button'/>
             </form>
         </div>
     );

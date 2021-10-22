@@ -1,5 +1,5 @@
 import './../styles/Header.css';
-// TODO: Implement Header
+
 const Header = () => {
     return (
         <div className='header'>
@@ -16,6 +16,6 @@ const Header = () => {
             </nav>            
         </div>
     );
-}
+};
 
 export default Header;

@@ -7,6 +7,7 @@ import JobListing from "./JobListing";
 const JobListings = ({ user }) => {
 
   const [ listings, setListings ] = React.useState([]);
+  const [ filterHover, setFilterHover ] = React.useState(false);
 
   React.useEffect(() => {
     const options = {
@@ -34,7 +35,11 @@ const JobListings = ({ user }) => {
 
   return (
     <div className='job-listings-container'>
-      <div className='listings-filter'>
+      <div 
+        className={filterHover ? 'listings-filter-hover' : 'listings-filter'}
+        onMouseEnter={() => setFilterHover(true)}
+        onMouseLeave={() => setFilterHover(false)}
+      >
         <FaFilter id='filter-icon'/>
         <p>Filter</p>
       </div>
