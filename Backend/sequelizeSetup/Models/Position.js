@@ -13,6 +13,9 @@ const PostionSchema = {
   minYearsExperience : {
     type: DataTypes.INTEGER,
   },
+  managerId: {
+    type: DataTypes.INTEGER,
+  },
   salary : {
     type: DataTypes.INTEGER,
   },
