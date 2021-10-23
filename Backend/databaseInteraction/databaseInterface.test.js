@@ -49,6 +49,7 @@ describe('getPositions testing', () => {
   test('Valid Company', async () => {
     const res = await getPositions(ValidCompany);
     expect(res).toEqual(expect.any(Array));
+    expect(res.length).toBeTruthy();
     for(const entry of res){
       expect(entry).toEqual(
         expect.objectContaining({
@@ -82,6 +83,7 @@ describe('getReferrals testing', () => {
   test('Valid Listing Id', async () => {
     const res = await getReferrals(ValidListingId);
     expect(res).toEqual(expect.any(Array));
+    expect(res.length).toBeTruthy();
     for(const entry of res){
       expect(entry).toEqual(
         expect.objectContaining({
