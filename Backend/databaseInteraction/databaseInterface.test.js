@@ -87,11 +87,13 @@ describe('getReferrals testing', () => {
     for(const entry of res){
       expect(entry).toEqual(
         expect.objectContaining({
-          firstname:expect.any(String),
-          lastname:expect.any(String),
+          firstName:expect.any(String),
+          lastName:expect.any(String),
           email:expect.any(String),
           referralText:expect.any(String),
-          listingId:expect.any(Number)
+          listingId:expect.any(Number),
+          authorId: expect.any(Number),
+          companyName: expect.any(String)
         })
       );
     }

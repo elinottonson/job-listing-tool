@@ -1,6 +1,10 @@
 const getReferrals = require('../databaseInteraction/getReferrals');
 const {Express} = require('express');
 
+// TODO: This should be a protected route, i.e., only hiring managers should be able to access this
+// Should also verify if the company of the hiring manager is the same as the company of the listing
+
+
 /**
  * Gets referrals for a given listingId
  * 
