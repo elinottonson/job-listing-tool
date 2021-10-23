@@ -20,7 +20,7 @@ const ReferralSchema = {
     type: DataTypes.STRING,
   },
   authorId: {
-      type: DataTypes.INTEGER
+    type: DataTypes.INTEGER
   },
 };
 
