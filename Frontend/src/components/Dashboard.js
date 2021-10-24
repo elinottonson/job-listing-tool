@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useRouteMatch } from 'react-router-dom';
 import './../styles/Dashboard.css';
 
 import { isValidUser } from '../lib/Validation';
@@ -13,6 +13,7 @@ import ListingCard from './ListingCard';
 const Dashboard = ({ user, setUser }) => {
 
   /* 
+    ====== DOESNT WORK ======== DOESNT WORK ======= DOESNT WORK ===============
     Checks once when the component is first rendered to see if there is currently
     a user logged into the backend. This will make it (hopefully...?) so when you
     refresh on the dashboard, you stay logged in.
@@ -46,17 +47,21 @@ const Dashboard = ({ user, setUser }) => {
       .catch(e => { throw e; })
   }, []);
 
+  const { url } = useRouteMatch();
+
   return (
     <Router basename='/dashboard'>
-      <div className='dashboard'>
-        <Switch>
-          
-          <Route path='job/:id' children={<ListingCard/>} />
-        </Switch>
+      <div className='dashboard'> 
         <Header />
         <DashboardNav />
         <JobListings user={user}/>
         <Footer />
+        <Switch>
+          <Route 
+            path='/job/:id' 
+            children={<ListingCard/>}
+          />
+        </Switch>
       </div>
     </Router>
   );

@@ -1,13 +1,13 @@
-import './styles/App.css';
-
 import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-  Link
+  useHistory
 } from "react-router-dom";
+
+import './styles/App.css';
 
 import Login from "./components/Login.js"
 import Dashboard from './components/Dashboard';
@@ -16,8 +16,10 @@ function App() {
 
   const [ user, setUser ] = React.useState({});
 
+  const history = useHistory()
+
   return (
-    <Router>
+    <Router history={history}>
       <div className='App'>
         <Switch>
           <Route exact path='/'>

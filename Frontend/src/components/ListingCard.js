@@ -1,16 +1,35 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router-dom';
 import './../styles/ListingCard.css';
 
 const ListingCard = () => {
 
-    const { id } = useParams();
+  const [ hover, setHover ] = React.useState(false);
+  const { id } = useParams();
+  const history = useHistory();
 
-    return (
-        <div className='listing-card'>
-            <p>LISTING CARD</p>
-        </div>
-    );
+  const handleClick = () => {
+    if(!hover) {
+      history.goBack();
+    }
+  }
+
+  return (
+    <div 
+      className='listing-card-container'
+      onClick={handleClick}
+    >
+      <div 
+        className='listing-card'
+        onMouseEnter={()=> setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <p>LISTING CARD</p>
+        <p>ID: {id}</p>
+        <p>Hovering: {hover.toString()}</p>
+      </div>
+    </div>
+  );
 };
 
 export default ListingCard;
