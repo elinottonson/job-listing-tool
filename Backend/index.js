@@ -15,7 +15,8 @@ const endpoints = [
   require('./endpoints/testGet'),
   require('./endpoints/loginPost'),
   require('./endpoints/listingsPost'),
-  require('./endpoints/referralsFromListingGet')
+  require('./endpoints/referralsFromListingGet'),
+  require('./endpoints/referralPost')
 ];
 
 for(const endpoint of endpoints){
