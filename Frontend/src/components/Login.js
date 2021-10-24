@@ -1,6 +1,7 @@
+import React from 'react';
 import './../styles/Login.css';
 
-import React from 'react';
+import { isValidUser, isValidEmail } from '../lib/Validation';
 
 /*
   email/pw for testing:
@@ -34,39 +35,6 @@ const Login = ({ setUser }) => {
   const [validEmail, setValidEmail] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState({ error: false, msg: '' });
   const [loading, setLoading] = React.useState(false);
-
-  const validateAndSetUser = (user) => {
-    let userObj = user.user;
-    let validUser = false;
-    let userKeys = Object.keys(userObj);
-    
-    validUser = userKeys.includes('employeeId') && userKeys.includes('companyId') && 
-                userKeys.includes('managerId') && userKeys.includes('isManager');
-
-    // set user if valid
-    if(validUser) {
-      setUser(userObj);
-    }
-    setLoading(false);
-  };
-
-  // Called in handleChange() to check if the current email text is valid
-  const validateEmail = (email) => {
-    //checks to see if email or password have invalid characters such as quotations
-    if (!(/^(?!.*['"]).*/.test(email)) || !(/^(?!.*['"])/.test(email))) {
-      console.log(/^(?!.*['"*&^%$#!]).*/.test(userInput['email']));
-      console.log('Invalid Characters Entered!');
-      setValidEmail(false);
-    }
-    //basic check to see if email contains an @ sign surrounded by non-empty characters
-    else if (!((/\S+@\S+\.\S+/.test(email)))) {
-      console.log('Invalid Email Entered!');
-      setValidEmail(false);
-    }
-    else {
-      setValidEmail(true);
-    }
-  };
 
   // Called on every onChange event
   const handleChange = (event) => {
@@ -110,7 +78,10 @@ const Login = ({ setUser }) => {
             setLoading(false);
           }
           else {
-            validateAndSetUser(data);
+            if(isValidUser(data.user)) {
+              setUser(data.user)
+            }
+            setLoading(false);
           }
         })
         .catch(e => { throw e; });
@@ -126,7 +97,7 @@ const Login = ({ setUser }) => {
       if(emailText.current) {
         setUserInput(v => ({ ...v, email: emailText.current.value }));
         if(emailText.current.value !== '') {
-          validateEmail(userInput.email);
+          setValidEmail(isValidEmail(userInput.email));
         }
         clearInterval(interval);
       }
