@@ -1,6 +1,8 @@
 import './../styles/Login.css';
+import logo from './../images/ukglogo.png';
 
 import React from 'react';
+import BringBackTendiesCredit from './BringBackTendiesCredit';
 
 /*
   email/pw for testing:
@@ -136,20 +138,27 @@ const Login = ({ setUser }) => {
     You'll notice that the <input> for email uses 'ref' instead of 'onChange'. 
     This is to accomodate the workaround seen above.
   */
+
   return (
-    <div className='login-container'>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit} className='login-form'>
-        <label htmlFor='email'>Email:</label>
-        <input type='text' name='email' ref={emailText} id={
-          validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'
-        } />
-        <label htmlFor='password'>Password:</label>
-        <input type='password' onChange={handleChange} id='password' name='password' />
-        <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
-        <p id='forgot-password'>Forgot Password?</p>
-        <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit'/>
-      </form>
+    <div>
+      <div className='login-center-container'>
+        <div>
+          <BringBackTendiesCredit/>
+        </div>
+        <div className='login-container'>
+          <img className='ukglogo' src={logo} alt='UKG Logo'/>
+          
+          <form onSubmit={handleSubmit} className='login-form'>
+            <input className='inputForm' type='text' placeholder='Email' name='email' ref={emailText} id={
+              validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'
+            } />
+            <input className='inputForm' type='password' placeholder='Password' onChange={handleChange} id='password' name='password' />
+            <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
+            <a href='url' id='forgot-password'>Forgot Password?</a>
+            <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit'/>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
