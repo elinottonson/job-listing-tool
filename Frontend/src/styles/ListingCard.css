@@ -1,11 +1,26 @@
+/* 
+    Credit for Firefox workaround: 
+    https://gist.github.com/mrtcmn/0490fb79fa63418e4409a99553f80e26 
+*/
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .listing-card-container {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    }
+}
+/* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .listing-card-container {
+    background-color: hsla(0, 0%, 90%, .8);
+    }
+}
+
 .listing-card-container {
     position: absolute;
     display: flex;
     z-index: 100;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(5px);
-    border: 1px solid blue;
 }
 .listing-card {
     border: 1px solid red;

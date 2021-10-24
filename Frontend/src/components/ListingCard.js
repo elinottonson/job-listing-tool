@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import './../styles/ListingCard.css';
 
-const ListingCard = () => {
+const ListingCard = ({ setPopupOpen }) => {
 
   const [ hover, setHover ] = React.useState(false);
   const { id } = useParams();
@@ -10,6 +10,7 @@ const ListingCard = () => {
 
   const handleClick = () => {
     if(!hover) {
+      setPopupOpen(false);
       history.goBack();
     }
   };

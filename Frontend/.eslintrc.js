@@ -22,9 +22,9 @@ module.exports = {
     'quotes': ['warn', 'single'],
     'semi': ['warn', 'always'],
     'max-len': ['warn', { code: 120 }],
-    'quote-props': ['warn','consistent-as-needed'],
+    'quote-props': ['off'],
     'space-infix-ops':['warn'],
     'react/prop-types': [0],
-    'no-unused-vars': ['ignore']
+    'no-unused-vars': ['off']
   }
 };

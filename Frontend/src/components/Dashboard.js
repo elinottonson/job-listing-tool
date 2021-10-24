@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import './../styles/Dashboard.css';
 
 import { isValidUser } from '../lib/Validation';
@@ -11,6 +12,10 @@ import Footer from './Footer';
 import ListingCard from './ListingCard';
 
 const Dashboard = ({ user, setUser }) => {
+
+  const [ popupOpen, setPopupOpen ] = React.useState(false);
+
+  const scrollLockTarget = document.querySelector('.dashboard');
 
   /* 
     ====== DOESNT WORK ======== DOESNT WORK ======= DOESNT WORK ===============
@@ -47,17 +52,27 @@ const Dashboard = ({ user, setUser }) => {
       .catch(e => { throw e; });
   }, []);
 
+  // Scroll-lock when the job listing pop-up is open
+  React.useEffect(() => {
+    if(popupOpen) {
+      disableBodyScroll(scrollLockTarget);
+    }
+    else {
+      clearAllBodyScrollLocks();
+    }
+  }, [popupOpen]);
+
   return (
     <Router basename='/dashboard'>
       <div className='dashboard'> 
         <Header />
         <DashboardNav />
-        <JobListings user={user}/>
+        <JobListings user={user} setPopupOpen={setPopupOpen}/>
         <Footer />
         <Switch>
           <Route 
             path='/job/:id' 
-            children={<ListingCard/>}
+            children={<ListingCard setPopupOpen={setPopupOpen}/>}
           />
         </Switch>
       </div>

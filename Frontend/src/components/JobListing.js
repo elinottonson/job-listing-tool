@@ -23,7 +23,7 @@ import { parseDate } from '../lib/ParseDate';
     "updatedAt": "2021-10-14T18:40:02.987Z"
   }
 */
-const JobListing = ({ listingObj }) => {
+const JobListing = ({ listingObj, setPopupOpen }) => {
 
   const history = useHistory();
   const { url } = useRouteMatch();
@@ -36,7 +36,10 @@ const JobListing = ({ listingObj }) => {
       className={hover ? 'job-listing-hover' : 'job-listing'} 
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={() => history.replace(`${url}job/${listingObj.id}`)}
+      onClick={() => {
+        history.push(`${url}job/${listingObj.id}`);
+        setPopupOpen(true);
+      }}
     >
       <div className='listing-header'>
         <div className='title-sal'>

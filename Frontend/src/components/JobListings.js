@@ -4,7 +4,7 @@ import './../styles/Listings.css';
 
 import JobListing from './JobListing';
 
-const JobListings = ({ user }) => {
+const JobListings = ({ user, setPopupOpen }) => {
 
   const [ listings, setListings ] = React.useState([]);
   const [ filterHover, setFilterHover ] = React.useState(false);
@@ -44,7 +44,7 @@ const JobListings = ({ user }) => {
         <p>Filter</p>
       </div>
       <ul className='job-listings'>
-        {listings.map(listing => <JobListing listingObj={listing} />)}
+        {listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)}
       </ul>
     </div>
   );
