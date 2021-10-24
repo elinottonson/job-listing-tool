@@ -79,7 +79,7 @@ const Login = ({ setUser }) => {
           }
           else {
             if(isValidUser(data.user)) {
-              setUser(data.user)
+              setUser(data.user);
             }
             setLoading(false);
           }

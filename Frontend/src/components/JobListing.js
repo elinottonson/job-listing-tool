@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 import { parseDate } from '../lib/ParseDate';
 
@@ -32,47 +32,47 @@ const JobListing = ({ listingObj }) => {
   const date = parseDate(listingObj.createdAt);
 
   return (
-      <li 
-        className={hover ? 'job-listing-hover' : 'job-listing'} 
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        onClick={() => history.replace(`${url}job/${listingObj.id}`)}
-      >
-        <div className='listing-header'>
-          <div className='title-sal'>
-            <h2 id='title'>{listingObj.title}</h2>
-            <div id='subtitle'>
-              <p id='salary'>
-                {`$${listingObj.salary.toLocaleString()}`}
-              </p>
-              <p id='st-break'>•</p>
-              <p id='exp-level'>
-                {
-                  listingObj.minYearsExperience === 0 ? 
-                    'Entry Level' : 
-                    `${listingObj.minYearsExperience} Years Experience`
-                }
-              </p>
-            </div>
-          </div>
-          <div className='manager-dep'>
-            <p id='manager-name'>MANAGER_NAME</p>
-            <p id='department'>DEPARTMENT</p>
-          </div>
-        </div>
-        <p className='listing-desc'>{listingObj.description}</p>
-        <div className='listing-footer'>
-            <ul className='tags'>
-              {listingObj.tags.map(tag => <li>{tag}</li>)}
-            </ul>
-            <p id='date'>
+    <li 
+      className={hover ? 'job-listing-hover' : 'job-listing'} 
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onClick={() => history.replace(`${url}job/${listingObj.id}`)}
+    >
+      <div className='listing-header'>
+        <div className='title-sal'>
+          <h2 id='title'>{listingObj.title}</h2>
+          <div id='subtitle'>
+            <p id='salary'>
+              {`$${listingObj.salary.toLocaleString()}`}
+            </p>
+            <p id='st-break'>•</p>
+            <p id='exp-level'>
               {
-                `${date.month}.${date.day}.${date.year} 
-                at ${date.hour}:${date.minute} ${date.pm?'PM':'AM'}`
+                listingObj.minYearsExperience === 0 ? 
+                  'Entry Level' : 
+                  `${listingObj.minYearsExperience} Years Experience`
               }
             </p>
+          </div>
         </div>
-      </li>
+        <div className='manager-dep'>
+          <p id='manager-name'>MANAGER_NAME</p>
+          <p id='department'>DEPARTMENT</p>
+        </div>
+      </div>
+      <p className='listing-desc'>{listingObj.description}</p>
+      <div className='listing-footer'>
+        <ul className='tags'>
+          {listingObj.tags.map(tag => <li>{tag}</li>)}
+        </ul>
+        <p id='date'>
+          {
+            `${date.month}.${date.day}.${date.year} 
+            at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
+          }
+        </p>
+      </div>
+    </li>
   );
 };
 

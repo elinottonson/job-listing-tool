@@ -6,15 +6,16 @@ module.exports = {
     node: true,
     browser: true
   },
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 12,
+    sourceType: 'module'
   },
   extends: [
     'eslint:recommended',
-    'plugin:jsdoc/recommended',
     'plugin:jest/recommended'
   ],
-  plugins: ['jsdoc','jest'],
+  plugins: ['jest'],
   rules: {
     'indent': ['warn', 2],
     'linebreak-style': ['warn', 'windows'],
@@ -23,6 +24,7 @@ module.exports = {
     'max-len': ['warn', { code: 120 }],
     'quote-props': ['warn','consistent-as-needed'],
     'space-infix-ops':['warn'],
-    'react/prop-types': [0]
+    'react/prop-types': [0],
+    'no-unused-vars': ['ignore']
   }
 };

@@ -12,7 +12,7 @@ const ListingCard = () => {
     if(!hover) {
       history.goBack();
     }
-  }
+  };
 
   return (
     <div 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './../styles/Dashboard.css';
 
 import { isValidUser } from '../lib/Validation';
@@ -18,7 +18,7 @@ const Dashboard = ({ user, setUser }) => {
     a user logged into the backend. This will make it (hopefully...?) so when you
     refresh on the dashboard, you stay logged in.
   */
-   React.useEffect(() => {
+  React.useEffect(() => {
     const options = {
       method: 'GET',
       headers: {
@@ -44,10 +44,8 @@ const Dashboard = ({ user, setUser }) => {
           }
         }
       })
-      .catch(e => { throw e; })
+      .catch(e => { throw e; });
   }, []);
-
-  const { url } = useRouteMatch();
 
   return (
     <Router basename='/dashboard'>

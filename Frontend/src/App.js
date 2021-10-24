@@ -5,18 +5,18 @@ import {
   Route,
   Redirect,
   useHistory
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import './styles/App.css';
 
-import Login from "./components/Login.js"
+import Login from './components/Login.js';
 import Dashboard from './components/Dashboard';
 
 function App() {
 
   const [ user, setUser ] = React.useState({});
 
-  const history = useHistory()
+  const history = useHistory();
 
   return (
     <Router history={history}>

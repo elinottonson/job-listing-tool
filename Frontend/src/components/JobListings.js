@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import { FaFilter } from 'react-icons/fa';
 import './../styles/Listings.css';
 
-import JobListing from "./JobListing";
+import JobListing from './JobListing';
 
 const JobListings = ({ user }) => {
 
@@ -26,7 +26,7 @@ const JobListings = ({ user }) => {
         return res.json();
       })
       .then((data) => {
-        console.log('Received response:')
+        console.log('Received response:');
         console.log(data);
         setListings(data);
       })
