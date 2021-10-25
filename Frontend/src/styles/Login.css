@@ -1,20 +1,64 @@
+
+
+.login-center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*
+    background-image: url('../images/login-background.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    */
+}
+
 .login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 300px;
+    position: absolute;
+    top: 30%;
+    border-radius: 10px;
+    width: 300px;
+    padding: 50px 25px;
+    box-shadow: 0px 0px 15px hsla(0, 100%, 0%, 0.4);
+    background-color: hsl(0, 0%, 95%);
 }
 
 .login-form {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    align-items: center;
+    width: 100%;
+}
+
+.ukglogo {
+    width: 75%;
+    padding: 5px;
+    border-radius: 10%;
+    margin: 0px 25px;
+    margin-bottom: 15px;
+
 }
 
 input {
     outline: none;
     padding: 10px;
+    margin: 10px;
+    width: 80%;
+    box-shadow: 
+        inset 2px 2px 6px hsla(0, 100%, 0%, 0.1),
+        3px 3px 8px hsla(0, 100%, 0%, 0.2),
+        -3px -3px 10px hsl(0, 0%, 100%);
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    border-radius: 5px;
+    background-color: hsl(0, 0%, 100%);
 }
+
 #email-valid:focus {
     
 }
@@ -29,7 +73,15 @@ label {
 }
 
 #submit {
-    margin: 10px 60px;
+    margin-top: 30px;
+    padding: 10px 50px;
+    color: white;
+    font-size: 15px;
+    background-color: rgb(0, 81, 81);
+    width: 60%;
+}
+#submit:hover {
+    cursor: pointer;
 }
 
 #err-msg {
@@ -40,13 +92,27 @@ label {
 }
 
 #forgot-password {
-    text-align: right;
+    text-align: center;
     width: max-content;
-    align-self: flex-end;
+    align-self: flex;
     margin: 0;
     font-size: 0.8rem;
+    color: #494949;
+    text-decoration: none;
 }
 #forgot-password:hover {
     cursor: pointer;
-    color: #666666;
+    color: #918f8f;
+}
+
+.bringBackTendiesCredit {
+    width: 15%;
+    align-items: right;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.bbtLogo {
+    width: 100%;
 }
