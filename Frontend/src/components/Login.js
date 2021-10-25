@@ -36,11 +36,12 @@ const Login = ({ setUser }) => {
   const [loading, setLoading] = React.useState(false);
 
   const validateAndSetUser = (user) => {
-    let userObj = user.user;
+    let userObj = user;
     let validUser = false;
     let userKeys = Object.keys(userObj);
     
-    validUser = userKeys.includes('id') && userKeys.includes('employeeId') && userKeys.includes('companyId') && userKeys.includes('managerId') && userKeys.includes('isManager');
+    validUser = userKeys.includes("employeeId") && userKeys.includes("companyId") && 
+                userKeys.includes("managerId") && userKeys.includes("isManager");
 
     // set user if valid
     if(validUser) {
