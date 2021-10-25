@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { FaTimesCircle } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
 
@@ -40,21 +40,27 @@ const ListingCard = ({ setPopupOpen }) => {
               <p id='popup-exp-level'>REQUIRED_EXPERIENCE</p>
             </div>
           </div>
-          <div className='popup-mng-dep'>
-            <p id='popup-mng-name'>MANAGER_NAME</p>
-            <p id='popup-mng-pos'>MANAGER_POS</p>
+          <div className='popup-header-right'>
+            <div className='popup-mng-dep'>
+              <p id=' manager-name'>MANAGER_NAME</p>
+              <p id='manager-pos'>MANAGER_POS</p>
+            </div>
+            <FaTimes
+              id='close-btn'
+              onClick={handleClose}
+            />
           </div>
-          <FaTimesCircle 
-            id='close-btn'
-            onClick={handleClose}
-          />
         </div>
         <p className='popup-desc'>LISTING_DESCRIPTION</p>
         <div className='listing-footer'>
-          <button type='button' id='ref-btn'>Leave Referral</button>
-          <ul className='popup-tags'>TAGS</ul>
+          <ul className='tags'>
+            <li>TAG 1</li>
+            <li>TAG 2</li>
+            <li>TAG 3</li>
+          </ul>
           <p id='popup-date'>DATE_CREATED</p>
         </div>
+        <button type='button' id='ref-btn'>Leave Referral</button>
       </div>
     </div>
   );

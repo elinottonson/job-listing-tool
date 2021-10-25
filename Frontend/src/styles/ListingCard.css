@@ -24,31 +24,65 @@
 }
 .listing-card {
     background-color: hsl(0, 0%, 95%);
-    width: 50rem;
-    padding: 10px 15px 15px 15px;
-    border: 1px solid red;
+    width: 54rem;
+    padding: 17px 22px 25px 22px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -25rem;
+    margin-left: -27rem;
     margin-top: -10%;
+    box-shadow: 2px 2px 10px hsla(0, 0%, 0%, 0.1);
+}
+
+.popup-header-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #close-btn {
     font-size: large;
-    width: 40px;
-    height: 40px;
+    color: hsl(0, 0%, 10%);
+    width: 30px;
+    height: 30px;
     padding: 4px;
-    border-radius: 5px;
+    border-radius: 30px;
+    margin-left: 30px;
+    margin-top: -2px;
 }
 #close-btn:hover {
     background-color: lightgray;
+    cursor: pointer;
 }
 
 .popup-desc {
     text-align: left;
     margin: 10px 5px 20px 5px;
+}
+
+#popup-date {
+    color: gray;
+    font-size: small;
+}
+
+#ref-btn {
+    margin-top: 20px;
+    width: 25%;
+    height: 42px;
+    align-self: center;
+    outline: none;
+    border-style: none;
+    background-color: hsl(0, 0%, 95%);
+    box-shadow: 
+        5px 5px 8px hsla(0, 100%, 0%, 0.2),
+        -5px -5px 10px hsla(0, 0%, 100%, 1);
+    border-radius: 10px;
+}
+#ref-btn:hover {
+    animation: hover-scale 200ms;
+    cursor: pointer;
+    scale: 1.05;
 }

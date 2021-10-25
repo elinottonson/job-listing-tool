@@ -60,7 +60,7 @@ const JobListing = ({ listingObj, setPopupOpen }) => {
         </div>
         <div className='manager-dep'>
           <p id='manager-name'>MANAGER_NAME</p>
-          <p id='department'>DEPARTMENT</p>
+          <p id='manager-pos'>DEPARTMENT</p>
         </div>
       </div>
       <p className='listing-desc'>{listingObj.description}</p>
