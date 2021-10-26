@@ -28,11 +28,7 @@ const JobListing = ({ listingObj }) => {
   const date = parseDate(listingObj.createdAt);
 
   return (
-      <li 
-        className={hover ? 'job-listing-hover' : 'job-listing'} 
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
+      <li className='job-listing'>
         <div className='listing-header'>
           <div className='title-sal'>
             <h2 id='title'>{listingObj.title}</h2>

@@ -16,11 +16,12 @@
     border: none;
     padding: 10px 10px 10px 10px;
     box-shadow: 
-    inset 2px 2px 6px var(--dark-shadow),
     3px 3px 8px var(--light-shadow),
     -3px -3px 10px hsl(0, 0%, 100%);
 }
 
 .dashboard-search button:hover {
     cursor: pointer;
+    box-shadow: inset 3px 3px 8px var(--light-shadow),
+    inset -3px -3px 10px var(--highlight);
 }

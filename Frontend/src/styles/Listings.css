@@ -18,6 +18,12 @@
         -3px -3px 10px var(--highlight);
 }
 
+.listings-filter:hover {
+    cursor: pointer;
+    box-shadow: inset 3px 3px 8px var(--light-shadow),
+    inset -3px -3px 10px var(--highlight);
+}
+
 #filter-icon {
     margin-right: 5px;
 }
@@ -54,18 +60,15 @@ ul {
         -5px -5px 10px var(--highlight);
 }
 
-.job-listing-hover {
-    animation-duration: 200ms;
-    animation-name: hover-scale;
+.job-listing:hover {
     display: flex;
     flex-direction: column;
     width: 100%;
     border-radius: 10px;
     margin: 15px 0px;
     padding: 10px 15px 15px 15px;
-    box-shadow: 5px 5px 8px var(--light-shadow),
-        -5px -5px 10px var(--highlight);
-    scale: 1.05;
+    box-shadow: inset 5px 5px 8px var(--light-shadow),
+        inset -5px -5px 10px var(--highlight);
     cursor: pointer;
 }
 

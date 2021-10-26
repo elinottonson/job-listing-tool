@@ -36,7 +36,7 @@ const JobListings = ({ user }) => {
     <div className='job-listings-container'>
       <div className='listings-filter'>
         <FaFilter id='filter-icon'/>
-        <p>Filter</p>
+        Filter
       </div>
       <ul className='job-listings'>
         {listings.map(listing => <JobListing listingObj={listing} />)}
