@@ -1,17 +1,21 @@
 import './../styles/Header.css';
+import logo from './../images/ukglogo.png';
+import { FaRegBell, FaRegUserCircle } from 'react-icons/fa';
+
 // TODO: Implement Header
 const Header = () => {
     return (
         <div className='header'>
-            <nav class='navbar'>
-                <div class='nav-left'>
-                    <a>Home</a>
+            <nav>
+                <div>
+                    <a ><img src={logo} alt='UKG Logo'/></a>
                     <a>Referrals</a>
                 </div>
-                <div class='nav-right'>
+
+                <div>
                     <a>Help</a>
-                    <a>Notifications</a>
-                    <a>User</a>
+                    <a><FaRegBell id='notification-icon'/></a>
+                    <a><FaRegUserCircle id='user-icon'/></a>
                 </div>
             </nav>            
         </div>

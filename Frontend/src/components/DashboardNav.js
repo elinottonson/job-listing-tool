@@ -1,12 +1,13 @@
 import React from 'react';
 import './../styles/Dashboard.css'
+import { FaSearch } from 'react-icons/fa'
 
 const DashboardNav = () => {
     return (
         <div>
             <form class='dashboard-search'>
-                <input type='text' class='search' placeholder='Search...'></input>
-                <input type='submit' value='Search'></input>
+                <input type='text' placeholder='Search...'></input>
+                <button type='submit'><FaSearch id='search-icon'/></button>
             </form>
         </div>
     );

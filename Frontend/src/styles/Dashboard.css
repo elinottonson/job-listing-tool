@@ -3,13 +3,24 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: hsl(0, 0%, 95%);
+    background-color: var(--background);
 }
 
 .dashboard-search {
     align-items: center;
+    display: inline-flex;
 }
 
-.dashboard-search input {
+.dashboard-search button {
     border-radius: 10px;
+    border: none;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 
+    inset 2px 2px 6px var(--dark-shadow),
+    3px 3px 8px var(--light-shadow),
+    -3px -3px 10px hsl(0, 0%, 100%);
+}
+
+.dashboard-search button:hover {
+    cursor: pointer;
 }

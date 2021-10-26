@@ -7,30 +7,35 @@
 nav {
     width: 100%;
     display: flex;
-    background-color: rgb(0, 85, 81);
+    position: fixed;
+    justify-content: space-between;
+    background-color: var(--background);
     margin-bottom: 10px; 
+    box-shadow: 
+        inset 2px 2px 6px var(--dark-shadow),
+        3px 3px 8px var(--light-shadow);
 }
 
 nav ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
   
-  nav a {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
+nav a {
+  display: inline-block;
+  text-align: center;
+  vertical-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
   
-  nav div.nav-right {
-      position: absolute;
-      right: 0;
-  }
-  
-  nav a:hover {
-    background-color: #111;
-  }
+nav img {
+  height: 16px;
+}
+
+nav a:hover {
+  background-color: var(--light-shadow);
+  cursor: pointer;
+}
