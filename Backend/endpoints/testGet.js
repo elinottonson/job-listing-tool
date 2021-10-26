@@ -1,4 +1,5 @@
 const {Express} = require('express');
+const { checkNotAuth } = require('../passport/checkAuth');
 
 /**
  * Test Endpoint
@@ -7,8 +8,8 @@ const {Express} = require('express');
  * @returns {void} Sets up the test endpoint
  */
 function testGet(app) {
-  app.get('/', (req, res) => {
-    res.send('Hello World!');
+  app.get('/', checkNotAuth, (req, res) => {
+    res.render('../public/index.ejs')
   });
 }
 
