@@ -9,7 +9,7 @@ async function main() {
     const allRefs = models.Referral.findAll({
         raw: true,
         where:{
-            firstName: "adaa"
+            firstName: "fname"
         }
     }).then(function(result){
         const ids = []
