@@ -1,6 +1,7 @@
 const expectExport = require('expect');
 const getUser = require('../endpoints/getUser');
 const doCredentialsMatch = require('./doCredentialsMatch');
+const getListings = require('./getFilteredListings');
 const getPositions = require('./getPositions');
 const getReferrals = require('./getReferrals');
 const getUserById = require('./getUserById');
@@ -52,38 +53,9 @@ describe('getPositions testing', () => {
   test('Valid Company', async () => {
     const res = await getPositions(ValidCompany);
     expect(res).toEqual(expect.any(Array));
-    expect(res.length).toBeTruthy();
+    expect(res.length > 0).toBe(true);
     for(const entry of res){
-      expect(entry).toEqual(
-        expect.objectContaining({
-          id: expect.any(Number),
-          title: expect.any(String),
-          companyName: expect.any(String),
-          description: expect.any(String),
-          minYearsExperience: expect.any(Number),
-          salary: expect.any(Number),
-          managerId: expect.any(Number),
-          tags: expect.any(Array),
-          manager: expect.objectContaining({
-            id: expect.any(Number),
-            firstName: expect.any(String),
-            lastName: expect.any(String),
-            employeeId: expect.any(Number),
-            companyId: expect.any(Number),
-            companyName: expect.any(String),
-            positionTitle: expect.any(String),
-            startDate: expect.any(String),
-            isManager: expect.any(Boolean),
-            createdAt: expect.any(Date),
-            updatedAt: expect.any(Date)
-          }),
-          createdAt: expect.any(Date),
-          updatedAt: expect.any(Date)
-        })
-      );
-      for(const tag of entry.tags){
-        expect(tag).toEqual(expect.any(String));
-      }
+      listingMatch(entry,{companyName:ValidCompany});
     }
   });
 });
@@ -99,7 +71,7 @@ describe('getReferrals testing', () => {
   test('Valid Listing Id', async () => {
     const res = await getReferrals(ValidListingId);
     expect(res).toEqual(expect.any(Array));
-    expect(res.length).toBeTruthy();
+    expect(res.length > 0).toBe(true);
     for(const entry of res){
       expect(entry).toEqual(
         expect.objectContaining({
@@ -107,7 +79,7 @@ describe('getReferrals testing', () => {
           lastName:expect.any(String),
           email:expect.any(String),
           referralText:expect.any(String),
-          listingId:expect.any(Number),
+          listingId:ValidListingId,
           authorId: expect.any(Number),
           companyName: expect.any(String)
         })
@@ -129,3 +101,74 @@ describe('getUserById testing', () => {
     expect(user.companyId).toEqual(3);
   });
 });
+
+describe('getListings testing', () => {
+  const InvalidListingId = -1;
+  const ValidListingId = 52;
+
+  test('Invalid Listing Id', async () => {
+    expect(await getListings({id:InvalidListingId})).toEqual([]);
+  });
+
+  test('Valid Listing Id', async () => {
+    const filterObj = {id:ValidListingId};
+    const res = await getListings(filterObj);
+    expect(res).toEqual(expect.any(Array));
+    expect(res.length > 0).toBe(true);
+    for(const entry of res){
+      listingMatch(entry,filterObj);
+    }
+  });
+
+  const InvalidCompanyName = 'Fake';
+  const ValidCompanyName = 'Techgenix';
+
+  test('Invalid Company Name', async () => {
+    expect(await getListings({companyName:InvalidCompanyName})).toEqual([]);
+  });
+
+  test('Valid Company Name', async () => {
+    const filterObj = {companyName:ValidCompanyName};
+    const res = await getListings(filterObj);
+    expect(res).toEqual(expect.any(Array));
+    expect(res.length > 0).toBe(true);
+    for(const entry of res){
+      listingMatch(entry,filterObj);
+    }
+  });
+});
+
+/**
+ * Determines if a given listing matches the structure expected as well as optional checks
+ * 
+ * @param {object} listing The listing being checked
+ * @param {object} options Optional parameter to specify additional requirements for the listing
+ */
+function listingMatch(listing,options = {}){
+  expect(listing).toEqual(
+    expect.objectContaining({
+      id: options.id ?? expect.any(Number),
+      title: expect.any(String),
+      companyName: options.companyName ?? expect.any(String),
+      description: expect.any(String),
+      minYearsExperience: expect.any(Number),
+      salary: expect.any(Number),
+      managerId: expect.any(Number),
+      tags: expect.any(Array),
+      manager: expect.objectContaining({
+        id: expect.any(Number),
+        firstName: expect.any(String),
+        lastName: expect.any(String),
+        employeeId: expect.any(Number),
+        companyId: expect.any(Number),
+        companyName: expect.any(String),
+        positionTitle: expect.any(String),
+        startDate: expect.any(String),
+        isManager: true,
+      })
+    })
+  );
+  for(const tag of listing.tags){
+    expect(tag).toEqual(expect.any(String));
+  }
+}

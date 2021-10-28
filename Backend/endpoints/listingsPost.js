@@ -16,7 +16,7 @@ function listingsPost(app) {
       return;
     }
     
-    positions = await getPositions(company)
+    let positions = await getPositions(company);
 
     res.send(JSON.parse(JSON.stringify(positions)));
   });
