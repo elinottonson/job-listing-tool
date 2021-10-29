@@ -14,7 +14,13 @@ import Dashboard from './components/Dashboard';
 
 function App() {
 
-  const [ user, setUser ] = React.useState({});
+  const [ user, setUser ] = React.useState([]);
+  
+  React.useEffect(() => {
+    fetch("/auth")
+      .then(res => res.json())
+      .then((user) => setUser(user))
+  }, []);
 
   return (
     <Router>

@@ -1,7 +1,10 @@
+const expectExport = require('expect');
+const getUser = require('../endpoints/getUser');
 const doCredentialsMatch = require('./doCredentialsMatch');
 const getListings = require('./getFilteredListings');
 const getPositions = require('./getPositions');
 const getReferrals = require('./getReferrals');
+const getUserById = require('./getUserById');
 
 afterAll(() => {return new Promise(done => {
   // Closing the DB connection allows Jest to exit successfully.
@@ -82,6 +85,20 @@ describe('getReferrals testing', () => {
         })
       );
     }
+  });
+});
+
+describe('getUserById testing', () => {
+
+  test('Invalid User Id', async () => {
+    const user = await(getUserById(-1));
+    expect(user).toBe(null);
+  });
+
+  test('Valid User Id', async () => {
+    const user = await getUserById(5);
+    expect(user.employeeId).toEqual(5);
+    expect(user.companyId).toEqual(3);
   });
 });
 
