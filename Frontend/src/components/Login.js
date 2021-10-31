@@ -2,7 +2,6 @@ import React from 'react';
 import './../styles/Login.css';
 
 import { isValidUser, isValidEmail } from '../lib/Validation';
-
 import BringBackTendiesCredit from './BringBackTendiesCredit';
 import logo from './../images/ukglogo.png';
 import bgImage from './../images/login-background.jpg';
@@ -51,8 +50,8 @@ const Login = ({ setUser }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if(!validEmail) {
-      setErrorMsg({ error: true, msg: 'Please enter a valid email.'});
+    if (!validEmail) {
+      setErrorMsg({ error: true, msg: 'Please enter a valid email.' });
       setLoading(false);
     }
     else {
@@ -69,26 +68,28 @@ const Login = ({ setUser }) => {
       setLoading(true);
 
       fetch('/api/login', options)
-        .then((res) => {
+        .then(async (res) => {
           console.log(res);
           console.log(res.status);
-          return res.json();
+          if(!res.ok){
+            throw Error(await res.text())
+
+          }
+          return res.json()
         })
         .then((data) => {
           console.log('Received Response:');
           console.log(data);
-          if(Object.keys(data).includes('Error')) {
-            setErrorMsg({ error: true, msg: data.Error });
-            setLoading(false);
-          }
-          else {
-            if(isValidUser(data)) {
-              setUser(data);
-            }
-            setLoading(false);
+          if(isValidUser(data)) {
+            setUser(data);
           }
         })
-        .catch(e => { throw e; });
+        .catch((e) => {
+          setErrorMsg({error: true, msg: e.message})
+        })
+        .finally(() => {
+          setLoading(false)
+        })
     }
   };
 
@@ -98,9 +99,9 @@ const Login = ({ setUser }) => {
   */
   React.useEffect(() => {
     let interval = setInterval(() => {
-      if(emailText.current) {
+      if (emailText.current) {
         setUserInput(v => ({ ...v, email: emailText.current.value }));
-        if(emailText.current.value !== '') {
+        if (emailText.current.value !== '') {
           setValidEmail(isValidEmail(userInput.email));
         }
         clearInterval(interval);
@@ -127,34 +128,34 @@ const Login = ({ setUser }) => {
   return (
     <div className='login-center-container'>
       <div style={bgImageStyle}></div>
-      <BringBackTendiesCredit/>
+      <BringBackTendiesCredit />
       <div className='login-container'>
-        <img className='ukglogo' src={logo} alt='UKG Logo'/>
+        <img className='ukglogo' src={logo} alt='UKG Logo' />
         <form onSubmit={handleSubmit} className='login-form'>
-          <input 
-            className='inputForm' 
-            type='text' 
-            placeholder='Email' 
-            name='email' 
-            ref={emailText} 
-            id={validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'} 
+          <input
+            className='inputForm'
+            type='text'
+            placeholder='Email'
+            name='email'
+            ref={emailText}
+            id={validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'}
           />
-          <input 
-            className='inputForm' 
-            type='password' 
-            placeholder='Password' 
-            onChange={handleChange} 
-            id='password' 
-            name='password' 
+          <input
+            className='inputForm'
+            type='password'
+            placeholder='Password'
+            onChange={handleChange}
+            id='password'
+            name='password'
           />
           <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
           <a href='' id='forgot-password'>Forgot Password?</a>
           {/* ^^^ This should probably be a react-router <Link> eventually instead */}
-          <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit'/>
+          <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit' />
         </form>
       </div>
     </div>
-    
+
   );
 };
 

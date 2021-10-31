@@ -72,7 +72,7 @@ const Dashboard = ({ user, setUser }) => {
         <Switch>
           <Route 
             path='/job/:id' 
-            children={<ListingCard setPopupOpen={setPopupOpen}/>}
+            children={<ListingCard setPopupOpen={setPopupOpen} listingObj = {popupOpen}/>}
           />
         </Switch>
       </div>
