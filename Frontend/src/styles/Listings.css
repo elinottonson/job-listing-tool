@@ -7,6 +7,14 @@
     min-width: 450px;
 }
 
+@keyframes hover-scale {
+    from {
+        scale: 1;
+    }
+    to {
+        scale: 1.05;
+    }
+}
 .listings-filter {
     display: flex;
     align-items: center;
@@ -17,7 +25,6 @@
     box-shadow: 3px 3px 8px hsla(0, 100%, 0%, 0.2),
         -3px -3px 10px hsla(0, 0%, 100%, 1);
 }
-
 #filter-icon {
     margin-right: 5px;
 }
@@ -35,14 +42,6 @@ ul {
     overflow-y: auto;
 }
 
-@keyframes hover-scale {
-    from {
-        scale: 1;
-    }
-    to {
-        scale: 1.05;
-    }
-}
 .job-listing {
     display: flex;
     flex-direction: column;
@@ -94,7 +93,7 @@ ul {
     margin: 0px 10px;
 }
 
-#department {
+#manager-pos {
     color: gray;
 }
 

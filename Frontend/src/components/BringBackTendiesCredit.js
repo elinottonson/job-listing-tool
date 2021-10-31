@@ -1,5 +1,6 @@
 import './../styles/Login.css';
 import logo from './../images/bringbacktendies.png';
+import React from 'react';
 
 const BringBackTendiesCredit = () => {
   return (
