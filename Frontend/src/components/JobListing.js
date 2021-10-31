@@ -38,7 +38,7 @@ const JobListing = ({ listingObj, setPopupOpen }) => {
         onMouseLeave={() => setHover(false)}
         onClick={() => {
           history.push(`${url}job/${listingObj.id}`);
-          setPopupOpen(true);
+          setPopupOpen(listingObj);
         }}
       >
         <div className='listing-header'>
