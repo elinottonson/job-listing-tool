@@ -119,7 +119,7 @@ const Login = ({ setUser }) => {
     transform: 'scale(1.03)',
     zIndex: '-5',
     position: 'fixed'
-  }
+  };
 
   /*
     You'll notice that the <input> for email uses 'ref' instead of 'onChange'. 
