@@ -7,9 +7,9 @@ const {Express} = require('express');
  * @returns {void} Sets up the logout endpoint
  */
 function logOut(app){
-  app.delete('/logout', (req, res) => {
+  app.delete('/logout', (req) => {
     req.logOut();
-  })
+  });
 }
 
 module.exports = logOut;

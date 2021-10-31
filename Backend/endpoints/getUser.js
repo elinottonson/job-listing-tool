@@ -9,8 +9,7 @@ const { checkAuth } = require('../passport/checkAuth');
  */
 function getUser(app) {
   app.get('/auth', checkAuth, (req, res) => {
-    user = req.user;
-    res.send(user);
+    res.send(req.user);
   });
 }
 

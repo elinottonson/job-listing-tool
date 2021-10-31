@@ -6,9 +6,6 @@ const flash = require('express-flash');
 const methodOverride = require('method-override');
 app.use(express.urlencoded({ extended: true }));
 
-//Initializes Passport
-
-
 //For if a port is supplied as an enviroment variable
 const port = process.env.PORT || 3001;
 

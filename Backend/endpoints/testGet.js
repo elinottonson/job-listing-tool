@@ -9,7 +9,7 @@ const { checkNotAuth } = require('../passport/checkAuth');
  */
 function testGet(app) {
   app.get('/', checkNotAuth, (req, res) => {
-    res.render('../public/index.ejs')
+    res.render('../public/index.ejs');
   });
 }
 
