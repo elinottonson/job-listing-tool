@@ -2,6 +2,9 @@ import React from 'react';
 import './../styles/Login.css';
 
 import { isValidUser, isValidEmail } from '../lib/Validation';
+import BringBackTendiesCredit from './BringBackTendiesCredit';
+import logo from './../images/ukglogo.png';
+import bgImage from './../images/login-background.jpg';
 
 /*
   email/pw for testing:
@@ -78,8 +81,8 @@ const Login = ({ setUser }) => {
             setLoading(false);
           }
           else {
-            if(isValidUser(data.user)) {
-              setUser(data.user);
+            if(isValidUser(data)) {
+              setUser(data);
             }
             setLoading(false);
           }
@@ -104,25 +107,53 @@ const Login = ({ setUser }) => {
     }, 100);
   });
 
+  const bgImageStyle = {
+    backgroundImage: `url(${bgImage})`,
+    backgroundAttachment: 'fixed',
+    minWidth: '100%',
+    minHeight: '100%',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    transform: 'scale(1.03)',
+    zIndex: '-5',
+    position: 'fixed'
+  }
+
   /*
     You'll notice that the <input> for email uses 'ref' instead of 'onChange'. 
     This is to accomodate the workaround seen above.
   */
   return (
-    <div className='login-container'>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit} className='login-form'>
-        <label htmlFor='email'>Email:</label>
-        <input type='text' name='email' ref={emailText} id={
-          validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'
-        } />
-        <label htmlFor='password'>Password:</label>
-        <input type='password' onChange={handleChange} id='password' name='password' />
-        <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
-        <p id='forgot-password'>Forgot Password?</p>
-        <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit'/>
-      </form>
+    <div className='login-center-container'>
+      <div style={bgImageStyle}></div>
+      <BringBackTendiesCredit/>
+      <div className='login-container'>
+        <img className='ukglogo' src={logo} alt='UKG Logo'/>
+        <form onSubmit={handleSubmit} className='login-form'>
+          <input 
+            className='inputForm' 
+            type='text' 
+            placeholder='Email' 
+            name='email' 
+            ref={emailText} 
+            id={validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'} 
+          />
+          <input 
+            className='inputForm' 
+            type='password' 
+            placeholder='Password' 
+            onChange={handleChange} 
+            id='password' 
+            name='password' 
+          />
+          <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
+          <a href='' id='forgot-password'>Forgot Password?</a>
+          {/* ^^^ This should probably be a react-router <Link> eventually instead */}
+          <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit'/>
+        </form>
+      </div>
     </div>
+    
   );
 };
 

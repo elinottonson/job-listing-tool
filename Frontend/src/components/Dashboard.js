@@ -44,8 +44,8 @@ const Dashboard = ({ user, setUser }) => {
           console.log(data.Error);
         }
         else {
-          if(isValidUser(data.user)) {
-            setUser(data.user);
+          if(isValidUser(data)) {
+            setUser(data);
           }
         }
       })
