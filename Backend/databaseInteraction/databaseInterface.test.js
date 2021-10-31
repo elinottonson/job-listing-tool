@@ -1,5 +1,3 @@
-const expectExport = require('expect');
-const getUser = require('../endpoints/getUser');
 const doCredentialsMatch = require('./doCredentialsMatch');
 const getListings = require('./getFilteredListings');
 const getPositions = require('./getPositions');
