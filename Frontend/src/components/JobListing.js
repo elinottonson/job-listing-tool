@@ -32,39 +32,45 @@ const JobListing = ({ listingObj, setPopupOpen }) => {
   const date = parseDate(listingObj.createdAt);
 
   return (
-      <li className='job-listing'>
-        <div className='listing-header'>
-          <div className='title-sal'>
-            <h2 id='title'>{listingObj.title}</h2>
-            <div id='subtitle'>
-              <p id='salary'>
-                {`$${listingObj.salary.toLocaleString()}`}
-              </p>
-              <p id='st-break'>•</p>
-              <p id='exp-level'>
-                {
-                  listingObj.minYearsExperience === 0 ? 
-                    'Entry Level' : 
-                    `${listingObj.minYearsExperience} Years Experience`
-                }
-              </p>
-            </div>
-          </div>
-          <div className='manager-dep'>
-            <p id='manager-name'>
-            {listingObj.manager.firstName + ' ' + listingObj.manager.lastName}
+    <li 
+      className='job-listing'
+      onClick={() => {
+        history.push(`${url}job/${listingObj.id}`);
+        setPopupOpen(listingObj);
+      }}
+    >
+      <div className='listing-header'>
+        <div className='title-sal'>
+          <h2 id='title'>{listingObj.title}</h2>
+          <div id='subtitle'>
+            <p id='salary'>
+              {`$${listingObj.salary.toLocaleString()}`}
             </p>
-            <p id='manager-pos'>
-              {listingObj.manager.positionTitle}
+            <p id='st-break'>•</p>
+            <p id='exp-level'>
+              {
+                listingObj.minYearsExperience === 0 ? 
+                  'Entry Level' : 
+                  `${listingObj.minYearsExperience} Years Experience`
+              }
             </p>
           </div>
         </div>
-        <p className='listing-desc'>{listingObj.description}</p>
-        <div className='listing-footer'>
-            <ul className='tags'>
-              {listingObj.tags.map(tag => <li>{tag}</li>)}
-            </ul>
-            <p id='date'>
+        <div className='manager-dep'>
+          <p id='manager-name'>
+            {listingObj.manager.firstName + ' ' + listingObj.manager.lastName}
+          </p>
+          <p id='manager-pos'>
+            {listingObj.manager.positionTitle}
+          </p>
+        </div>
+      </div>
+      <p className='listing-desc'>{listingObj.description}</p>
+      <div className='listing-footer'>
+        <ul className='tags'>
+          {listingObj.tags.map(tag => <li>{tag}</li>)}
+        </ul>
+        <p id='date'>
           {
             `${date.month}.${date.day}.${date.year} 
             at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
