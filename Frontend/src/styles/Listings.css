@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 50%;
     max-width: 900px;
-    min-width: 450px;
+    min-width: 500px;
 }
 
 .listings-filter {
@@ -97,7 +97,13 @@ ul {
     margin: 0px 10px;
 }
 
-#department {
+.manager-dep {
+    text-align: right;
+}
+#manager-name {
+    margin-bottom: -5px;
+}
+#manager-pos {
     color: gray;
 }
 

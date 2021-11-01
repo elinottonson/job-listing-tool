@@ -1,43 +1,56 @@
 .header {
-    height: 64px;
-    width: 100%;
+  display: flex;
+  height: 64px;
+  width: 100%;
 }
 
 /*Navbar CSS*/
 nav {
-    width: 100%;
-    display: flex;
-    position: fixed;
-    justify-content: space-between;
-    background-color: var(--background);
-    margin-bottom: 10px; 
-    box-shadow: 
-        inset 2px 2px 6px var(--dark-shadow),
-        3px 3px 8px var(--light-shadow);
-}
-
-nav ul{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--background);
+  margin-bottom: 10px; 
+  box-shadow: 
+      inset 2px 2px 6px var(--dark-shadow),
+      3px 3px 8px var(--light-shadow);
 }
   
-nav a {
-  display: inline-block;
-  text-align: center;
-  vertical-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-  
-nav img {
-  height: 16px;
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  margin: 0px 10px;
 }
 
-nav a:hover {
+#header-title-text {
+  margin-bottom: 2px;
+}
+
+.header-btn {
+  padding: 0px 20px;
+  height: 100%;
+}
+.header-btn:hover {
   cursor: pointer;
   box-shadow: 
-  inset -2px -2px 6px var(--highlight),
-  inset 3px 3px 8px var(--light-shadow);
+    inset -2px -2px 6px var(--highlight),
+    inset 3px 3px 8px var(--light-shadow);
+}
+
+nav img {
+  height: 20px;
+  margin-bottom: -2px;
+  margin-right: 10px;
+}
+
+#help-text {
+  display: flex;
+  align-items: center;
+}
+#help-text a {
+  margin-bottom: 1px;
+}
+
+.header-icon {
+  width: auto;
 }

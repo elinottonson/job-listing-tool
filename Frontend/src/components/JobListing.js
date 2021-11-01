@@ -50,7 +50,7 @@ const JobListing = ({ listingObj }) => {
             <p id='manager-name'>
             {listingObj.manager.firstName + ' ' + listingObj.manager.lastName}
             </p>
-            <p id='department'>
+            <p id='manager-pos'>
               {listingObj.manager.positionTitle}
             </p>
           </div>
