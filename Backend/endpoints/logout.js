@@ -9,7 +9,6 @@ const {Express} = require('express');
 function logOut(app){
   app.delete('/logout', (req, res) => {
     req.logOut();
-    res.redirect('/'); 
   })
 }
 

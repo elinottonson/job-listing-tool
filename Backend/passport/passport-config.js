@@ -26,14 +26,11 @@ function initialize(passport, getUserById) {
                 console.log('Found User.');
                 return done(null, user);
             } else {
-                res.status(404);
-                res.send({ Error: 'Invalid username and/or password' });
                 return done(null, false, {message : 'Invalid username and/or password.'});
             }
+            
         } else {
             console.log('Invalid email');
-            res.status(400);
-            res.send({ Error: 'Invalid email' });
             return done(null, false, {message : 'Invalid email.'});
         }
     }

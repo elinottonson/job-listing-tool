@@ -1,28 +1,32 @@
 import React from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 import { parseDate } from '../lib/ParseDate';
 
 /*
   Sample Job Listing Object
   {
-    "id": 51,
+    "id": 52,
     "title": "Software Engineer I",
     "companyName": "Techgenix",
     "description": "Entry level Software Engineering role on an Agile team",
     "minYearsExperience": 0,
-    "salary": 67848,
+    "managerId": 111,
+    "salary": 66880,
     "tags": [
-      "Kotlin", 
-      "React",
-      "MySQL",
-      "Git"
+      "Git",
+      "SQL",
+      "MongoDB",
+      "Jenkins"
     ],
-    "createdAt": "2021-10-08T02:23:26.911Z",
-    "updatedAt": "2021-10-08T02:23:26.911Z"
+    "createdAt": "2021-10-14T18:40:02.987Z",
+    "updatedAt": "2021-10-14T18:40:02.987Z"
   }
 */
-const JobListing = ({ listingObj }) => {
+const JobListing = ({ listingObj, setPopupOpen }) => {
 
+  const history = useHistory();
+  const { url } = useRouteMatch();
   const [ hover, setHover ] = React.useState(false);
 
   const date = parseDate(listingObj.createdAt);
@@ -61,13 +65,13 @@ const JobListing = ({ listingObj }) => {
               {listingObj.tags.map(tag => <li>{tag}</li>)}
             </ul>
             <p id='date'>
-              {
-                `${date.month}.${date.day}.${date.year} 
-                at ${date.hour}:${date.minute} ${date.pm?'PM':'AM'}`
-              }
-            </p>
-        </div>
-      </li>
+          {
+            `${date.month}.${date.day}.${date.year} 
+            at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
+          }
+        </p>
+      </div>
+    </li>
   );
 };
 

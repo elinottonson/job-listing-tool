@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
 import { FaFilter } from 'react-icons/fa';
 import './../styles/Listings.css';
 
-import JobListing from "./JobListing";
+import JobListing from './JobListing';
 
-const JobListings = ({ user }) => {
+const JobListings = ({ user, setPopupOpen }) => {
 
   const [ listings, setListings ] = React.useState([]);
+  const [ filterHover, setFilterHover ] = React.useState(false);
 
   React.useEffect(() => {
     const options = {
@@ -25,7 +26,7 @@ const JobListings = ({ user }) => {
         return res.json();
       })
       .then((data) => {
-        console.log('Received response:')
+        console.log('Received response:');
         console.log(data);
         setListings(data);
       })
@@ -34,12 +35,16 @@ const JobListings = ({ user }) => {
 
   return (
     <div className='job-listings-container'>
-      <div className='listings-filter'>
+      <div 
+        className={filterHover ? 'listings-filter-hover' : 'listings-filter'}
+        onMouseEnter={() => setFilterHover(true)}
+        onMouseLeave={() => setFilterHover(false)}
+      >
         <FaFilter id='filter-icon'/>
         Filter
       </div>
       <ul className='job-listings'>
-        {listings.map(listing => <JobListing listingObj={listing} />)}
+        {listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)}
       </ul>
     </div>
   );
