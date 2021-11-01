@@ -23,7 +23,7 @@
     width: 300px;
     padding: 50px 25px;
     box-shadow: 0px 0px 15px hsla(0, 100%, 0%, 0.4);
-    background-color: hsl(0, 0%, 95%);
+    background-color: var(--background);
 }
 
 .login-form {
@@ -48,8 +48,8 @@ input {
     margin: 10px;
     width: 80%;
     box-shadow: 
-        inset 2px 2px 6px hsla(0, 100%, 0%, 0.1),
-        3px 3px 8px hsla(0, 100%, 0%, 0.2),
+        inset 2px 2px 6px var(--dark-shadow),
+        3px 3px 8px var(--light-shadow),
         -3px -3px 10px hsl(0, 0%, 100%);
     border-top-style: hidden;
     border-right-style: hidden;
