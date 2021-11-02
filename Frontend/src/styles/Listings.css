@@ -15,7 +15,7 @@
     width: fit-content;
     padding: 10px 20px;
     box-shadow: 3px 3px 8px hsla(0, 100%, 0%, 0.2),
-        -3px -3px 10px hsla(0, 0%, 100%, 1);
+        -3px -3px 10px rgb(64, 146, 142);
 }
 
 #filter-icon {
@@ -44,6 +44,7 @@ ul {
     }
 }
 .job-listing {
+    background-color: hsl(0, 0%, 95%);
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -51,7 +52,9 @@ ul {
     margin: 15px 0px;
     padding: 10px 15px 15px 15px;
     box-shadow: 5px 5px 8px hsla(0, 100%, 0%, 0.2),
-        -5px -5px 10px hsla(0, 0%, 100%, 1);
+        -5px -5px 10px ;
+    box-shadow: 5px 5px 8px rgb(147, 180, 179),
+    -5px -5px 10px hsla(0, 0%, 100%, 1);
 }
 
 .job-listing-hover {
@@ -118,8 +121,10 @@ ul {
     margin-right: 16px;
     padding: 2px 8px;
     font-size: small;
-    background-color: hsl(0, 0%, 85%);
+    /* background-color: hsl(0, 0%, 85%); */
     border-radius: 8px;
+    background-color: rgb(0, 85, 81);
+    color: white;
 }
 .tags li:hover {
     cursor: pointer;
