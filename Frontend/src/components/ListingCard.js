@@ -50,21 +50,21 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
                 <p id='salary'>{'$' + listingObj.salary}</p>
                 <p id='st-break'>•</p>
                 <p id='popup-exp-level'>
-                {
-                  listingObj.minYearsExperience === 0 ? 
-                    'Entry Level' : 
-                    `${listingObj.minYearsExperience} Years Experience`
-                }
+                  {
+                    listingObj.minYearsExperience === 0 ? 
+                      'Entry Level' : 
+                      `${listingObj.minYearsExperience} Years Experience`
+                  }
                 </p>
               </div>
             </div>
             <div className='popup-header-right'>
               <div className='popup-mng-dep'>
                 <p id=' manager-name'>            
-                {listingObj.manager.firstName + ' ' + listingObj.manager.lastName}
+                  {listingObj.manager.firstName + ' ' + listingObj.manager.lastName}
                 </p>
                 <p id='manager-pos'>
-                {listingObj.manager.positionTitle}
+                  {listingObj.manager.positionTitle}
                 </p>
               </div>
               <FaTimes
@@ -75,14 +75,14 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
           </div>
           <p className='popup-desc'>{listingObj.description}</p>
           <div className='listing-footer'>
-          <ul className='tags'>
-                {listingObj.tags.map(tag => <li>{tag}</li>)}
-              </ul>
+            <ul className='tags'>
+              {listingObj.tags.map(tag => <li>{tag}</li>)}
+            </ul>
             <p id='popup-date'>
-            {
-              `${date.month}.${date.day}.${date.year} 
-              at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
-            }
+              {
+                `${date.month}.${date.day}.${date.year} 
+                at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
+              }
             </p>
           </div>
           <button type='button' id='ref-btn'>Leave Referral</button>

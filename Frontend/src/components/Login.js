@@ -72,10 +72,10 @@ const Login = ({ setUser }) => {
           console.log(res);
           console.log(res.status);
           if(!res.ok){
-            throw Error(await res.text())
+            throw Error(await res.text());
 
           }
-          return res.json()
+          return res.json();
         })
         .then((data) => {
           console.log('Received Response:');
@@ -85,11 +85,11 @@ const Login = ({ setUser }) => {
           }
         })
         .catch((e) => {
-          setErrorMsg({error: true, msg: e.message})
+          setErrorMsg({error: true, msg: e.message});
         })
         .finally(() => {
-          setLoading(false)
-        })
+          setLoading(false);
+        });
     }
   };
 
