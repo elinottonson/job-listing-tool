@@ -1,9 +1,11 @@
+const {models} = require('../sequelizeSetup/sequalizeConstructor');
 const expectExport = require('expect');
 const getUser = require('../endpoints/getUser');
 const doCredentialsMatch = require('./doCredentialsMatch');
 const getListings = require('./getFilteredListings');
 const getPositions = require('./getPositions');
 const getReferrals = require('./getReferrals');
+const postReferrals = require('./postReferrals');
 const getUserById = require('./getUserById');
 
 afterAll(() => {return new Promise(done => {
@@ -87,6 +89,44 @@ describe('getReferrals testing', () => {
     }
   });
 });
+
+describe('postReferrals testing', () => {
+  const referral = {
+    firstName: 'fname',
+    lastName: 'lname',
+    email: 'email@email.com',
+    referralText: 'some text',
+    listingId: 3,
+    companyName: 'compName',
+    authorId: 30
+  }
+
+  test('Create Referral then Delete it', async () => {
+    const submit = await postReferrals(referral);
+    expect(submit).toEqual(
+      expect.objectContaining({
+        firstName: 'fname',
+        lastName: 'lname',
+        email: 'email@email.com',
+        referralText: 'some text',
+        listingId: 3,
+        authorId: 30,
+        companyName: 'compName'
+      })
+    )
+    models.Referral.destroy({
+      where: {
+        firstName: 'fname',
+        lastName: 'lname',
+        email: 'email@email.com',
+        referralText: 'some text',
+        listingId: '3',
+        authorId: 30,
+        companyName: 'compName'
+      }
+    })
+  })
+})
 
 describe('getUserById testing', () => {
 
