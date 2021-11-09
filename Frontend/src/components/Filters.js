@@ -1,7 +1,19 @@
 import React from 'react';
 import './../styles/Filters.css';
+import { Provider } from 'react-redux';
+import {createStore} from 'redux';
 import { RangeInput, StateProvider } from '@appbaseio/reactivesearch';
 
+function todos(state = [], action) {
+    switch (action.type) {
+      case 'ADD_TODO':
+        return state.concat([action.text])
+      default:
+        return state
+    }
+}
+
+const store1 = createStore(todos, ['Use Redux']);
 
 const Filters = () => {
 
@@ -30,7 +42,7 @@ const Filters = () => {
         <div class="filter-container">
             <h3>Experience Level</h3>
             <div class="form">
-                {/* <StateProvider>
+                <Provider store={store1}>
                     <RangeInput  componentId="RangeInputComponent"
                     dataField="rating"
                     title="Ratings"
@@ -38,7 +50,8 @@ const Filters = () => {
                         "start": 3000,
                         "end": 50000
                     }}/>
-                </StateProvider> */}
+                </Provider>
+                
             </div>
         </div>
         <div>
