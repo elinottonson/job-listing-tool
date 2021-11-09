@@ -1,6 +1,6 @@
 import React from 'react';
 import './../styles/Filters.css';
-import DoubleSlider from './DoubleSlider.js'
+import { RangeInput, StateProvider } from '@appbaseio/reactivesearch';
 
 
 const Filters = () => {
@@ -30,12 +30,20 @@ const Filters = () => {
         <div class="filter-container">
             <h3>Experience Level</h3>
             <div class="form">
-                <DoubleSlider/>
+                {/* <StateProvider>
+                    <RangeInput  componentId="RangeInputComponent"
+                    dataField="rating"
+                    title="Ratings"
+                    range={{
+                        "start": 3000,
+                        "end": 50000
+                    }}/>
+                </StateProvider> */}
             </div>
         </div>
         <div>
             <h3>Salary Range</h3>
-                <DoubleSlider/>
+                {/* <RangeInput/> */}
         </div>
     </div>
     );
