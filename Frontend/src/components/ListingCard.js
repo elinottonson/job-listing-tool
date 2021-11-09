@@ -3,15 +3,14 @@ import { useParams, useHistory } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
-import { parseDate } from '../lib/ParseDate';
 
+import { parseDate } from '../lib/ParseDate';
 
 const ListingCard = ({ setPopupOpen, listingObj }) => {
 
   const [ hover, setHover ] = React.useState(false);
   const { id } = useParams();
   const history = useHistory();
-
 
   const handleClick = () => {
     if(!hover) {
@@ -29,7 +28,7 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
     // add logic for getting data from backend with listing id, and use SetPopupOpen to add that data,
     // This should make the react-router links work when they are directly accessed
     // A hook maybe?
-    return <></>
+    return <></>;
   }
   else{
     const date = parseDate(listingObj.createdAt);
@@ -44,27 +43,27 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
           onMouseLeave={() => setHover(false)}
         >
           <div className='listing-header'>
-            <div className='title-sal'>
+            <div className='title-sal' id='popup-title-sal'>
               <h2 id='title'>{listingObj.title}</h2>
               <div id='subtitle'>
                 <p id='salary'>{'$' + listingObj.salary}</p>
                 <p id='st-break'>•</p>
                 <p id='popup-exp-level'>
-                {
-                  listingObj.minYearsExperience === 0 ? 
-                    'Entry Level' : 
-                    `${listingObj.minYearsExperience} Years Experience`
-                }
+                  {
+                    listingObj.minYearsExperience === 0 ? 
+                      'Entry Level' : 
+                      `${listingObj.minYearsExperience} Years Experience`
+                  }
                 </p>
               </div>
             </div>
             <div className='popup-header-right'>
-              <div className='popup-mng-dep'>
-                <p id=' manager-name'>            
-                {listingObj.manager.firstName + ' ' + listingObj.manager.lastName}
+              <div className='popup-mng-pos'>
+                <p id='manager-name'>            
+                  {listingObj.manager.firstName + ' ' + listingObj.manager.lastName}
                 </p>
                 <p id='manager-pos'>
-                {listingObj.manager.positionTitle}
+                  {listingObj.manager.positionTitle}
                 </p>
               </div>
               <FaTimes
@@ -75,14 +74,14 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
           </div>
           <p className='popup-desc'>{listingObj.description}</p>
           <div className='listing-footer'>
-          <ul className='tags'>
-                {listingObj.tags.map(tag => <li>{tag}</li>)}
-              </ul>
+            <ul className='tags'>
+              {listingObj.tags.map(tag => <li>{tag}</li>)}
+            </ul>
             <p id='popup-date'>
-            {
-              `${date.month}.${date.day}.${date.year} 
-              at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
-            }
+              {
+                `${date.month}.${date.day}.${date.year} 
+                at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
+              }
             </p>
           </div>
           <button type='button' id='ref-btn'>Leave Referral</button>

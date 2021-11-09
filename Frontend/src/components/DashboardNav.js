@@ -1,6 +1,6 @@
 import React from 'react';
-import './../styles/Dashboard.css'
-import { FaSearch } from 'react-icons/fa'
+import { FaSearch } from 'react-icons/fa';
+import './../styles/Dashboard.css';
 
 const DashboardNav = () => {
   return (
