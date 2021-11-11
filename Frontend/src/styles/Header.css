@@ -5,14 +5,13 @@
 }
 
 /*Navbar CSS*/
-
 nav {
   width: 100%;
   display: flex;
   justify-content: space-between;
   background-color: var(--background);
-  margin-bottom: 10px;
-  box-shadow: 0px 3px 8px var(--light-shadow);
+  margin-bottom: 10px; 
+  box-shadow: 3px 3px 8px var(--light-shadow);
 }
 
 .header-left, .header-right {
@@ -26,14 +25,14 @@ nav {
 }
 
 .header-btn {
-  padding: 0px 20px;
+  padding: 0px 18px;
   height: 100%;
 }
-
 .header-btn:hover {
   cursor: pointer;
-  box-shadow: inset -2px -2px 6px var(--highlight), 
-  inset 3px 3px 8px var(--light-shadow);
+  box-shadow: 
+    inset -2px -2px 6px var(--highlight),
+    inset 3px 3px 8px var(--light-shadow);
 }
 
 nav img {
@@ -46,34 +45,29 @@ nav img {
   display: flex;
   align-items: center;
 }
-
 #help-text a {
   margin-bottom: 1px;
 }
 
 .header-icon {
-  width: auto;
+  width: 54px;
 }
 
 /* User dropdown styling */
 .dropdown {
   position: relative;
   display: inline-block;
-}
-
-.dropbtn {
-  padding: 18px 20px;
-  border: none;
-  cursor: pointer;
+  height: 100%;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   right: 0;
-  background-color: #f9f9f9;
+  top: 54px;
+  background-color: var(--background);
   min-width: 160px;
-  box-shadow: 0px 8px 16px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px -1px var(--light-shadow);
   z-index: 1;
 }
 
@@ -85,14 +79,9 @@ nav img {
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: var(--light-shadow);
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-.dropdown:hover .dropbtn {
-  box-shadow: inset -2px -2px 6px var(--highlight), 
-  inset 3px 3px 8px var(--light-shadow);
 }

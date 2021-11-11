@@ -16,9 +16,7 @@ const Header = () => {
           <div className='header-btn' id='help-text'><a>Help</a></div>
           <FaRegBell className='header-btn header-icon' id='notification-icon' />
           <div class="dropdown">
-            <button class="dropbtn">
-              <FaRegUserCircle id='user-icon' />
-            </button>
+            <FaRegUserCircle className='header-btn header-icon' id='user-icon' />
             <div class="dropdown-content">
               <a onClick={logout}>Logout</a>
             </div>
@@ -30,7 +28,7 @@ const Header = () => {
 };
 
 const logout = () => {
-  console.log('attempting logout');
+  console.log('attempting logout...');
   const options = {
     method: 'DELETE'
   };

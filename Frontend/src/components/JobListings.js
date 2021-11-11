@@ -35,11 +35,7 @@ const JobListings = ({ user, setPopupOpen }) => {
 
   return (
     <div className='job-listings-container'>
-      <div 
-        className={filterHover ? 'listings-filter-hover' : 'listings-filter'}
-        onMouseEnter={() => setFilterHover(true)}
-        onMouseLeave={() => setFilterHover(false)}
-      >
+      <div className='listings-filter'>
         <FaFilter id='filter-icon'/>
         Filter
       </div>

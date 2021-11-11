@@ -6,13 +6,12 @@ const { Express } = require('express');
  * @param {Express} app The express instance to setup the endpoint on
  * @returns {void} Sets up the logout endpoint
  */
-function logOutDelete(app) {
+function logOut(app) {
   app.delete('/logout', (req, res) => {
-    console.log('we do get here');
     req.logOut()
       .then(res.status(200))
       .catch(res.status(500));
   });
 }
 
-module.exports = logOutDelete;
+module.exports = logOut;
