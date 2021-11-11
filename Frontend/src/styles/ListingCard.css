@@ -16,6 +16,12 @@
   }
 }
 
+.referralButton{
+  width: fit-content;
+  padding: 10px;
+
+}
+
 .listing-card-container {
   position: absolute;
   display: flex;

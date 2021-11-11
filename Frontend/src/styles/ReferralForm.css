@@ -1,0 +1,53 @@
+
+.form-container {
+    align-items: center;
+}
+
+.SubmitButton {
+    margin-top: 20px;
+    width: 25%;
+    height: 42px;
+    align-self: center;
+    outline: none;
+    border-style: none;
+    background-color: hsl(0, 0%, 95%);
+    box-shadow: 
+        5px 5px 8px hsla(0, 100%, 0%, 0.2),
+        -5px -5px 10px hsla(0, 0%, 100%, 1);
+    border-radius: 10px;
+}
+
+textarea {
+    margin: 5px;
+}
+
+.form{    
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+} 
+
+.form input {
+    position: relative;
+    vertical-align: bottom;
+    width: 150px;
+    height: 20px;
+    margin: 5px;
+    padding-left: 10px;
+    top: 7px;
+
+}
+  
+label {
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    padding-right: 15px;
+    /* text-indent: -15px; */
+}
+
+.column2 input.description {
+    width: 300px;
+    height: 50px;
+}
