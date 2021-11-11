@@ -4,10 +4,8 @@ import './../styles/Listings.css';
 
 import JobListing from './JobListing';
 
-const JobListings = ({ user, setPopupOpen }) => {
-
-  const [ listings, setListings ] = React.useState([]);
-  const [ filterHover, setFilterHover ] = React.useState(false);
+const JobListings = ({ user, setPopupOpen, searchInput = '' }) => {
+  const [listings, setListings] = React.useState([]);
 
   React.useEffect(() => {
     const options = {
@@ -18,7 +16,7 @@ const JobListings = ({ user, setPopupOpen }) => {
       },
       body: JSON.stringify({ company: user.companyName })
     };
-    
+
     console.log('Sending job listings request...');
 
     fetch('/api/listings', options)
@@ -33,18 +31,24 @@ const JobListings = ({ user, setPopupOpen }) => {
       .catch(e => { throw e; });
   }, []);
 
+  console.log(searchInput);
+
   return (
     <div className='job-listings-container'>
-      <div 
-        className={filterHover ? 'listings-filter-hover' : 'listings-filter'}
-        onMouseEnter={() => setFilterHover(true)}
-        onMouseLeave={() => setFilterHover(false)}
-      >
-        <FaFilter id='filter-icon'/>
+      <div className='listings-filter'>
+        <FaFilter id='filter-icon' />
         Filter
       </div>
       <ul className='job-listings'>
-        {listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)}
+        {!searchInput ?
+          listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />) :
+          listings.filter(
+            listing =>
+              listing.title.toLowerCase().includes(searchInput)
+              || listing.description.toLowerCase().includes(searchInput)
+          )
+            .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+        }
       </ul>
     </div>
   );
