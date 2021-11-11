@@ -31,8 +31,6 @@ const JobListings = ({ user, setPopupOpen, searchInput = '' }) => {
       .catch(e => { throw e; });
   }, []);
 
-  console.log(searchInput);
-
   return (
     <div className='job-listings-container'>
       <div className='listings-filter'>
