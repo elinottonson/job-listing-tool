@@ -1,19 +1,11 @@
 import React from 'react';
 import './../styles/Filters.css';
-import { Provider } from 'react-redux';
-import {createStore} from 'redux';
-import { RangeInput, StateProvider } from '@appbaseio/reactivesearch';
+import 'rc-slider';
+import 'rc-slider/assets/index.css';
 
-function todos(state = [], action) {
-    switch (action.type) {
-      case 'ADD_TODO':
-        return state.concat([action.text])
-      default:
-        return state
-    }
-}
-
-const store1 = createStore(todos, ['Use Redux']);
+const Slider = require('rc-slider');
+const createSliderWithTooltip = Slider.createSliderWithTooltip;
+const Range = createSliderWithTooltip(Slider.Range);
 
 const Filters = () => {
 
@@ -39,24 +31,15 @@ const Filters = () => {
                 </label>)}
             </div>
         </div>
-        <div class="filter-container">
+        <div class="filter-container-ranges">
             <h3>Experience Level</h3>
             <div class="form">
-                <Provider store={store1}>
-                    <RangeInput  componentId="RangeInputComponent"
-                    dataField="rating"
-                    title="Ratings"
-                    range={{
-                        "start": 3000,
-                        "end": 50000
-                    }}/>
-                </Provider>
-                
+                <Range allowCross={false} min={0} max={30} defaultValue={[0, 30]} ariaValueTextFormatterGroupForHandles={[(value) => "$"+value+" per year"]}/>
             </div>
-        </div>
-        <div>
             <h3>Salary Range</h3>
-                {/* <RangeInput/> */}
+            <div class="form">
+                <Range allowCross={false} min={0} max={100000} defaultValue={[0, 100000]} step={1000}/>
+            </div>
         </div>
     </div>
     );
