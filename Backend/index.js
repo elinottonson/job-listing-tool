@@ -39,6 +39,7 @@ const endpoints = [
   require('./endpoints/logout'),
   require('./endpoints/listingsPost'),
   require('./endpoints/referralsFromListingGet'),
+  require('./endpoints/referralPost'),
   require('./endpoints/listingFromlistingIdGet')
 ];
 
