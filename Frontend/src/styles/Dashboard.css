@@ -14,3 +14,30 @@
   max-width: 700px;
   min-width: 400px;
 }
+
+.dashboard-search {
+  align-items: center;
+  display: inline-flex;
+  width: 100%;
+}
+
+.search-box {
+  flex-grow: 1;
+  margin-left: 0px;
+}
+
+.dashboard-search button {
+  border-radius: 10px;
+  border: none;
+  padding: 10px 10px 10px 10px;
+  background-color: var(--background);
+  box-shadow: 
+    3px 3px 8px var(--light-shadow),
+    -3px -3px 10px white;
+}
+
+.dashboard-search button:hover {
+  cursor: pointer;
+  box-shadow: inset 3px 3px 6px var(--light-shadow),
+  inset -3px -3px 8px var(--highlight);
+}

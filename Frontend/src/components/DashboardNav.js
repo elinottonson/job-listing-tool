@@ -1,6 +1,5 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
-import './../styles/Nav.css';
 
 const DashboardNav = ({ setSearchInput }) => {
   //searches based on values submitted from DashboardNav form
