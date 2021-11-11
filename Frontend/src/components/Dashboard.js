@@ -13,9 +13,7 @@ import ListingCard from './ListingCard';
 
 const Dashboard = ({ user, setUser }) => {
 
-  const [popupOpen, setPopupOpen] = React.useState(false);
-
-  //searchInput takes on value false or string 
+  const [popupOpen, setPopupOpen] = React.useState(false); 
   const [searchInput, setSearchInput] = React.useState('');
 
   const scrollLockTarget = document.querySelector('.dashboard');
