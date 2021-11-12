@@ -42,8 +42,8 @@ const JobListings = ({ user, setPopupOpen, searchInput = '' }) => {
           listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />) :
           listings.filter(
             listing =>
-              listing.title.toLowerCase().includes(searchInput)
-              || listing.description.toLowerCase().includes(searchInput)
+              listing.title.toLowerCase().includes(searchInput.toLowerCase())
+              || listing.description.toLowerCase().includes(searchInput.toLowerCase())
           )
             .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
         }
