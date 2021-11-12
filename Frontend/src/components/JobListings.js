@@ -41,7 +41,7 @@ const JobListings = ({ user, setPopupOpen }) => {
         onMouseLeave={() => setFilterHover(false)}
       >
         <FaFilter id='filter-icon'/>
-        <p>Filter</p>
+        Filter
       </div>
       <ul className='job-listings'>
         {listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)}

@@ -1,4 +1,8 @@
-async function mailer(nodemailer, info){
+const getUserById = require('../databaseInteraction/getUserById');
+const getPosById = require('../databaseInteraction/getPosById');
+const nodemailer = require('nodemailer');
+
+async function mailer(ref){
 
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -12,15 +16,23 @@ async function mailer(nodemailer, info){
             rejectUnauthorized: false
         }
     });
+
     try{
-        let info = await transporter.sendMail({
-            from: '"Test Sender" <joblistintest@gmail.com>', // sender address
-            to: "uppatel@umass.edu", // list of receivers
-            subject: "Hello", // Subject line
-            text: "Hello world?", // plain text body
-            html: "<b>Hello world?</b>", // html body
+        const listing = await getPosById(ref.listingId);
+        const rec = await getUserById(ref.authorId);
+
+        let text = 
+        `${ref.firstName} ${ref.lastName} been referred for position ${listing.title}.\n\n` + 
+        `Referral Description: \n${ref.referralText}\n\n` + 
+        `Referee Email: ${ref.email}`;
+
+        await transporter.sendMail({
+            from: '"no-reply" <joblistintest@gmail.com>', // sender address
+            to: rec.email, // list of receivers
+            subject: "Job Referral", // Subject line
+            text: text, // plain text body
         });
-        console.log('Email Sent')
+        console.log('Email Sent to ' + rec.email);
     } catch(err) {
         console.log("Sending Error: " + err.message);
     }

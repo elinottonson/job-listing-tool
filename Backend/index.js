@@ -7,13 +7,11 @@ const passport = require('passport');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Initializes Passport
 const initializePassport = require('./passport/passport-config');
 const getUserById = require('./databaseInteraction/getUserById');
-const mailer = require('./nodemailer/mailer');
 initializePassport(
   passport,
   getUserById
@@ -41,6 +39,7 @@ const endpoints = [
   require('./endpoints/logout'),
   require('./endpoints/listingsPost'),
   require('./endpoints/referralsFromListingGet'),
+  require('./endpoints/referralPost'),
   require('./endpoints/listingFromlistingIdGet')
 ];
 
@@ -49,7 +48,6 @@ for(const endpoint of endpoints){
 }
 
 require('./endpoints/loginPost')(app, passport);
-require('./endpoints/testMailer')(app, nodemailer);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

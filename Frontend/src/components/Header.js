@@ -1,20 +1,21 @@
 import './../styles/Header.css';
-import React from 'react';
+import logo from './../images/ukglogo.png';
+import { FaRegBell, FaRegUserCircle } from 'react-icons/fa';
 
 const Header = () => {
   return (
     <div className='header'>
-      <nav class='navbar'>
-        <div class='nav-left'>
-          <a>Home</a>
-          <a>Referrals</a>
+      <nav>
+        <div className='header-left'>
+          <div id='header-title'><img src={logo} alt='UKG Logo'/></div>
+          <p id='header-title-text'>Referrals</p>
         </div>
-        <div class='nav-right'>
-          <a>Help</a>
-          <a>Notifications</a>
-          <a>User</a>
+        <div className='header-right'>
+          <div className='header-btn' id='help-text'><a>Help</a></div>
+          <FaRegBell className='header-btn header-icon' id='notification-icon'/>
+          <FaRegUserCircle className='header-btn header-icon' id='user-icon'/>
         </div>
-      </nav>            
+      </nav>    
     </div>
   );
 };

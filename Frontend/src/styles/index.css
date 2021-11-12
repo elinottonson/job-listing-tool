@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  padding: 0;
+  min-height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,8 +14,22 @@ code {
     monospace;
 }
 
+html {
+  height: 100%;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+:root {
+  /* main background color (navbar, page body, listings) */
+  --background: hsl(0, 0%, 95%);
+
+  /* dropdown shadow colors */
+  --light-shadow: hsla(0, 100%, 0%, 0.1);
+  --dark-shadow: hsla(0, 100%, 0%, 0.2);
+  --highlight: hsla(0, 0%, 100%, 1);
 }
