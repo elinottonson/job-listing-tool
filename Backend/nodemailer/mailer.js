@@ -19,7 +19,7 @@ async function mailer(ref){
 
     try{
         const listing = await getPosById(ref.listingId);
-        const rec = await getUserById(ref.authorId);
+        const rec = await getUserById(listing.managerId);
 
         let text = 
         `${ref.firstName} ${ref.lastName} been referred for position ${listing.title}.\n\n` + 
@@ -28,7 +28,7 @@ async function mailer(ref){
 
         await transporter.sendMail({
             from: '"no-reply" <joblistintest@gmail.com>', // sender address
-            to: rec.email, // list of receivers
+            to: "uppatel@umass.edu", // list of receivers
             subject: "Job Referral", // Subject line
             text: text, // plain text body
         });
