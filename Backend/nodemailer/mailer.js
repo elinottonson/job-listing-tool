@@ -28,7 +28,7 @@ async function mailer(ref){
 
         await transporter.sendMail({
             from: '"no-reply" <joblistintest@gmail.com>', // sender address
-            to: "uppatel@umass.edu", // list of receivers
+            to: rec.email, // list of receivers
             subject: "Job Referral", // Subject line
             text: text, // plain text body
         });
