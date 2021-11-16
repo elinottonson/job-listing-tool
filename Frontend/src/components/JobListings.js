@@ -33,10 +33,6 @@ const JobListings = ({ user, setPopupOpen, searchInput = '' }) => {
 
   return (
     <div className='job-listings-container'>
-      <div className='listings-filter'>
-        <FaFilter id='filter-icon' />
-        Filter
-      </div>
       <ul className='job-listings'>
         {!searchInput ?
           listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />) :
