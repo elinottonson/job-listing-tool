@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
+import { FaFilter } from 'react-icons/fa';
 import './../styles/Listings.css';
 
-import JobListing from "./JobListing";
+import JobListing from './JobListing';
 
-const JobListings = ({ user,filterObj,setTags }) => {
-
+const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags }) => {
   const [listings, setListings] = React.useState([]);
 
   React.useEffect(() => {
@@ -24,7 +24,7 @@ const JobListings = ({ user,filterObj,setTags }) => {
         return res.json();
       })
       .then((data) => {
-        console.log('Received response:')
+        console.log('Received response:');
         console.log(data);
         setListings(data);
         const tags = new Set(); // So No duplicates
@@ -34,12 +34,41 @@ const JobListings = ({ user,filterObj,setTags }) => {
       .catch(e => { throw e; });
   }, []);
 
-  console.log(filterObj);
+  /**
+   * 
+   * Takes the search input prop and returns an array of <JobListing>s 
+   * filtered based on the title and description of each listing
+   * 
+   * @param {string} searchInput input string
+   * @returns {[<JobListing>]} array of filtered job listings
+   * 
+   */
+  const getFilteredListings = (searchInput) => {
+    return (
+      listings.filter(listing => 
+        listing.title.toLowerCase().includes(searchInput.toLowerCase())
+          || listing.description.toLowerCase().includes(searchInput.toLowerCase())
+      )
+        .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+    );
+  };
 
   return (
     <div className='job-listings-container'>
+      <p id='num-listings'>
+        {
+          `Showing ${
+            searchInput ? `${getFilteredListings(searchInput).length}` :
+              listings.length
+          } 
+            results${searchInput.length ? ` for "${searchInput}"` : ''}.`
+        }
+      </p>
       <ul className='job-listings'>
-        {listings.filter(item => filter(filterObj, item)).map(listing => <JobListing listingObj={listing} />)}
+        {searchInput ? 
+          getFilteredListings(searchInput) :
+          listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+        }
       </ul>
     </div>
   );

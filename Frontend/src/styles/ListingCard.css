@@ -1,0 +1,101 @@
+/* 
+  Credit for Firefox workaround: 
+  https://gist.github.com/mrtcmn/0490fb79fa63418e4409a99553f80e26 
+*/
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .listing-card-container {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    background-color: hsla(0, 0%, 90%, 0.2);
+  }
+}
+/* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .listing-card-container {
+    background-color: hsla(0, 0%, 90%, 0.8);
+  }
+}
+
+.listing-card-container {
+  position: absolute;
+  display: flex;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+.listing-card {
+  background-color: hsl(0, 0%, 95%);
+  width: 54rem;
+  padding: 17px 22px 25px 22px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -27rem;
+  margin-top: -10%;
+  box-shadow: 2px 2px 10px hsla(0, 0%, 0%, 0.2);
+}
+
+#popup-title-sal {
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.popup-header-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.popup-mng-pos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#close-btn {
+  font-size: large;
+  color: hsl(0, 0%, 10%);
+  width: 30px;
+  height: 30px;
+  padding: 4px;
+  border-radius: 30px;
+  margin-left: 30px;
+  margin-top: -2px;
+}
+#close-btn:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.popup-desc {
+  text-align: left;
+  margin: 10px 5px 20px 5px;
+}
+
+#popup-date {
+  color: gray;
+  font-size: small;
+}
+
+#ref-btn {
+  margin-top: 20px;
+  width: 25%;
+  height: 42px;
+  align-self: center;
+  outline: none;
+  border-style: none;
+  background-color: var(--background);
+  box-shadow: 
+    5px 5px 8px var(--light-shadow),
+    -5px -5px 10px white;
+  border-radius: 10px;
+}
+#ref-btn:hover {
+  cursor: pointer;
+  box-shadow: 
+    inset 5px 5px 6px var(--light-shadow),
+    inset -5px -5px 8px white;
+}
