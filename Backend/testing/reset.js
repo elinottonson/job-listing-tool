@@ -20,7 +20,7 @@ positions = [
     ...addField(positions_techgenix, "companyName", "Techgenix"),
     ...addField(positions_fuzzy, "companyName", "Fuzzy Alpaca Consulting")
 ]
-referrals=[...referrals_birdseye, ...referrals_fuzzy, ...referrals_birdseye]
+referrals = [...referrals_birdseye, ...referrals_fuzzy, ...referrals_techgenix]
 
 // Connects to SQL server, inserts raw data and closes connection
 async function reset(){
@@ -57,7 +57,7 @@ async function createPositionsTable(){
 // Creates table for referrals and uploads example data
 async function createReferralTable(){
     return sequelize.models.Referral.sync({ force: true })
-    .then(() => sequelize.models.Referral.bulkCreate(positions))
+    .then(() => sequelize.models.Referral.bulkCreate(referrals))
     .then(() => {console.log("Referral data pushed! ☑️\n")})
     .catch(console.error)
 
