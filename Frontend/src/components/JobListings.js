@@ -31,21 +31,40 @@ const JobListings = ({ user, setPopupOpen, searchInput = '' }) => {
       .catch(e => { throw e; });
   }, []);
 
+  /**
+   * 
+   * Takes the search input prop and returns an array of <JobListing>s 
+   * filtered based on the title and description of each listing
+   * 
+   * @param {string} searchInput input string
+   * @returns {[<JobListing>]} array of filtered job listings
+   * 
+   */
+  const getFilteredListings = (searchInput) => {
+    return (
+      listings.filter(listing => 
+        listing.title.toLowerCase().includes(searchInput.toLowerCase())
+          || listing.description.toLowerCase().includes(searchInput.toLowerCase())
+      )
+        .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+    );
+  };
+
   return (
     <div className='job-listings-container'>
-      <div className='listings-filter'>
-        <FaFilter id='filter-icon' />
-        Filter
-      </div>
+      <p id='num-listings'>
+        {
+          `Showing ${
+            searchInput ? `${getFilteredListings(searchInput).length}` :
+              listings.length
+          } 
+            results${searchInput.length ? ` for "${searchInput}"` : ''}.`
+        }
+      </p>
       <ul className='job-listings'>
-        {!searchInput ?
-          listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />) :
-          listings.filter(
-            listing =>
-              listing.title.toLowerCase().includes(searchInput.toLowerCase())
-              || listing.description.toLowerCase().includes(searchInput.toLowerCase())
-          )
-            .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+        {searchInput ? 
+          getFilteredListings(searchInput) :
+          listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
         }
       </ul>
     </div>
