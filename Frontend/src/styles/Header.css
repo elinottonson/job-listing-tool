@@ -68,7 +68,6 @@ nav img {
   background-color: var(--background);
   min-width: 160px;
   box-shadow: 0px 8px 16px -1px var(--light-shadow);
-  z-index: 1;
 }
 
 .dropdown-content a {
@@ -80,6 +79,7 @@ nav img {
 
 .dropdown-content a:hover {
   background-color: var(--light-shadow);
+  cursor: pointer;
 }
 
 .dropdown:hover .dropdown-content {
