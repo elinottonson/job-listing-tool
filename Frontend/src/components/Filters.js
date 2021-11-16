@@ -11,11 +11,7 @@ const Range = createSliderWithTooltip(Slider.Range);
   
   const Filters = ({ setFilterObj, filterObj }) => {
     const [tags, setTags] = React.useState(["SQL", "MySQL", "Angular", "NodeJS", "JavaScript", "Spark", "MongoDB"])
-    const [selectedValue, setSelectedValue] = React.useState([]);
-    const [minSalary, setMinSalary] = React.useState(0);
-    const [maxSalary, setMaxSalary] = React.useState(100);
-    const [minExperience, setMinExperience] = React.useState(0);
-    const [maxExperience, setMaxExperience] = React.useState(30);
+
 
     function setFilter(minExperience, maxExperience, minSalary, maxSalary, tags) {
         const obj = {};
@@ -29,15 +25,15 @@ const Range = createSliderWithTooltip(Slider.Range);
     }
 
     function handleChangeSelect(value) {
-      console.log(value[0])
-      setSelectedValue(selectedValue => [...selectedValue, value[0].label]);
-      console.log(selectedValue)
-      filter();
+      setFilter(null, null, null, null, value.map(x=>x.value))
     }
 
-    const filter = () => {
-      console.log('runs');
-      setFilter(minExperience, maxExperience,  minSalary, maxSalary, selectedValue);
+    function handleChangeRangeEx(value) {
+      setFilter(value[0], value[1], null, null, null);
+    }
+
+    function handleChangeRangeSal(value) {
+      setFilter(null, null, value[0], value[1], null);
     }
 
     return (
@@ -49,7 +45,6 @@ const Range = createSliderWithTooltip(Slider.Range);
                     isMulti={true} 
                     options={tags.map(tag => {return {value: tag, label: tag}})}
                     maxMenuHeight={200}
-                    value={tags.find(str => str === selectedValue)}
                     onChange={handleChangeSelect}
                 />
             </div>
@@ -62,7 +57,7 @@ const Range = createSliderWithTooltip(Slider.Range);
                     min={0} 
                     max={30} 
                     defaultValue={[0, 30]} 
-                    // onChange={handleChangeRange()}
+                    onChange={handleChangeRangeEx}
                 />
             </div>
             <h3>Salary Range</h3>
@@ -73,7 +68,7 @@ const Range = createSliderWithTooltip(Slider.Range);
                     max={100} 
                     defaultValue={[0, 100]} 
                     step={10} 
-                    // onChange={setFilter(minExperience, maxExperience,  minSalary, maxSalary, selectedValue)}
+                    onChange={handleChangeRangeSal}
                 />
             </div>
         </div>
