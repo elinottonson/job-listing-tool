@@ -11,11 +11,7 @@ const Range = createSliderWithTooltip(Slider.Range);
   
   const Filters = ({ setFilterObj, filterObj }) => {
     const [tags, setTags] = React.useState(["SQL", "MySQL", "Angular", "NodeJS", "JavaScript", "Spark", "MongoDB"])
-    const [selectedValue, setSelectedValue] = React.useState([]);
-    const [minSalary, setMinSalary] = React.useState(0);
-    const [maxSalary, setMaxSalary] = React.useState(100);
-    const [minExperience, setMinExperience] = React.useState(0);
-    const [maxExperience, setMaxExperience] = React.useState(30);
+
 
     function setFilter(minExperience, maxExperience, minSalary, maxSalary, tags) {
         const obj = {};
@@ -41,7 +37,6 @@ const Range = createSliderWithTooltip(Slider.Range);
                     isMulti={true} 
                     options={tags.map(tag => {return {value: tag, label: tag}})}
                     maxMenuHeight={200}
-                    value={tags.find(str => str === selectedValue)}
                     onChange={handleChangeSelect}
                 />
             </div>
