@@ -1,5 +1,6 @@
 const {Express} = require('express');
 const postReferrals = require('../databaseInteraction/postReferrals');
+const mailer = require('../nodemailer/mailer');
 
 /**
  * Determines if the supplied email is valid
@@ -54,6 +55,7 @@ function referralPost(app) {
                 authorId: req.body.authorId
             }
             res.status(200);
+            mailer(referral);
             res.send(await postReferrals(referral));
         } else {
             res.status(400);

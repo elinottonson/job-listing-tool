@@ -4,10 +4,8 @@ import './../styles/Listings.css';
 
 import JobListing from './JobListing';
 
-const JobListings = ({ user, setPopupOpen }) => {
-
-  const [ listings, setListings ] = React.useState([]);
-  const [ filterHover, setFilterHover ] = React.useState(false);
+const JobListings = ({ user, setPopupOpen, searchInput = '' }) => {
+  const [listings, setListings] = React.useState([]);
 
   React.useEffect(() => {
     const options = {
@@ -18,7 +16,7 @@ const JobListings = ({ user, setPopupOpen }) => {
       },
       body: JSON.stringify({ company: user.companyName })
     };
-    
+
     console.log('Sending job listings request...');
 
     fetch('/api/listings', options)
@@ -33,14 +31,32 @@ const JobListings = ({ user, setPopupOpen }) => {
       .catch(e => { throw e; });
   }, []);
 
+  /**
+   * 
+   * Takes the search input prop and returns an array of <JobListing>s 
+   * filtered based on the title and description of each listing
+   * 
+   * @param {string} searchInput input string
+   * @returns {[<JobListing>]} array of filtered job listings
+   * 
+   */
+  const getFilteredListings = (searchInput) => {
+    return (
+      listings.filter(listing => 
+        listing.title.toLowerCase().includes(searchInput.toLowerCase())
+          || listing.description.toLowerCase().includes(searchInput.toLowerCase())
+      )
+        .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+    );
+  };
+
   return (
     <div className='job-listings-container'>
-      <div className='listings-filter'>
-        <FaFilter id='filter-icon'/>
-        Filter
-      </div>
       <ul className='job-listings'>
-        {listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)}
+        {searchInput ? 
+          getFilteredListings(searchInput) :
+          listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+        }
       </ul>
     </div>
   );

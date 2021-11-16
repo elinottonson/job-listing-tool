@@ -73,7 +73,6 @@ const Login = ({ setUser }) => {
           console.log(res.status);
           if(!res.ok){
             throw Error(await res.text());
-
           }
           return res.json();
         })

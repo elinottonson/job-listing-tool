@@ -14,8 +14,7 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
 
   const handleClick = () => {
     if (!hover) {
-      setPopupOpen(false);
-      history.goBack();
+      handleClose();
     }
   };
   const handleClose = () => {
