@@ -31,12 +31,22 @@ const JobListings = ({ user, setPopupOpen, searchInput = '' }) => {
       .catch(e => { throw e; });
   }, []);
 
+  /**
+   * 
+   * Takes the search input prop and returns an array of <JobListing>s 
+   * filtered based on the title and description of each listing
+   * 
+   * @param {string} searchInput input string
+   * @returns {[<JobListing>]} array of filtered job listings
+   * 
+   */
   const getFilteredListings = (searchInput) => {
-    return (listings.filter(listing => 
-      listing.title.toLowerCase().includes(searchInput.toLowerCase())
+    return (
+      listings.filter(listing => 
+        listing.title.toLowerCase().includes(searchInput.toLowerCase())
           || listing.description.toLowerCase().includes(searchInput.toLowerCase())
-    )
-      .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+      )
+        .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
     );
   };
 
@@ -44,12 +54,15 @@ const JobListings = ({ user, setPopupOpen, searchInput = '' }) => {
     <div className='job-listings-container'>
       <p id='num-listings'>
         {
-          `Showing ${searchInput.length ?
-            `${getFilteredListings().length} of ${listings.length}` :
-            listings.length} 
-            results${searchInput.length ? ` for "${searchInput}"` : ''}.`}</p>
+          `Showing ${
+            searchInput ? `${getFilteredListings(searchInput).length}` :
+              listings.length
+          } 
+            results${searchInput.length ? ` for "${searchInput}"` : ''}.`
+        }
+      </p>
       <ul className='job-listings'>
-        {searchInput.length ? 
+        {searchInput ? 
           getFilteredListings(searchInput) :
           listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
         }
