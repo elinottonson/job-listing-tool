@@ -8,51 +8,36 @@ const Slider = require('rc-slider');
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
 
-const handleXp = props => {
-    const { value, dragging, index, ...restProps } = props;
-    return (
-      <SliderTooltip
-        prefixCls="rc-slider-tooltip"
-        overlay={`${value} Years`}
-        visible={dragging}
-        placement="top"
-        key={index}
-      >
-        <Handle value={value} {...restProps} />
-      </SliderTooltip>
-    );
-  };
-
-
   
   const Filters = ({ setFilterObj, filterObj }) => {
-      
-    const handleSal = props => {
-      const { value, dragging, index, ...restProps } = props;
-      return (
-        <SliderTooltip
-          prefixCls="rc-slider-tooltip"
-          overlay={`$${value}K`}
-          visible={dragging}
-          placement="top"
-          key={index}
-        >
-          <Handle value={value} {...restProps} />
-        </SliderTooltip>
-      );
-    };
-
     const [tags, setTags] = React.useState(["SQL", "MySQL", "Angular", "NodeJS", "JavaScript", "Spark", "MongoDB"])
+    const [selectedValue, setSelectedValue] = React.useState([]);
+    const [minSalary, setMinSalary] = React.useState(0);
+    const [maxSalary, setMaxSalary] = React.useState(100);
+    const [minExperience, setMinExperience] = React.useState(0);
+    const [maxExperience, setMaxExperience] = React.useState(30);
 
     function setFilter(minExperience, maxExperience, minSalary, maxSalary, tags) {
         const obj = {};
         obj.minExperience = minExperience ?? filterObj.minExperience;
-        obj.minExperience = maxExperience ?? filterObj.maxExperience;
+        obj.maxExperience = maxExperience ?? filterObj.maxExperience;
         obj.minSalary = minSalary ?? filterObj.minSalary;
         obj.maxSalary = maxSalary ?? filterObj.maxSalary;
         obj.tags = tags ?? filterObj.tags;
         console.log(obj);
         setFilterObj(obj);
+    }
+
+    function handleChangeSelect(value) {
+      console.log(value[0])
+      setSelectedValue(selectedValue => [...selectedValue, value[0].label]);
+      console.log(selectedValue)
+      filter();
+    }
+
+    const filter = () => {
+      console.log('runs');
+      setFilter(minExperience, maxExperience,  minSalary, maxSalary, selectedValue);
     }
 
     return (
@@ -64,7 +49,8 @@ const handleXp = props => {
                     isMulti={true} 
                     options={tags.map(tag => {return {value: tag, label: tag}})}
                     maxMenuHeight={200}
-                    // onChange={() => setFilter(0, 30, 0, 100, )}
+                    value={tags.find(str => str === selectedValue)}
+                    onChange={handleChangeSelect}
                 />
             </div>
         </div>
@@ -76,7 +62,7 @@ const handleXp = props => {
                     min={0} 
                     max={30} 
                     defaultValue={[0, 30]} 
-                    handle={handleXp}
+                    // onChange={handleChangeRange()}
                 />
             </div>
             <h3>Salary Range</h3>
@@ -87,7 +73,7 @@ const handleXp = props => {
                     max={100} 
                     defaultValue={[0, 100]} 
                     step={10} 
-                    handle={handleSal}
+                    // onChange={setFilter(minExperience, maxExperience,  minSalary, maxSalary, selectedValue)}
                 />
             </div>
         </div>
