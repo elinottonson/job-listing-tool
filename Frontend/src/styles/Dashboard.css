@@ -75,6 +75,8 @@
         box-shadow: 3px 3px 8px hsla(0, 100%, 0%, 0.2), 
             -5px -5px 10px white;
     }
+}
+
 .dashboard-search button:hover {
   cursor: pointer;
   box-shadow: inset 3px 3px 6px var(--light-shadow),
