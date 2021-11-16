@@ -24,20 +24,12 @@ const Range = createSliderWithTooltip(Slider.Range);
         obj.minSalary = minSalary ?? filterObj.minSalary;
         obj.maxSalary = maxSalary ?? filterObj.maxSalary;
         obj.tags = tags ?? filterObj.tags;
-        console.log(obj);
         setFilterObj(obj);
+        console.log(filterObj);
     }
 
     function handleChangeSelect(value) {
-      console.log(value[0])
-      setSelectedValue(selectedValue => [...selectedValue, value[0].label]);
-      console.log(selectedValue)
-      filter();
-    }
-
-    const filter = () => {
-      console.log('runs');
-      setFilter(minExperience, maxExperience,  minSalary, maxSalary, selectedValue);
+        setFilter(null, null, null, null, value.map(x=>x.value))
     }
 
     return (
@@ -62,7 +54,7 @@ const Range = createSliderWithTooltip(Slider.Range);
                     min={0} 
                     max={30} 
                     defaultValue={[0, 30]} 
-                    // onChange={handleChangeRange()}
+                    onAfterChange={(x)=>setFilter(x[0],x[1],null,null,null)}
                 />
             </div>
             <h3>Salary Range</h3>
@@ -73,7 +65,7 @@ const Range = createSliderWithTooltip(Slider.Range);
                     max={100} 
                     defaultValue={[0, 100]} 
                     step={10} 
-                    // onChange={setFilter(minExperience, maxExperience,  minSalary, maxSalary, selectedValue)}
+                    onAfterChange={(x)=>setFilter(null,null,x[0],x[1],null)}
                 />
             </div>
         </div>

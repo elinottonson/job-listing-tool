@@ -50,8 +50,8 @@ const JobListings = ({ user,filterObj }) => {
  * @returns {boolean} true if the item fits the filter, false otherwise
  * 
  * @typedef {object} filterObject
- * @property {number} minExpreience
- * @property {number} maxExpreience
+ * @property {number} minExperience
+ * @property {number} maxExperience
  * @property {number} minSalery
  * @property {number} maxSalery
  * @property {string[]} tags
@@ -69,8 +69,8 @@ const JobListings = ({ user,filterObj }) => {
  */
 function filter(filterObj, item) {
   if (!filterObj) return true
-  if (filterObj.minExpreience && item.minYearsExperience < filterObj.minExpreience) return false;
-  if (filterObj.maxExpreience && item.minYearsExperience > filterObj.maxExpreience) return false;
+  if (filterObj.minExperience && item.minYearsExperience < filterObj.minExperience) return false;
+  if (filterObj.maxExperience && item.minYearsExperience > filterObj.maxExperience) return false;
   if (filterObj.minSalery && item.salary < filterObj.minSalery) return false;
   if (filterObj.maxSalery && item.salary > filterObj.maxSalery) return false;
   if (filterObj.tags && !filterObj.tags.every(val => item.tags.includes(val))) return false;
