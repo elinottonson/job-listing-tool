@@ -8,14 +8,13 @@ import { parseDate } from '../lib/ParseDate';
 
 const ListingCard = ({ setPopupOpen, listingObj }) => {
 
-  const [ hover, setHover ] = React.useState(false);
+  const [hover, setHover] = React.useState(false);
   const { id } = useParams();
   const history = useHistory();
 
   const handleClick = () => {
-    if(!hover) {
-      setPopupOpen(false);
-      history.goBack();
+    if (!hover) {
+      handleClose();
     }
   };
   const handleClose = () => {
@@ -23,23 +22,23 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
     history.goBack();
   };
 
-  if(!listingObj){
+  if (!listingObj) {
     // TODO
     // add logic for getting data from backend with listing id, and use SetPopupOpen to add that data,
     // This should make the react-router links work when they are directly accessed
     // A hook maybe?
     return <></>;
   }
-  else{
+  else {
     const date = parseDate(listingObj.createdAt);
     return (
-      <div 
+      <div
         className='listing-card-container'
         onClick={handleClick}
       >
-        <div 
+        <div
           className='listing-card'
-          onMouseEnter={()=> setHover(true)}
+          onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
           <div className='listing-header'>
