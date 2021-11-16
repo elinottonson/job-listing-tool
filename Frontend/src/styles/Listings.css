@@ -6,26 +6,9 @@
   min-width: 500px;
 }
 
-.listings-filter {
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  width: fit-content;
-  padding: 10px 20px;
-  box-shadow: 
-    3px 3px 8px var(--light-shadow),
-    -3px -3px 10px var(--highlight);
-}
-
-.listings-filter:hover {
-  cursor: pointer;
-  box-shadow: inset 3px 3px 8px var(--light-shadow),
-  inset -3px -3px 10px var(--highlight);
-}
-#filter-icon {
-  margin-right: 5px;
+#num-listings {
+  align-self: flex-start;
+  margin-left: 22px;
 }
 
 ul {
@@ -35,7 +18,7 @@ ul {
 .job-listings {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 0px 20px;
   height: 83.7vh;
   overflow-x: hidden;
   overflow-y: scroll;

@@ -31,17 +31,27 @@ const JobListings = ({ user, setPopupOpen, searchInput = '' }) => {
       .catch(e => { throw e; });
   }, []);
 
+  const getFilteredListings = (searchInput) => {
+    return (listings.filter(listing => 
+      listing.title.toLowerCase().includes(searchInput.toLowerCase())
+          || listing.description.toLowerCase().includes(searchInput.toLowerCase())
+    )
+      .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+    );
+  };
+
   return (
     <div className='job-listings-container'>
+      <p id='num-listings'>
+        {
+          `Showing ${searchInput.length ?
+            `${getFilteredListings().length} of ${listings.length}` :
+            listings.length} 
+            results${searchInput.length ? ` for "${searchInput}"` : ''}.`}</p>
       <ul className='job-listings'>
-        {!searchInput ?
-          listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />) :
-          listings.filter(
-            listing =>
-              listing.title.toLowerCase().includes(searchInput.toLowerCase())
-              || listing.description.toLowerCase().includes(searchInput.toLowerCase())
-          )
-            .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
+        {searchInput.length ? 
+          getFilteredListings(searchInput) :
+          listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
         }
       </ul>
     </div>
