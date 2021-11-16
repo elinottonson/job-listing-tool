@@ -8,7 +8,8 @@ import Footer from './Footer';
 import Filters from './Filters.js';
 
 const Dashboard = ({ user }) => {
-    const [filterObj, setFilterObj] = React.useState([]);
+    const [filterObj, setFilterObj] = React.useState({});
+    const [tags, setTags] = React.useState(["Loading..."]);
 
     return (
     <div>
@@ -16,10 +17,10 @@ const Dashboard = ({ user }) => {
             <Header />
             <DashboardNav />
             <div className='filters'>
-              <Filters setFilterObj={setFilterObj} filterObj={filterObj}/>
+              <Filters setFilterObj={setFilterObj} filterObj={filterObj} tags={tags}/>
             </div>
             <div className='jobListings'>
-                <JobListings user={user} filterObj={filterObj}/>
+                <JobListings user={user} filterObj={filterObj} setTags={setTags}/>
             </div>
             <Footer />
         </div>

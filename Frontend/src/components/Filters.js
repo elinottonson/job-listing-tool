@@ -9,17 +9,16 @@ const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
 
   
-  const Filters = ({ setFilterObj, filterObj }) => {
-    const [tags, setTags] = React.useState(["SQL", "MySQL", "Angular", "NodeJS", "JavaScript", "Spark", "MongoDB"])
+  const Filters = ({ setFilterObj, filterObj, tags }) => {
 
 
-    function setFilter(minExperience, maxExperience, minSalary, maxSalary, tags) {
+    function setFilter(minExperience, maxExperience, minSalary, maxSalary, newTags) {
         const obj = {};
         obj.minExperience = minExperience ?? filterObj.minExperience;
         obj.maxExperience = maxExperience ?? filterObj.maxExperience;
         obj.minSalary = minSalary ?? filterObj.minSalary;
         obj.maxSalary = maxSalary ?? filterObj.maxSalary;
-        obj.tags = tags ?? filterObj.tags;
+        obj.tags = newTags ?? filterObj.tags;
         setFilterObj(obj);
         console.log(filterObj);
     }
@@ -57,9 +56,9 @@ const Range = createSliderWithTooltip(Slider.Range);
                 <Range 
                     allowCross={false} 
                     min={0} 
-                    max={100} 
-                    defaultValue={[0, 100]} 
-                    step={10} 
+                    max={200000} 
+                    defaultValue={[0, 200000]} 
+                    step={10000} 
                     onAfterChange={(x)=>setFilter(null,null,x[0],x[1],null)}
                 />
             </div>
