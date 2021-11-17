@@ -10,6 +10,7 @@ const Range = createSliderWithTooltip(Slider.Range);
 
 const Filters = ({ setFilterObj, filterObj, tags }) => {
 
+  // TODO: JSdoc entry for setFilter()
   function setFilter(minExperience, maxExperience, minSalary, maxSalary, newTags) {
     const obj = {};
     obj.minExperience = minExperience ?? filterObj.minExperience;
@@ -21,6 +22,7 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
     console.log(filterObj);
   }
 
+  // TODO: JSdoc entry for handleChangeSelect()
   function handleChangeSelect(value) {
     setFilter(null, null, null, null, value.map(x=>x.value));
   }

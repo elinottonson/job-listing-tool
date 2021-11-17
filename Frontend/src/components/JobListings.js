@@ -35,11 +35,11 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
 
   /**
    * 
-   * Takes the search input prop and returns an array of <JobListing>s 
+   * Takes the search input prop and returns an array of ListingObjects 
    * filtered based on the title and description of each listing
    * 
    * @param {string} searchInput input string
-   * @returns {[<JobListing>]} array of filtered job listings
+   * @returns {[ListingObject]} array of filtered listing objects
    * 
    */
   const getSearchedListings = (searchInput) => {
@@ -51,6 +51,14 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
     );
   };
 
+  /**
+   * 
+   * Take an array of ListingObjects and filters them based on the selected options
+   * and returns an array of <JobListing> components
+   * 
+   * @param {ListingObject} l 
+   * @returns {[<JobListing>]} array of filtered job listing components
+   */
   const getFilteredListings = (l) => {
     return l.filter(listing => filterFromOptions(filterObj, listing))
       .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />);
