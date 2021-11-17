@@ -8,7 +8,6 @@ const Slider = require('rc-slider');
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
 
-  
 const Filters = ({ setFilterObj, filterObj, tags }) => {
 
   function setFilter(minExperience, maxExperience, minSalary, maxSalary, newTags) {
