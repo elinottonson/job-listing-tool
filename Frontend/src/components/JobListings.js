@@ -42,38 +42,21 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
    * @returns {[<JobListing>]} array of filtered job listings
    * 
    */
-  const getFilteredListings = (searchInput) => {
+  const getSearchedListings = (searchInput) => {
     return (
       listings.filter(listing => 
         listing.title.toLowerCase().includes(searchInput.toLowerCase())
           || listing.description.toLowerCase().includes(searchInput.toLowerCase())
       )
-        .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
     );
   };
 
-  return (
-    <div className='job-listings-container'>
-      <p id='num-listings'>
-        {
-          `Showing ${
-            searchInput ? `${getFilteredListings(searchInput).length}` :
-              listings.length
-          } 
-            results${searchInput.length ? ` for "${searchInput}"` : ''}.`
-        }
-      </p>
-      <ul className='job-listings'>
-        {searchInput ? 
-          getFilteredListings(searchInput) :
-          listings.map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />)
-        }
-      </ul>
-    </div>
-  );
-};
+  const getFilteredListings = (l) => {
+    return l.filter(listing => filterFromOptions(filterObj, listing))
+      .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />);
+  };  
 
-/**
+  /**
  * Determines if a given listing item passes the filter criteria
  * 
  * @param {filterObject} filterObj the object containing the filter requirements
@@ -98,14 +81,35 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
  * @property {string} createdAt
  * @property {string} updatedAt
  */
-function filter(filterObj, item) {
-  if (!filterObj) return true;
-  if (filterObj.minExperience && item.minYearsExperience < filterObj.minExperience) return false;
-  if (filterObj.maxExperience && item.minYearsExperience > filterObj.maxExperience) return false;
-  if (filterObj.minSalary && item.salary < filterObj.minSalary) return false;
-  if (filterObj.maxSalary && item.salary > filterObj.maxSalary) return false;
-  if (filterObj.tags && !filterObj.tags.every(val => item.tags.includes(val))) return false;
-  return true;
-}
+  function filterFromOptions(filterObj, item) {
+    if (!filterObj) return true;
+    if (filterObj.minExperience && item.minYearsExperience < filterObj.minExperience) return false;
+    if (filterObj.maxExperience && item.minYearsExperience > filterObj.maxExperience) return false;
+    if (filterObj.minSalary && item.salary < filterObj.minSalary) return false;
+    if (filterObj.maxSalary && item.salary > filterObj.maxSalary) return false;
+    if (filterObj.tags && !filterObj.tags.every(val => item.tags.includes(val))) return false;
+    return true;
+  }
+
+  return (
+    <div className='job-listings-container'>
+      <p id='num-listings'>
+        {
+          `Showing ${
+            searchInput ? `${getFilteredListings(getSearchedListings(searchInput)).length}` :
+              getFilteredListings(listings).length
+          } 
+            results${searchInput.length ? ` for "${searchInput}"` : ''}.`
+        }
+      </p>
+      <ul className='job-listings'>
+        {searchInput ? 
+          getFilteredListings(getSearchedListings(searchInput)) :
+          getFilteredListings(listings)
+        }
+      </ul>
+    </div>
+  );
+};
 
 export default JobListings;

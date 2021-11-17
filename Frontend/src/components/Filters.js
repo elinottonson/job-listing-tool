@@ -54,8 +54,8 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
           <Range 
             allowCross={false} 
             min={0} 
-            max={200000} 
-            defaultValue={[0, 200000]} 
+            max={250000} 
+            defaultValue={[0, 250000]} 
             step={10000} 
             onAfterChange={(x)=>setFilter(null,null,x[0],x[1],null)}
           />
