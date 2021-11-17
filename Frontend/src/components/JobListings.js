@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaFilter } from 'react-icons/fa';
 import './../styles/Listings.css';
 
 import JobListing from './JobListing';
@@ -29,7 +28,7 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
         setListings(data);
         const tags = new Set(); // So No duplicates
         data.forEach(listing=>listing.tags.forEach(tag=>tags.add(tag)));
-        setTags(Array.from(tags))
+        setTags(Array.from(tags));
       })
       .catch(e => { throw e; });
   }, []);
@@ -100,7 +99,7 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
  * @property {string} updatedAt
  */
 function filter(filterObj, item) {
-  if (!filterObj) return true
+  if (!filterObj) return true;
   if (filterObj.minExperience && item.minYearsExperience < filterObj.minExperience) return false;
   if (filterObj.maxExperience && item.minYearsExperience > filterObj.maxExperience) return false;
   if (filterObj.minSalary && item.salary < filterObj.minSalary) return false;
