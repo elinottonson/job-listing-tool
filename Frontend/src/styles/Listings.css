@@ -1,8 +1,6 @@
 .job-listings-container {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  max-width: 900px;
   min-width: 500px;
 }
 

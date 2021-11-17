@@ -32,4 +32,8 @@ html {
   --light-shadow: hsla(0, 100%, 0%, 0.1);
   --dark-shadow: hsla(0, 100%, 0%, 0.2);
   --highlight: hsla(0, 0%, 100%, 1);
+
+  /* UKG colors */
+  --ukg-dark-green: #014747;
+  --ukg-cyan: #2ac7b4;
 }
