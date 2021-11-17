@@ -49,8 +49,8 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
                 <p id='st-break'>•</p>
                 <p id='popup-exp-level'>
                   {
-                    listingObj.minYearsExperience === 0 ? 
-                      'Entry Level' : 
+                    listingObj.minYearsExperience === 0 ?
+                      'Entry Level' :
                       `${listingObj.minYearsExperience} Years Experience`
                   }
                 </p>
@@ -58,7 +58,7 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
             </div>
             <div className='popup-header-right'>
               <div className='popup-mng-pos'>
-                <p id='manager-name'>            
+                <p id='manager-name'>
                   {listingObj.manager.firstName + ' ' + listingObj.manager.lastName}
                 </p>
                 <p id='manager-pos'>
