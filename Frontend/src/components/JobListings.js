@@ -5,6 +5,7 @@ import JobListing from './JobListing';
 
 const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags }) => {
   const [listings, setListings] = React.useState([]);
+  const [ managerListings, setManagerListings ] = React.useState(false);
 
   React.useEffect(() => {
     const options = {
@@ -56,39 +57,42 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
    * Take an array of ListingObjects and filters them based on the selected options
    * and returns an array of <JobListing> components
    * 
-   * @param {ListingObject} l 
+   * @param {ListingObject} l input array of ListingObjects
+   * @param {Boolean} managerView whether or not the manager has chosen to view
+   *                              only their own listings
    * @returns {[<JobListing>]} array of filtered job listing components
    */
-  const getFilteredListings = (l) => {
+  const getFilteredListings = (l, managerView) => {
+    // TODO: implement managerView
     return l.filter(listing => filterFromOptions(filterObj, listing))
       .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />);
   };  
 
   /**
- * Determines if a given listing item passes the filter criteria
- * 
- * @param {filterObject} filterObj the object containing the filter requirements
- * @param {listingObject} item the item to determine if it meets the filter requirements
- * @returns {boolean} true if the item fits the filter, false otherwise
- * 
- * @typedef {object} filterObject
- * @property {number} minExperience
- * @property {number} maxExperience
- * @property {number} minSalary
- * @property {number} maxSalary
- * @property {string[]} tags
- * 
- * @typedef {object} listingObject
- * @property {number} id
- * @property {string} title
- * @property {string} companyName
- * @property {string} description
- * @property {number} minYearsExperience
- * @property {number} salary
- * @property {string[]} tags
- * @property {string} createdAt
- * @property {string} updatedAt
- */
+  * Determines if a given listing item passes the filter criteria
+  * 
+  * @param {filterObject} filterObj the object containing the filter requirements
+  * @param {listingObject} item the item to determine if it meets the filter requirements
+  * @returns {boolean} true if the item fits the filter, false otherwise
+  * 
+  * @typedef {object} filterObject
+  * @property {number} minExperience
+  * @property {number} maxExperience
+  * @property {number} minSalary
+  * @property {number} maxSalary
+  * @property {string[]} tags
+  * 
+  * @typedef {object} listingObject
+  * @property {number} id
+  * @property {string} title
+  * @property {string} companyName
+  * @property {string} description
+  * @property {number} minYearsExperience
+  * @property {number} salary
+  * @property {string[]} tags
+  * @property {string} createdAt
+  * @property {string} updatedAt
+  */
   function filterFromOptions(filterObj, item) {
     if (!filterObj) return true;
     if (filterObj.minExperience && item.minYearsExperience < filterObj.minExperience) return false;
@@ -101,15 +105,22 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
 
   return (
     <div className='job-listings-container'>
-      <p id='num-listings'>
-        {
-          `Showing ${
-            searchInput ? `${getFilteredListings(getSearchedListings(searchInput)).length}` :
-              getFilteredListings(listings).length
-          } 
-            results${searchInput.length ? ` for "${searchInput}"` : ''}.`
-        }
-      </p>
+      <div className='listings-container-header'>
+        <p id='num-listings'>
+          {
+            `Showing ${
+              searchInput ? `${getFilteredListings(getSearchedListings(searchInput)).length}` :
+                getFilteredListings(listings).length
+            } 
+              results${searchInput.length ? ` for "${searchInput}"` : ''}.`
+          }
+        </p>
+        {user.isManager ? 
+          <button
+            onClick={() => setManagerListings(!managerListings)}
+            id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
+          >Show Only Own Listings</button> : <></>}
+      </div>
       <ul className='job-listings'>
         {searchInput ? 
           getFilteredListings(getSearchedListings(searchInput)) :
