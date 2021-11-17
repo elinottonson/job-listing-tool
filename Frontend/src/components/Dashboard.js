@@ -9,13 +9,16 @@ import Header from './Header';
 import DashboardNav from './DashboardNav';
 import JobListings from './JobListings';
 import Footer from './Footer';
+import Filters from './Filters.js';
 import ListingCard from './ListingCard';
 
 const Dashboard = ({ user, setUser }) => {
 
   const [popupOpen, setPopupOpen] = React.useState(false); 
   const [searchInput, setSearchInput] = React.useState('');
-
+  const [filterObj, setFilterObj] = React.useState({});
+  const [tags, setTags] = React.useState(['Loading...']);
+  
   const scrollLockTarget = document.querySelector('.dashboard');
 
   /* 
@@ -68,7 +71,16 @@ const Dashboard = ({ user, setUser }) => {
       <div className='dashboard'>
         <Header />
         <DashboardNav setSearchInput={setSearchInput} />
-        <JobListings user={user} setPopupOpen={setPopupOpen} searchInput={searchInput} />
+        <div className='filters'>
+          <Filters setFilterObj={setFilterObj} filterObj={filterObj} tags={tags}/>
+        </div>
+        <JobListings 
+          user={user} 
+          setPopupOpen={setPopupOpen} 
+          searchInput={searchInput} 
+          filterObj={filterObj} 
+          setTags={setTags} 
+        />
         <Footer />
         <Switch>
           <Route
