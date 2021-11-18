@@ -61,7 +61,7 @@ const CandidateFit = (props) => {
     <textarea type="text"/>
   </label >
   <button onClick={props.previousStep}>Previous Step</button>
-    <button onClick={props.nextStep}>Next Step</button>
+    <button>Finish</button>
 </div>   
   );
 }
