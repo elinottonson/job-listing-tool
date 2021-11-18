@@ -1,16 +1,14 @@
 import React, {Fragment, updateState} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
-import ReferralForm from './ReferralForm.js';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
-import StepWizard from 'react-step-wizard';
+import ReferralWizard from './ReferralWizard.js';
 
 import { parseDate } from '../lib/ParseDate';
 
 const ListingCard = ({ setPopupOpen, listingObj}) => {
   
-
   const [ hover, setHover ] = React.useState(false);
   const [ openReferral, setOpenReferral ] = React.useState(false);
   const { id } = useParams();
@@ -27,7 +25,8 @@ const ListingCard = ({ setPopupOpen, listingObj}) => {
     history.goBack();
   };
 
-  const openReferralCard = () => {
+  const openReferralCard = (event) => {
+    event.preventDefault();
     setOpenReferral(true);
   };
 
@@ -94,38 +93,8 @@ const ListingCard = ({ setPopupOpen, listingObj}) => {
             </p>
           </div>
           <div className='referral-button-container'>
-            { openReferral ? <StepWizard nextStep={StepWizard.nextStep}>
-              <div> 
-                <label>
-                First Name<input type="text"/>
-                </label>
-                <label>
-                Last Name<input type="text"/>
-                </label>
-              </div>
-       
-              <div>
-                <label>
-                Email<input type="text"/>
-                </label>
-                <label>
-                Phone Number<input type="text"/>
-                </label>
-              </div>
-              <div>
-                <label>
-                Please Briefly Describe the experience of the candidate:
-                  <textarea/>
-                </label>
-              </div>
-              <div>
-                <label>
-                Briefly describe why you think they would be a good fit for this position:
-                  <textarea type="text"/>
-                </label >
-              </div>
-              <p><button onClick={StepWizard.props.nextStep}>Previous Step</button></p>
-            </StepWizard> : <button className='referralButton' onClick={openReferralCard}>Leave a Referral</button> }
+          {openReferral ? <ReferralWizard />
+          : <button className='referralButton' onClick={openReferralCard}>Leave a Referral</button> }
           </div>
         </div>
       </div>
