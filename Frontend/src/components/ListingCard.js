@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {Fragment, updateState} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import ReferralForm from './ReferralForm.js';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
-import StepWizard from "react-step-wizard";
+import StepWizard from 'react-step-wizard';
 
 import { parseDate } from '../lib/ParseDate';
 
-const ListingCard = ({ setPopupOpen, listingObj }) => {
+const ListingCard = ({ setPopupOpen, listingObj}) => {
   
 
   const [ hover, setHover ] = React.useState(false);
@@ -29,32 +29,14 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
 
   const openReferralCard = () => {
     setOpenReferral(true);
-  }
-
-  // const setInstance = step => updateState({
-  //   ...state,
-  //   step,
-  // });
-
-  
-
-  const Instance = ({ step }) => (
-    <Fragment>
-        <h4>Control from outside component</h4>
-        <button className={'btn btn-secondary'} onClick={step.previousStep}>Previous Step</button>
-        &nbsp;
-        <button className={'btn btn-secondary'} onClick={step.nextStep}>Next Step</button>
-        &nbsp;
-    </Fragment>
-);
-
-
+  };
 
   if(!listingObj){
     // TODO
     // add logic for getting data from backend with listing id, and use SetPopupOpen to add that data,
     // This should make the react-router links work when they are directly accessed
     // A hook maybe?
+
     return <></>;
   }
   else{
@@ -112,44 +94,39 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
             </p>
           </div>
           <div className='referral-button-container'>
-          { openReferral ? <StepWizard>
-            <div> 
-              <label>
+            { openReferral ? <StepWizard nextStep={StepWizard.nextStep}>
+              <div> 
+                <label>
                 First Name<input type="text"/>
-              </label>
-              <label>
+                </label>
+                <label>
                 Last Name<input type="text"/>
-              </label>
-
-              <div>
-                { ( step) && <Instance step={step} /> }
+                </label>
               </div>
-            </div>
        
-            <div>
-              <label>
+              <div>
+                <label>
                 Email<input type="text"/>
-              </label>
-              <label>
+                </label>
+                <label>
                 Phone Number<input type="text"/>
-              </label>
-            </div>
-            <div>
-              <label>
+                </label>
+              </div>
+              <div>
+                <label>
                 Please Briefly Describe the experience of the candidate:
-                <textarea/>
-              </label>
-            </div>
-            <div>
-              <label>
+                  <textarea/>
+                </label>
+              </div>
+              <div>
+                <label>
                 Briefly describe why you think they would be a good fit for this position:
-                <textarea type="text"/>
-              </label >
-            </div>
-            
-            
-          </StepWizard> : <button className='referralButton' onClick={openReferralCard}>Leave a Referral</button> }
-        </div>
+                  <textarea type="text"/>
+                </label >
+              </div>
+              <p><button onClick={StepWizard.props.nextStep}>Previous Step</button></p>
+            </StepWizard> : <button className='referralButton' onClick={openReferralCard}>Leave a Referral</button> }
+          </div>
         </div>
       </div>
     );
