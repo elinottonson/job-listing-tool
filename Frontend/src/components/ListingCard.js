@@ -93,7 +93,7 @@ const ListingCard = ({ setPopupOpen, listingObj}) => {
             </p>
           </div>
           <div className='referral-button-container'>
-          {openReferral ? <ReferralWizard />
+          {openReferral ? <ReferralWizard setOpenReferral={setOpenReferral}/>
           : <button className='referralButton' onClick={openReferralCard}>Leave a Referral</button> }
           </div>
         </div>
