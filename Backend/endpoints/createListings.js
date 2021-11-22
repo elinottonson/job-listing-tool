@@ -36,10 +36,10 @@ function isListingValid (req) {
         if (isListingValid(req)){
             const listing = {
                 title: req.body.title,
-                companyName: COMPANY,
+                companyName: req.body.companyName,
                 description: req.body.description,
                 minYearsExperience: req.body.minYearsExperience,
-                managerId: ID,
+                managerId: req.body.managerId,
                 salary: req.body.salary,
                 tags: req.body.tags
             }
