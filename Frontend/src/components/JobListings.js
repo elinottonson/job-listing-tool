@@ -4,6 +4,7 @@ import './../styles/Listings.css';
 import JobListing from './JobListing';
 
 const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags }) => {
+  
   const [listings, setListings] = React.useState([]);
   const [ managerListings, setManagerListings ] = React.useState(false);
 
