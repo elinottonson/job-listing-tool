@@ -63,9 +63,8 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
    *                              only their own listings
    * @returns {[<JobListing>]} array of filtered job listing components
    */
-  const getFilteredListings = (l, managerView) => {
-    // TODO: implement managerView
-    return l.filter(listing => filterFromOptions(filterObj, listing))
+  const getFilteredListings = (l) => {
+    return l.filter(listing => filterFromOptions(filterObj, listing, managerListings))
       .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />);
   };  
 
@@ -94,7 +93,8 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
   * @property {string} createdAt
   * @property {string} updatedAt
   */
-  function filterFromOptions(filterObj, item) {
+  function filterFromOptions(filterObj, item, managerView) {
+    if(managerView && item.managerId !== user.employeeId) return false;
     if (!filterObj) return true;
     if (filterObj.minExperience && item.minYearsExperience < filterObj.minExperience) return false;
     if (filterObj.maxExperience && item.minYearsExperience > filterObj.maxExperience) return false;
