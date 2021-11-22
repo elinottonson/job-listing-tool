@@ -10,13 +10,13 @@ const {models} = require('../sequelizeSetup/sequalizeConstructor');
 
 function createListingDB(listing) {
     return models.Position.create({
-        title: req.body.title,
-        companyName: COMPANY,
-        description: req.body.description,
-        minYearsExperience: req.body.minYearsExperience,
-        managerId: ID,
-        salary: req.body.salary,
-        tags: req.body.tags
+        title: listing.title,
+        companyName: listing.companyName,
+        description: listing.description,
+        minYearsExperience: listing.minYearsExperience,
+        managerId: listing.managerId,
+        salary: listing.salary,
+        tags: listing.tags
     });
 }
 
