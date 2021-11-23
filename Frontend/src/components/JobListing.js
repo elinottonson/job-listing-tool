@@ -69,13 +69,12 @@ const JobListing = ({ listingObj, setPopupOpen }) => {
           {listingObj.tags.map(tag => <li>{tag}</li>)}
         </ul>
         <p id='date'>
-          {date.toLocaleString('en-US', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-          })
+          {
+            `${
+              date.toLocaleString('en-US', { dateStyle: 'short' })
+                .replaceAll('/', '.')
+            } 
+            at ${date.toLocaleString('en-US', { timeStyle: 'short' })}`
           }
         </p>
       </div>
