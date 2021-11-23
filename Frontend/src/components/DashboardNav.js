@@ -19,6 +19,4 @@ const DashboardNav = ({ setSearchInput }) => {
   );
 };
 
-
-
 export default DashboardNav;
