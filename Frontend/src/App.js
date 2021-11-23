@@ -17,9 +17,9 @@ function App() {
   const [ user, setUser ] = React.useState([]);
   
   React.useEffect(() => {
-    fetch("/auth")
+    fetch('/auth')
       .then(res => res.json())
-      .then((user) => setUser(user))
+      .then((user) => setUser(user));
   }, []);
 
   const history = useHistory();
