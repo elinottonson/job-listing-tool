@@ -4,8 +4,6 @@ import { FaTimes } from 'react-icons/fa';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
 
-import { parseDate } from '../lib/ParseDate';
-
 const ListingCard = ({ setPopupOpen, listingObj }) => {
 
   const [hover, setHover] = React.useState(false);
@@ -30,7 +28,7 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
     return <></>;
   }
   else {
-    const date = parseDate(listingObj.createdAt);
+    const date = new Date(listingObj.createdAt);
     return (
       <div
         className='listing-card-container'
@@ -78,8 +76,13 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
             </ul>
             <p id='popup-date'>
               {
-                `${date.month}.${date.day}.${date.year} 
-                at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
+                date.toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })
               }
             </p>
           </div>

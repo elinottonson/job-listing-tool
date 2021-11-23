@@ -1,14 +1,38 @@
 .job-listings-container {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  max-width: 900px;
   min-width: 500px;
+  width: 100%;
 }
 
-#num-listings {
-  align-self: flex-start;
-  margin-left: 22px;
+.listings-container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: center;
+  margin-left: -5px;
+  width: 93%;
+}
+#manager-listings-off, #manager-listings-on:hover {
+  height: 28px;
+  background-color: var(--background);
+  border-style: none;
+  padding: 2px 8px;
+  border-radius: 10px;
+  box-shadow: 
+    5px 5px 8px var(--light-shadow),
+    -5px -5px 10px var(--highlight);
+}
+#manager-listings-off:hover, #manager-listings-on {
+  cursor: pointer;
+  height: 28px;
+  background-color: var(--background);
+  border-style: none;
+  padding: 2px 8px;
+  border-radius: 10px;
+  box-shadow: 
+    inset 3px 3px 6px var(--light-shadow),
+    inset -3px -3px 8px var(--highlight);
 }
 
 ul {

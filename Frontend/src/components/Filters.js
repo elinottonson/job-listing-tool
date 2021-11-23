@@ -10,6 +10,7 @@ const Range = createSliderWithTooltip(Slider.Range);
 
 const Filters = ({ setFilterObj, filterObj, tags }) => {
 
+  // TODO: JSdoc entry for setFilter()
   function setFilter(minExperience, maxExperience, minSalary, maxSalary, newTags) {
     const obj = {};
     obj.minExperience = minExperience ?? filterObj.minExperience;
@@ -21,14 +22,15 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
     console.log(filterObj);
   }
 
+  // TODO: JSdoc entry for handleChangeSelect()
   function handleChangeSelect(value) {
     setFilter(null, null, null, null, value.map(x=>x.value));
   }
 
   return (
     <div className='filter'>
-      <div class="tags-container">
-        <h3>Tags</h3>
+      <div className="tags-container">
+        <p id='tags-label'>Tags</p>
         <div class="form">
           <Select className='selectTag' 
             isMulti={true} 
@@ -39,8 +41,8 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
         </div>
       </div>
       <div class="filter-container-ranges">
-        <h3>Experience Level</h3>
-        <div class="form">
+        <p>Experience Level</p>
+        <div className="form">
           <Range 
             allowCross={false} 
             min={0} 
@@ -49,8 +51,8 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
             onAfterChange={(x)=>setFilter(x[0],x[1],null,null,null)}
           />
         </div>
-        <h3>Salary Range</h3>
-        <div class="form">
+        <p>Salary Range</p>
+        <div className="form">
           <Range 
             allowCross={false} 
             min={0} 
