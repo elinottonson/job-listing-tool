@@ -1,7 +1,7 @@
 import React from 'react';
 import './../styles/Header.css';
 import logo from './../images/ukglogo.png';
-import { FaRegBell, FaRegUserCircle, FaSun, FaMoon } from 'react-icons/fa';
+import { FaRegBell, FaRegUserCircle } from 'react-icons/fa';
 import DarkThemeToggle from './DarkThemeToggle';
 
 const Header = ({ darkTheme, setDarkTheme }) => {
