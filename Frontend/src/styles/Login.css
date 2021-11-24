@@ -13,7 +13,7 @@
   border-radius: 10px;
   width: 300px;
   padding: 50px 25px;
-  box-shadow: 0px 0px 15px hsla(0, 100%, 0%, 0.4);
+  box-shadow: 0px 0px 15px var(--darkest-shadow);
   background-color: var(--background);
 }
 
@@ -40,13 +40,13 @@ input {
   box-shadow: 
     inset 2px 2px 6px var(--light-shadow),
     3px 3px 8px var(--light-shadow),
-    -3px -3px 10px white;
+    -3px -3px 10px var(--highlight);
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: hidden;
   border-radius: 5px;
-  background-color: white;
+  background-color: var(--input-background);
 }
 
 #email-invalid {
@@ -66,8 +66,10 @@ label {
   padding: 10px 50px;
   color: white;
   font-size: 15px;
-  background-color: rgb(0, 81, 81);
+  background-color: var(--ukg-dark-green);
   width: 60%;
+  box-shadow: 
+    0px 3px 10px var(--darkest-shadow);
 }
 #submit:hover {
   cursor: pointer;
@@ -86,12 +88,12 @@ label {
   align-self: flex;
   margin: 0;
   font-size: 0.8rem;
-  color: #494949;
+  color: var(--font-sub);
   text-decoration: none;
 }
 #forgot-password:hover {
   cursor: pointer;
-  color: #918f8f;
+  color: lightgray;
 }
 
 .bringBackTendiesCredit {
