@@ -27,7 +27,6 @@ const JobListing = ({ listingObj, setPopupOpen }) => {
 
   const history = useHistory();
   const { url } = useRouteMatch();
-  const [ hover, setHover ] = React.useState(false);
 
   const date = parseDate(listingObj.createdAt);
 

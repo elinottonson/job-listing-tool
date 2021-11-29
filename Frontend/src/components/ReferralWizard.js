@@ -1,15 +1,38 @@
 import StepWizard from 'react-step-wizard';
 import React from'react';
+import { isValidEmail } from '../lib/Validation';
 
-const ReferralWizard = ({ setOpenReferral }) => {
+/*
+  Sample Job Listing Object
+  {
+    "id": 52,
+    "title": "Software Engineer I",
+    "companyName": "Techgenix",
+    "description": "Entry level Software Engineering role on an Agile team",
+    "minYearsExperience": 0,
+    "managerId": 111,
+    "salary": 66880,
+    "tags": [
+      "Git",
+      "SQL",
+      "MongoDB",
+      "Jenkins"
+    ],
+    "createdAt": "2021-10-14T18:40:02.987Z",
+    "updatedAt": "2021-10-14T18:40:02.987Z"
+  }
+*/
+
+const ReferralWizard = ({ setOpenReferral, listingObj }) => {
 
   const [userInput, setUserInput] = React.useState({
-    'first-name': '',
-    'last-name': '',
-    'email': '',
-    'phone-number': '',
-    'experience': '',
-    'good-fit': ''
+      firstName: '',
+      lastName: '',
+      email: '',
+      referralText: '',
+      listingId: listingObj.id,
+      companyName: listingObj.companyName,
+      authorId: ''
   });
 
   // Called on every onChange event
@@ -27,20 +50,19 @@ const ReferralWizard = ({ setOpenReferral }) => {
   return (
     <form onSubmit={handleSubmit}>
       <StepWizard transitions='nothing'>
-        <Name userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
+        <CandidateName userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
         <ContactInfo userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
-        <CandidateExperience userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
-        <CandidateFit userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
+        <CandidateDescription userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
       </StepWizard>
     </form>
   );
 };
 
-// TODO: disable next button when required inputs are not filled
-const Name = (props) => {
+// TODO: display error message when conditions for moving to the next step have not been met
+const CandidateName = (props) => {
   //function to make sure required fields are filled in before proceeding
   const filledRequired = () => {
-    if (props.userInput['first-name'] !== '' && props.userInput['last-name'] !== '') {
+    if (props.userInput.firstName !== '' && props.userInput.lastName !== '') {
       props.nextStep();
     }
   };
@@ -48,10 +70,10 @@ const Name = (props) => {
   return (
     <div>
       <label>
-        First Name<input type="text" name='first-name' onChange={props.handleChange} />
+        First Name<input type="text" name='firstName' onChange={props.handleChange} />
       </label>
       <label>
-        Last Name<input type="text" name='last-name' onChange={props.handleChange} />
+        Last Name<input type="text" name='lastName' onChange={props.handleChange} />
       </label>
       <button type='button' onClick={filledRequired}>Next Step</button>
     </div>
@@ -61,29 +83,27 @@ const Name = (props) => {
 const ContactInfo = (props) => {
   //function to make sure required fields are filled in before proceeding
   const filledRequired = () => {
-    if (props.userInput['email'] !== '' && props.userInput['phone-number'] !== '') {
+    if (isValidEmail(props.userInput.email)) {
       props.nextStep();
     }
   };
 
+  //Get contact info of referral -- used to contain phone number but our database currently doesn't handle that
   return (
     <div>
       <label>
         Email<input type='email' name='email' onChange={props.handleChange} />
       </label>
-      <label>
-        Phone Number<input type='tel' name='phone-number' onChange={props.handleChange} />
-      </label>
       <button type='button' onClick={props.previousStep}>Previous Step</button>
       <button type='button' onClick={filledRequired}>Next Step</button>
     </div>
   );
 };
 
-const CandidateExperience = (props) => {
+const CandidateDescription = (props) => {
   //function to make sure fields are filled in before proceeding
   const filledRequired = () => {
-    if (props.userInput['experience'] !== '') {
+    if (props.userInput.referralText !== '') {
       props.nextStep();
     }
   };
@@ -91,31 +111,11 @@ const CandidateExperience = (props) => {
   return (
     <div>
       <label>
-        Please Briefly Describe the candidate's experience (accomplishments):
-        <textarea type='text' name='experience' onChange={props.handleChange} />
+        Please briefly describe why you chose to refer this candidate:
+        <textarea type='text' name='referralText' onChange={props.handleChange} />
       </label>
       <button type='button' onClick={props.previousStep}>Previous Step</button>
-      <button type='button' onClick={filledRequired}>Next Step</button>
-    </div>
-  );
-};
-
-const CandidateFit = (props) => {
-  //function to make sure fields are filled in before proceeding
-  const filledRequired = (event) => {
-    if (props.userInput['good-fit'] === '') {
-      event.preventDefault();
-    }
-  };
-
-  return (
-    <div>
-      <label>
-        Briefly describe why the candidate is a good fit for the company:
-        <textarea type='text' name='good-fit' onChange={props.handleChange} />
-      </label >
-      <button type='button' onClick={props.previousStep}>Previous Step</button>
-      <button onClick={filledRequired}>Finish</button>
+      <button onClick={filledRequired}>Finish</button>    
     </div>
   );
 };
