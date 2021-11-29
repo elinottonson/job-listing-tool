@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import './../styles/Dashboard.css';
 
 import { isValidUser } from '../lib/Validation';
@@ -9,12 +9,16 @@ import Header from './Header';
 import DashboardNav from './DashboardNav';
 import JobListings from './JobListings';
 import Footer from './Footer';
+import Filters from './Filters.js';
 import ListingCard from './ListingCard';
 
 const Dashboard = ({ user, setUser }) => {
 
-  const [ popupOpen, setPopupOpen ] = React.useState(false);
-
+  const [popupOpen, setPopupOpen] = React.useState(false); 
+  const [searchInput, setSearchInput] = React.useState('');
+  const [filterObj, setFilterObj] = React.useState({});
+  const [tags, setTags] = React.useState(['Loading...']);
+  
   const scrollLockTarget = document.querySelector('.dashboard');
 
   /* 
@@ -30,7 +34,7 @@ const Dashboard = ({ user, setUser }) => {
         'Accept': 'application/json'
       }
     };
-    
+
     console.log('Checking for logged in user...');
 
     fetch('/auth', options)
@@ -40,11 +44,11 @@ const Dashboard = ({ user, setUser }) => {
       .then(data => {
         console.log('Received Response:');
         console.log(data);
-        if(Object.keys(data).includes('Error')) {
+        if (Object.keys(data).includes('Error')) {
           console.log(data.Error);
         }
         else {
-          if(isValidUser(data)) {
+          if (isValidUser(data)) {
             setUser(data);
           }
         }
@@ -54,7 +58,7 @@ const Dashboard = ({ user, setUser }) => {
 
   // Scroll-lock when the job listing pop-up is open
   React.useEffect(() => {
-    if(popupOpen) {
+    if (popupOpen) {
       disableBodyScroll(scrollLockTarget);
     }
     else {
@@ -64,15 +68,24 @@ const Dashboard = ({ user, setUser }) => {
 
   return (
     <Router basename='/dashboard'>
-      <div className='dashboard'> 
+      <div className='dashboard'>
         <Header />
-        <DashboardNav />
-        <JobListings user={user} setPopupOpen={setPopupOpen}/>
+        <DashboardNav setSearchInput={setSearchInput} />
+        <div className='dashboard-content'>
+          <Filters className='filters' setFilterObj={setFilterObj} filterObj={filterObj} tags={tags}/>
+          <JobListings 
+            user={user} 
+            setPopupOpen={setPopupOpen} 
+            searchInput={searchInput} 
+            filterObj={filterObj} 
+            setTags={setTags} 
+          />
+        </div>
         <Footer />
         <Switch>
-          <Route 
-            path='/job/:id' 
-            children={<ListingCard setPopupOpen={setPopupOpen} listingObj = {popupOpen}/>}
+          <Route
+            path='/job/:id'
+            children={<ListingCard setPopupOpen={setPopupOpen} listingObj={popupOpen} />}
           />
         </Switch>
       </div>

@@ -1,8 +1,6 @@
 import React from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
-import { parseDate } from '../lib/ParseDate';
-
 /*
   Sample Job Listing Object
   {
@@ -28,7 +26,7 @@ const JobListing = ({ listingObj, setPopupOpen }) => {
   const history = useHistory();
   const { url } = useRouteMatch();
 
-  const date = parseDate(listingObj.createdAt);
+  const date = new Date(listingObj.createdAt);
 
   return (
     <li 
@@ -71,8 +69,11 @@ const JobListing = ({ listingObj, setPopupOpen }) => {
         </ul>
         <p id='date'>
           {
-            `${date.month}.${date.day}.${date.year} 
-            at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
+            `${
+              date.toLocaleString('en-US', { dateStyle: 'short' })
+                .replaceAll('/', '.')
+            } 
+            at ${date.toLocaleString('en-US', { timeStyle: 'short' })}`
           }
         </p>
       </div>

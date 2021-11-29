@@ -40,7 +40,8 @@ const endpoints = [
   require('./endpoints/listingsPost'),
   require('./endpoints/referralsFromListingGet'),
   require('./endpoints/referralPost'),
-  require('./endpoints/listingFromlistingIdGet')
+  require('./endpoints/listingFromlistingIdGet'),
+  require('./endpoints/swaggerGet'),
 ];
 
 for(const endpoint of endpoints){
