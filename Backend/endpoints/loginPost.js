@@ -11,13 +11,13 @@ function loginPost(app, passport) {
     passport.authenticate('local', function(err, user, info) {
       if (err) { return next(err); }
       if (!user) {
-        console.log("User not found")
-        res.status(401)
-        return res.send(info.message)
+        console.log('User not found');
+        res.status(401);
+        return res.send(info.message);
       }
       req.logIn(user, function(err) {
         if (err) { return next(err); }
-        return res.send(req.user)
+        return res.send(req.user);
       });
     })(req, res, next);
   });
