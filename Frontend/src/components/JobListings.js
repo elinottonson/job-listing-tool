@@ -1,12 +1,15 @@
 import React from 'react';
 import './../styles/Listings.css';
+import CreateReferralWizard from './CreateReferralWizard';
 
 import JobListing from './JobListing';
+import PopupCard from './PopupCard';
 
-const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags }) => {
+const JobListings = ({ user, tags, setPopupOpen, searchInput = '', filterObj, setTags }) => {
   
   const [listings, setListings] = React.useState([]);
   const [ managerListings, setManagerListings ] = React.useState(false);
+  const [ createReferral, setCreateReferral ] = React.useState(false);
 
   React.useEffect(() => {
     const options = {
@@ -51,6 +54,10 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
           || listing.description.toLowerCase().includes(searchInput.toLowerCase())
       )
     );
+  };
+
+  const createReferralForm = () => {
+    setCreateReferral(true);
   };
 
   /**
@@ -117,10 +124,22 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
           }
         </p>
         {user.isManager ? 
-          <button
-            onClick={() => setManagerListings(!managerListings)}
-            id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
-          >Show Only Own Listings</button> : <></>}
+          <div>
+            <button
+              onClick={() => createReferralForm()}
+              id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
+            >Create a New Listing</button>
+            <button
+              onClick={() => setManagerListings(!managerListings)}
+              id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
+            >Show Only Own Listings</button>
+          </div>
+          : <></>}
+        <p>{createReferral.toString()} test</p>
+        {createReferral ? <PopupCard  
+          className='create-referral-popup' 
+          setPopupOpen={setCreateReferral} 
+          content={ <CreateReferralWizard setOpenReferral={setCreateReferral} tags={tags} setTags={setTags} createReferral={createReferral}/> }/> : <></>}
       </div>
       <ul className='job-listings'>
         {searchInput ? 

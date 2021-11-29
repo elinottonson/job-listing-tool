@@ -72,10 +72,13 @@ const Dashboard = ({ user, setUser }) => {
         <Header />
         <DashboardNav setSearchInput={setSearchInput} />
         <div className='dashboard-content'>
-          <Filters className='filters' setFilterObj={setFilterObj} filterObj={filterObj} tags={tags}/>
+          {/* <Filters className='filters' setFilterObj={setFilterObj} filterObj={filterObj} tags={tags}/> */}
+          <p>{tags}</p>
           <JobListings 
             user={user} 
+            tags={tags}
             setPopupOpen={setPopupOpen} 
+            listingObj={popupOpen}
             searchInput={searchInput} 
             filterObj={filterObj} 
             setTags={setTags} 
