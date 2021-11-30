@@ -29,7 +29,7 @@ function isListingValid (req) {
  * Sets up new listing endpoint
  * 
  * @param {Express} app The express instance to setup the endpoint on
- * @returns {void} Sets up new referral endpoint
+ * @returns {void} Create listing endpoint
  */
  function createListing(app) {
     app.post('/api/new-listing', async(req, res) => {
@@ -47,7 +47,7 @@ function isListingValid (req) {
             res.send( await createListingDB(listing));
         } else {
             res.status(400);
-            res.send({ Error: 'Invalid isting.'})
+            res.send({ Error: 'Invalid listing.'})
         }
     });
 }

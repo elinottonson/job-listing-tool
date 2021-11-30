@@ -5,7 +5,6 @@ const {models} = require('../sequelizeSetup/sequalizeConstructor');
  *
  * @param {object} referral The object of the listing you want to create.
  * @returns {Promise<models.Referral>} An instance of the listing model
- * 
  */
 
 function createListingDB(listing) {
