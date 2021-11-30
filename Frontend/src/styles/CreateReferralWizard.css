@@ -2,6 +2,40 @@
     display: flex;
     flex-direction: column;
     flex-flow: column;
-    
+    width: 100%;
+    height: 100%;
 }
 
+.step-container {
+    text-align: left;
+}
+
+textarea {
+    resize: none;
+    width: 90%;
+    height: 80%;
+}
+
+.wizard input {
+    margin: 5px;
+}
+
+.wizard button {
+    height: 28px;
+    background-color: var(--background);
+    /* background-color: red; */
+    border-style: none;
+    padding: 2px 8px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 8px var(--light-shadow), -5px -5px 10px var(--highlight);
+}
+
+.selectTag {
+    width: 80%;
+}
+
+.wizard button:hover {
+    box-shadow: inset 3px 3px 6px var(--light-shadow),
+    inset -3px -3px 8px var(--highlight);
+}

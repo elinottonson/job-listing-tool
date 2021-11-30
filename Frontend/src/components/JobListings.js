@@ -135,11 +135,14 @@ const JobListings = ({ user, tags, setPopupOpen, searchInput = '', filterObj, se
             >Show Only Own Listings</button>
           </div>
           : <></>}
-        <p>{createReferral.toString()} test</p>
         {createReferral ? <PopupCard  
           className='create-referral-popup' 
           setPopupOpen={setCreateReferral} 
-          content={ <CreateReferralWizard setOpenReferral={setCreateReferral} tags={tags} setTags={setTags} createReferral={createReferral}/> }/> : <></>}
+          content={ <CreateReferralWizard 
+            setOpenReferral={setCreateReferral} 
+            tags={tags} 
+            setTags={setTags} 
+            createReferral={createReferral}/> }/> : <></>}
       </div>
       <ul className='job-listings'>
         {searchInput ? 

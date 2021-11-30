@@ -30,7 +30,8 @@ const CreateReferralWizard = ({ setOpenReferral, tags, setTags, createReferral }
     jobTitle: '',
     description: '',
     minYearsExperience: '',
-    salary: ''
+    salary: '',
+    tags: []
   });
 
   // Called on every onChange event
@@ -43,10 +44,12 @@ const CreateReferralWizard = ({ setOpenReferral, tags, setTags, createReferral }
   const handleSubmit = (event) => {
     event.preventDefault();
     setOpenReferral(false);
+    console.log(userInput);
+
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='wizard'> 
       <StepWizard transitions='nothing'>
         <JobTitle 
           userInput={userInput} 
@@ -60,6 +63,7 @@ const CreateReferralWizard = ({ setOpenReferral, tags, setTags, createReferral }
           tags={tags} 
           setTags={setTags} 
           createReferral={createReferral}
+          setOpenReferral={setOpenReferral}
           userInput={userInput} 
           setUserInput={setUserInput} 
           handleChange={handleChange} />
@@ -71,25 +75,17 @@ const CreateReferralWizard = ({ setOpenReferral, tags, setTags, createReferral }
 // TODO: display error message when conditions for moving to the next step have not been met
 const JobTitle = (props) => {
   //function to make sure required fields are filled in before proceeding
-  const filledRequired = () => {
-    if (props.userInput.firstName !== '' && props.userInput.lastName !== '') {
-      props.nextStep();
-    }
-  };
 
   return (
-    <div className='wizard'>
-      <label className='jobtitle'>
-        Job Title<input type="text" name='jobtitle' onChange={props.handleChange} />
-      </label>
-      <label>
-        Minimum Years of Experience Required
-        <input type="text" name='minYearsExperience' onChange={props.handleChange} />
-      </label>
-      <label>
-        Salary <input type="text" name='salary' onChange={props.handleChange}/>
-      </label>
-      <button type='button' onClick={filledRequired}>Next Step</button>
+    <div  className='step-container'>
+      <input type="text" placeholder="Job Title" name='jobTitle' onChange={props.handleChange} />
+      <input 
+        type="text" 
+        placeholder="Minimum Years of Experience Required" 
+        name='minYearsExperience' 
+        onChange={props.handleChange} />
+      <input type="text" placeholder="Salary" name='salary' onChange={props.handleChange}/>
+      <button type='button' onClick={props.nextStep}>Next Step</button>
     </div>
   );
 };
@@ -102,10 +98,12 @@ const JobDescription = (props) => {
 
   //Get contact info of referral -- used to contain phone number but our database currently doesn't handle that
   return (
-    <div>
-      <label>
-        Job Description<input type='textarea' name='description' onChange={props.handleChange} />
-      </label>
+    <div  className='step-container'>
+      <textarea className='jobdesc'  
+        placeholder="Job Description" 
+        rows='8'
+        name='description' 
+        onChange={props.handleChange} />
       <button type='button' onClick={props.previousStep}>Previous Step</button>
       <button type='button' onClick={filledRequired}>Next Step</button>
     </div>
@@ -120,22 +118,28 @@ const Tags = (props) => {
   const addTag = (event)=> {
     setAddNewTag(event.target.value);
   };
+
+  const handleAddNewTag = (event) => {
+    event.preventDefault();
+    if (addNewTag != '' && addNewTag in props.tags == false) {
+      props.setTags(props.tags.concat(addNewTag));
+    }
+  };
   
   return (
-    <div>
+    <div className='step-container'>
       <Select className='selectTag' 
+        placeholder="Select Tags"
         isMulti={true} 
         options={props.tags.map(tag => { return {value: tag, label: tag}; })}
         maxMenuHeight={200}
       />
       <div>
-        <label>
-          Or, Create a new Tag:<input type='text' name='tags' onChange={addTag}/>
-        </label>
-        <button onClick={() => {props.setTags(props.tags.concat(addNewTag));}}>Add New Tag</button>
+        <input type='text' placeholder="Or, Create a New Tag" onChange={addTag}/>
+        <button onClick={handleAddNewTag} >Add New Tag</button>
       </div>
       <button type='button' onClick={props.previousStep}>Previous Step</button>
-      <button onClick={props.nextStep}>Finish</button>    
+      <button >Finish</button>    
     </div>
   );
 };

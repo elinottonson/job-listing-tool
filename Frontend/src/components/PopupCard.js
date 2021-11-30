@@ -13,7 +13,8 @@ const PopupCard = ({ setPopupOpen, content}) => {
       handleClose();
     }
   };
-  const handleClose = () => {
+  const handleClose = (event) => {
+    event.preventDefault();
     setPopupOpen(false);
   };
 
