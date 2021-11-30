@@ -38,7 +38,15 @@ const CreateReferralWizard = ({ setOpenReferral, tags, setTags, createReferral }
   const handleChange = (event) => {
     const name = event.target.name.trim();
     const value = event.target.value.trim();
-    setUserInput(values => ({ ...values, [name]: value }));
+    setUserInput(values => {
+      return ({ ...values, [name]: value });
+    });
+  };
+
+  const handleChangeTags = (value) => {
+    setUserInput(values => {
+      return ({ ...values, 'tags': value.map(obj => obj.value)});
+    });
   };
 
   const handleSubmit = (event) => {
@@ -66,7 +74,7 @@ const CreateReferralWizard = ({ setOpenReferral, tags, setTags, createReferral }
           setOpenReferral={setOpenReferral}
           userInput={userInput} 
           setUserInput={setUserInput} 
-          handleChange={handleChange} />
+          handleChange={handleChangeTags} />
       </StepWizard>
     </form>
   );
@@ -133,10 +141,11 @@ const Tags = (props) => {
         isMulti={true} 
         options={props.tags.map(tag => { return {value: tag, label: tag}; })}
         maxMenuHeight={200}
+        onChange={props.handleChange}
       />
       <div>
         <input type='text' placeholder="Or, Create a New Tag" onChange={addTag}/>
-        <button onClick={handleAddNewTag} >Add New Tag</button>
+        <button onClick={handleAddNewTag}>Add New Tag</button>
       </div>
       <button type='button' onClick={props.previousStep}>Previous Step</button>
       <button >Finish</button>    
