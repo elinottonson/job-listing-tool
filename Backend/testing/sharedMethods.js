@@ -1,4 +1,3 @@
-import reset from './reset'
 /*
  * Determines if a given listing matches the structure expected as well as optional checks
  * 
@@ -49,5 +48,4 @@ function teardown() {
 module.exports = {
   listingMatch,
   teardown,
-  reset
 };

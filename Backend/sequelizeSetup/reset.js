@@ -1,17 +1,39 @@
-// WARNING: running this file resets the "Employees" and "Positions" table in the local test db
+const { Sequelize } = require('sequelize');
 
-const sequelize = require('../sequelizeSetup/sequalizeConstructor');
+// Extract database uri from environmental variables
+require('dotenv').config();
+
+let DATABASE_OPTIONS = {logging: false}
+
+const DATABASE_URI = process.env.DATABASE_URI;
+
+console.log(DATABASE_URI)
+const sequelize = new Sequelize(DATABASE_URI, DATABASE_OPTIONS);
+
+const modelDefiners = [
+  require('./Models/Employee'),
+  require('./Models/Position'),
+  require('./Models/Referral'),
+];
+
+for (const modelDefiner of modelDefiners) {
+  sequelize.define(...modelDefiner);
+}
+
+
+const Employee = require('./Models/Employee');
+const Position = require('./Models/Position');
 
 // get json files for raw data
-employees_birdseye = require("../sequelizeSetup/raw_data/Birdseye_Entertainment-employees.json")
-employees_fuzzy = require("../sequelizeSetup/raw_data/Fuzzy_Alpaca_Consulting-employees.json")
-employees_techgenix = require("../sequelizeSetup/raw_data/Techgenix-employees.json")
-positions_birdseye = require("../sequelizeSetup/raw_data/Birdseye_Entertainment-positions.json")
-positions_fuzzy = require("../sequelizeSetup/raw_data/Fuzzy_Alpaca_Consulting-positions.json")
-positions_techgenix = require("../sequelizeSetup/raw_data/Techgenix-positions.json")
+employees_birdseye = require("./raw_data/Birdseye_Entertainment-employees.json")
+employees_fuzzy = require("./raw_data/Fuzzy_Alpaca_Consulting-employees.json")
+employees_techgenix = require("./raw_data/Techgenix-employees.json")
+positions_birdseye = require("./raw_data/Birdseye_Entertainment-positions.json")
+positions_fuzzy = require("./raw_data/Fuzzy_Alpaca_Consulting-positions.json")
+positions_techgenix = require("./raw_data/Techgenix-positions.json")
 referrals_birdseye = require("../sequelizeSetup/raw_data/Birdseye_Entertainment-Referrals")
 referrals_fuzzy = require("../sequelizeSetup/raw_data//Fuzzy_Alpaca_Consulting_Referrals")
-referrals_techgenix = require("../sequelizeSetup/raw_data/Techgenix_Referrals.json")
+referrals_techgenix = require("./raw_data/Techgenix_Referrals.json")
 
 // prepare data to be uploaded to postgres
 employees = [...employees_techgenix, ...employees_birdseye, ...employees_fuzzy]
@@ -33,7 +55,7 @@ async function reset(){
     .then(createEmployeeTable)
     .then(createReferralTable)
     .then(() => console.log("Success, data is live now! 🚀\n"))
-    .then(() => {require('../sequelizeSetup/sequalizeConstraints')(sequelize);})
+    .then(() => {sequelize.close()})
     .catch(console.error)
 }
 
@@ -68,4 +90,5 @@ async function createReferralTable(){
 function addField(l, name, value){
     return l.map(obj=> ({ ...obj, [name]: value }))
 }
+
 reset()

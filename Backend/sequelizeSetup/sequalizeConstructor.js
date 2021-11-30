@@ -37,9 +37,6 @@ for (const modelDefiner of modelDefiners) {
   sequelize.define(...modelDefiner);
 }
 
-if (process.env.ENV == 'PROD'){
-  require('./sequalizeConstraints')(sequelize);
-
-}
+require('./sequalizeConstraints')(sequelize);
 
 module.exports = sequelize;
