@@ -1,5 +1,5 @@
 import StepWizard from 'react-step-wizard';
-import React from'react';
+import React from 'react';
 import { isValidEmail } from '../lib/Validation';
 
 /*
@@ -26,14 +26,14 @@ import { isValidEmail } from '../lib/Validation';
 const ReferralWizard = ({ setOpenReferral, listingObj }) => {
 
   const [userInput, setUserInput] = React.useState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      referralText: '',
-      listingId: listingObj.id,
-      companyName: listingObj.companyName,
-      authorId: ''
+    firstName: '',
+    lastName: '',
+    email: '',
+    referralText: '',
+    listingId: listingObj.id
   });
+  const [errorMsg, setErrorMsg] = React.useState({ error: false, msg: '' });
+  const [submittingForm, setSubmittingForm] = React.useState(false);
 
   // Called on every onChange event
   const handleChange = (event) => {
@@ -44,7 +44,40 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setOpenReferral(false);
+
+    if (userInput.firstName !== '' && userInput.lastName !== ''
+      && isValidEmail(userInput.email) && userInput.referralText !== '') {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userInput)
+      };
+
+      console.log('Sending referral data...');
+      setSubmittingForm(true);
+
+      fetch('/api/new-referral', options)
+        .then(async (res) => {
+          console.log(res);
+          console.log(res.status);
+          if (!res.ok) {
+            throw Error(await res.text());
+          }
+          return res.json();
+        })
+        .then((data) => {
+          //TODO: Add alert that referral was added succesfully
+          console.log(data);
+          setSubmittingForm(false);
+          setOpenReferral(false);
+        })
+        .catch((e) => {
+          setErrorMsg({ error: true, msg: e.message });
+        });
+    }
   };
 
   return (
@@ -52,7 +85,13 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
       <StepWizard transitions='nothing'>
         <CandidateName userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
         <ContactInfo userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
-        <CandidateDescription userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
+        <CandidateDescription
+          userInput={userInput}
+          setUserInput={setUserInput}
+          handleChange={handleChange}
+          errorMsg={errorMsg}
+          submittingForm={submittingForm}
+        />
       </StepWizard>
     </form>
   );
@@ -101,21 +140,15 @@ const ContactInfo = (props) => {
 };
 
 const CandidateDescription = (props) => {
-  //function to make sure fields are filled in before proceeding
-  const filledRequired = () => {
-    if (props.userInput.referralText !== '') {
-      props.nextStep();
-    }
-  };
-
   return (
     <div>
       <label>
         Please briefly describe why you chose to refer this candidate:
         <textarea type='text' name='referralText' onChange={props.handleChange} />
       </label>
+      <p id='err-msg'>{props.errorMsg.error ? props.errorMsg.msg : ''}</p>
       <button type='button' onClick={props.previousStep}>Previous Step</button>
-      <button onClick={filledRequired}>Finish</button>    
+      <button>{props.submittingForm ? 'Submitting...' : 'Finish'}</button>
     </div>
   );
 };

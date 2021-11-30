@@ -5,10 +5,10 @@ import ReferralWizard from './ReferralWizard.js';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
 
-const ListingCard = ({ setPopupOpen, listingObj}) => {
-  
-  const [ hover, setHover ] = React.useState(false);
-  const [ openReferral, setOpenReferral ] = React.useState(false);
+const ListingCard = ({ setPopupOpen, listingObj }) => {
+
+  const [hover, setHover] = React.useState(false);
+  const [openReferral, setOpenReferral] = React.useState(false);
   const { id } = useParams();
   const history = useHistory();
 
@@ -27,7 +27,7 @@ const ListingCard = ({ setPopupOpen, listingObj}) => {
     setOpenReferral(true);
   };
 
-  if(!listingObj){
+  if (!listingObj) {
     // TODO
     // add logic for getting data from backend with listing id, and use SetPopupOpen to add that data,
     // This should make the react-router links work when they are directly accessed
@@ -95,8 +95,8 @@ const ListingCard = ({ setPopupOpen, listingObj}) => {
             </p>
           </div>
           <div className='referral-button-container'>
-          {openReferral ? <ReferralWizard setOpenReferral={setOpenReferral} listingObj={listingObj}/>
-          : <button className='referralButton' onClick={openReferralCard}>Leave a Referral</button> }
+            {openReferral ? <ReferralWizard setOpenReferral={setOpenReferral} listingObj={listingObj} />
+              : <button className='referralButton' onClick={openReferralCard}>Leave a Referral</button>}
           </div>
         </div>
       </div>
