@@ -51,9 +51,9 @@ input {
 
 #email-invalid {
   box-shadow: 
-    inset 2px 2px 6px hsla(0, 90%, 40%, 0.3),
-    3px 3px 8px hsla(0, 90%, 40%, 0.3),
-    -3px -3px 10px hsla(0, 90%, 100%, 1);
+    inset 2px 2px 6px var(--invalid-email-shadow),
+    3px 3px 8px var(--invalid-email-shadow-outer),
+    -3px -3px 10px var(--highlight);
 }
 
 label {

@@ -36,7 +36,11 @@ function App() {
       <div className='App'>
         <Switch>
           <Route exact path='/'>
-            {Object.keys(user).length ? <Redirect to='/dashboard'/> : <Login setUser={setUser}/>}
+            {
+              Object.keys(user).length ? 
+                <Redirect to='/dashboard'/> : 
+                <Login setUser={setUser} />
+            }
           </Route>
           <Route path='/dashboard'>
             {

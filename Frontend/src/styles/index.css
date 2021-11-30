@@ -46,6 +46,9 @@ html {
   --ukg-cyan: #2ac7b4;
 
   /* misc */
+  --invalid-email-shadow: hsla(0, 90%, 40%, 0.3);
+  --invalid-email-shadow-outer: hsla(0, 90%, 40%, 0.3);
+
   --scrollbar-handle: #888;
   --scrollbar-handle-hover: #555;
   --scrollbar-track: #d8d8d8;
@@ -70,6 +73,8 @@ html {
   --highlight: hsl(224, 14.3%, 21%);
   --light-shadow: rgba(0, 0, 0, 0.3);
   --dark-shadow: rgba(0, 0, 0, 0.5);
+
+  --invalid-email-shadow-outer: hsla(0, 90%, 40%, 0.5);
 
   --scrollbar-handle: hsl(226, 15%, 30%);
   --scrollbar-handle-hover: hsl(226, 15%, 35%);
