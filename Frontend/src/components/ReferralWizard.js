@@ -1,6 +1,7 @@
 import StepWizard from 'react-step-wizard';
 import React from'react';
 import { isValidEmail } from '../lib/Validation';
+import './../styles/ReferralWizard.css';
 
 /*
   Sample Job Listing Object
@@ -68,14 +69,14 @@ const CandidateName = (props) => {
   };
 
   return (
-    <div>
+    <div className = 'name-container'>
       <label>
         First Name<input type="text" name='firstName' onChange={props.handleChange} />
       </label>
       <label>
         Last Name<input type="text" name='lastName' onChange={props.handleChange} />
       </label>
-      <button type='button' onClick={filledRequired}>Next Step</button>
+      <button className = 'nextButton' type='button' onClick={filledRequired}>Next Step</button>
     </div>
   );
 };
@@ -90,12 +91,12 @@ const ContactInfo = (props) => {
 
   //Get contact info of referral -- used to contain phone number but our database currently doesn't handle that
   return (
-    <div>
+    <div className= 'email-container'>
       <label>
         Email<input type='email' name='email' onChange={props.handleChange} />
       </label>
-      <button type='button' onClick={props.previousStep}>Previous Step</button>
-      <button type='button' onClick={filledRequired}>Next Step</button>
+      <button className = 'previousButton' type='button' onClick={props.previousStep}>Previous Step</button>
+      <button className = 'nextButton' type='button' onClick={filledRequired}>Next Step</button>
     </div>
   );
 };
@@ -109,13 +110,13 @@ const CandidateDescription = (props) => {
   };
 
   return (
-    <div>
+    <div className = '.explain-container'>
       <label>
         Please briefly describe why you chose to refer this candidate:
         <textarea type='text' name='referralText' onChange={props.handleChange} />
       </label>
-      <button type='button' onClick={props.previousStep}>Previous Step</button>
-      <button onClick={filledRequired}>Finish</button>    
+      <button className = 'previousButton' type='button' onClick={props.previousStep}>Previous Step</button>
+      <button className = 'finishButton' onClick={filledRequired}>Finish</button>    
     </div>
   );
 };
