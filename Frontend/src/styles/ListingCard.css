@@ -19,6 +19,13 @@
 .referralButton{
   width: fit-content;
   padding: 10px;
+  box-shadow: inset 2px 2px 6px var(--light-shadow), 3px 3px 8px var(--light-shadow), -3px -3px 10px white;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+  border-radius: 5px;
+    
 
 }
 
