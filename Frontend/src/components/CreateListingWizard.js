@@ -1,7 +1,7 @@
 import StepWizard from 'react-step-wizard';
 import Select from 'react-select';
 import React from'react';
-import './../styles/CreateReferralWizard.css';
+import './../styles/CreateListingWizard.css';
 
 /*
   Sample Job Listing Object
@@ -24,7 +24,7 @@ import './../styles/CreateReferralWizard.css';
   }
 */
 
-const CreateReferralWizard = ({ setOpenReferral, tags, setTags, createReferral }) => {
+const CreateListingWizard = ({ setOpenCreateListing, tags, setTags, createListing}) => {
 
   const [userInput, setUserInput] = React.useState({
     jobTitle: '',
@@ -51,9 +51,7 @@ const CreateReferralWizard = ({ setOpenReferral, tags, setTags, createReferral }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setOpenReferral(false);
-    console.log(userInput);
-
+    setOpenCreateListing(false);
   };
 
   return (
@@ -70,8 +68,8 @@ const CreateReferralWizard = ({ setOpenReferral, tags, setTags, createReferral }
         <Tags 
           tags={tags} 
           setTags={setTags} 
-          createReferral={createReferral}
-          setOpenReferral={setOpenReferral}
+          createListing={createListing}
+          setOpenCreateListing={setOpenCreateListing}
           userInput={userInput} 
           setUserInput={setUserInput} 
           handleChange={handleChangeTags} />
@@ -104,7 +102,6 @@ const JobDescription = (props) => {
     props.nextStep();
   };
 
-  //Get contact info of referral -- used to contain phone number but our database currently doesn't handle that
   return (
     <div  className='step-container'>
       <textarea className='jobdesc'  
@@ -153,4 +150,4 @@ const Tags = (props) => {
   );
 };
 
-export default CreateReferralWizard;
+export default CreateListingWizard;
