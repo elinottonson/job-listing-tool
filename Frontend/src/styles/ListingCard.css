@@ -29,6 +29,14 @@
 
 }
 
+.referralButton:hover{
+  
+  cursor: pointer;
+  box-shadow: inset 3px 3px 6px var(--light-shadow),
+  inset -3px -3px 8px var(--highlight);
+
+}
+
 .listing-card-container {
   position: absolute;
   display: flex;

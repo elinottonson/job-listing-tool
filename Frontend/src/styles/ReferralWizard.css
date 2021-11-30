@@ -72,3 +72,20 @@ input{
     
 }
 
+.nextButton:hover{
+    cursor: pointer;
+    box-shadow: inset 3px 3px 6px var(--light-shadow),
+    inset -3px -3px 8px var(--highlight);
+}
+
+.previousButton:hover{
+    cursor: pointer;
+    box-shadow: inset 3px 3px 6px var(--light-shadow),
+    inset -3px -3px 8px var(--highlight);
+}
+
+.finishButton:hover{
+    cursor: pointer;
+    box-shadow: inset 3px 3px 6px var(--light-shadow),
+    inset -3px -3px 8px var(--highlight);
+}
