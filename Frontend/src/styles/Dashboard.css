@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: fit-content;
   background-color: var(--background);
 }
 
@@ -33,7 +33,11 @@
   background-color: var(--background);
   box-shadow: 
     3px 3px 8px var(--light-shadow),
-    -3px -3px 10px white;
+    -3px -3px 10px var(--highlight);
+}
+
+#search-icon {
+  color: var(--font-color);
 }
 
 .dashboard-search input {

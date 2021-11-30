@@ -12,7 +12,7 @@ import Footer from './Footer';
 import Filters from './Filters.js';
 import ListingCard from './ListingCard';
 
-const Dashboard = ({ user, setUser }) => {
+const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
 
   const [popupOpen, setPopupOpen] = React.useState(false); 
   const [searchInput, setSearchInput] = React.useState('');
@@ -69,7 +69,7 @@ const Dashboard = ({ user, setUser }) => {
   return (
     <Router basename='/dashboard'>
       <div className='dashboard'>
-        <Header />
+        <Header darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
         <DashboardNav setSearchInput={setSearchInput} />
         <div className='dashboard-content'>
           <Filters className='filters' setFilterObj={setFilterObj} filterObj={filterObj} tags={tags}/>

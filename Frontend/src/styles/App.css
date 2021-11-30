@@ -1,3 +1,8 @@
+* {
+  scrollbar-color: var(--scrollbar-handle) var(--scrollbar-track);
+}
+
 .App {
   text-align: center;
+  color: var(--font-color);
 }
