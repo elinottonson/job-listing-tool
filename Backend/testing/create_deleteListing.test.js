@@ -1,10 +1,11 @@
 const createListingDB = require('../databaseInteraction/createListingDB');
+const deleteListingDB = require('../databaseInteraction/deleteListingDB');
 const { teardown } = require('./sharedMethods');
 const {models} = require('../sequelizeSetup/sequalizeConstructor');
 
-describe ('createListing testing', () => {
+describe ('createListing and deleteListing testing', () => {
     const listing = {
-        title: 'Job Title',
+        title: 'Job Title (ABCDEF)',
         companyName: "Company Name",
         description: "Job Description",
         minYearsExperience: 10,
@@ -17,7 +18,7 @@ describe ('createListing testing', () => {
             const submit = await createListingDB(listing);
             expect(submit).toEqual(
                 expect.objectContaining({
-                    title: 'Job Title',
+                    title: 'Job Title (ABCDEF)',
                     companyName: "Company Name",
                     description: "Job Description",
                     minYearsExperience: 10,
@@ -26,7 +27,10 @@ describe ('createListing testing', () => {
                     tags: []
                 })
             );
-            models.Position.destroy({
+            
+            const listingId = submit.id;
+            const deleteListing = await deleteListingDB(listingId);
+            const expectEmpty = models.Position.findAll({
                 where: {
                     title: 'Job Title',
                     companyName: "Company Name",
@@ -37,6 +41,10 @@ describe ('createListing testing', () => {
                     tags: []
                 }
             });
+
+            expect(expectEmpty).toEqual(
+                expect.objectContaining({})
+            );
     });
 });
 
