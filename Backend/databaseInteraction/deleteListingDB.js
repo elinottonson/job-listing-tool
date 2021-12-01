@@ -8,10 +8,10 @@ const {models} = require('../sequelizeSetup/sequalizeConstructor');
  * 
  */
 
-function deleteListingDB(positionId) {
+function deleteListingDB(listingId) {
     models.Referral.findAll({
         where: {
-            listingId: positionId
+            listingId: listingId
         }
     }).then(function (result) {
         const ids = [];
@@ -26,7 +26,7 @@ function deleteListingDB(positionId) {
     });
     models.Position.findAll({
         where: {
-            id: positionId
+            id: listingId
         }
     }).then(function (results) {
         const ids = [];
