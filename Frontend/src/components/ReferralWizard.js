@@ -93,6 +93,7 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
           errorMsg={errorMsg}
           submittingForm={submittingForm}
         />
+        <SubmitPage></SubmitPage>
       </StepWizard>
     </form>
   );
@@ -149,8 +150,16 @@ const CandidateDescription = (props) => {
       </label>
       <p id='err-msg'>{props.errorMsg.error ? props.errorMsg.msg : ''}</p>
       <button className = 'previousButton' type='button' onClick={props.previousStep}>Previous Step</button>
-      <button className = 'finishButton'>Finish</button>    
+      <button className = 'finishButton' type = 'button' onClick={props.nextStep}>Finish</button>    
     </div>
+  );
+};
+
+const SubmitPage = (props) => {
+  return (
+  <div>
+    <p>Referral Submitted</p>
+  </div>
   );
 };
 
