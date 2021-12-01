@@ -45,9 +45,12 @@ function isListingValid (req) {
             }
             res.status(200);
             res.send( await createListingDB(listing));
+        } else if (!req.user.isManager){
+            res.status(400);
+            res.send({ Error: 'User not a manager.'})
         } else {
             res.status(400);
-            res.send({ Error: 'Invalid listing.'})
+            res.send({ Error: 'Invalid Listing.'})
         }
     });
 }
