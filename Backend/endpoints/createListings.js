@@ -33,13 +33,13 @@ function isListingValid (req) {
  */
  function createListing(app) {
     app.post('/api/new-listing', async(req, res) => {
-        if (isListingValid(req)){
+        if (isListingValid(req) && req.user.isManager){
             const listing = {
                 title: req.body.title,
-                companyName: req.body.companyName,
+                companyName: req.user.companyName,
                 description: req.body.description,
                 minYearsExperience: req.body.minYearsExperience,
-                managerId: req.body.managerId,
+                managerId: req.user.managerId,
                 salary: req.body.salary,
                 tags: req.body.tags
             }
