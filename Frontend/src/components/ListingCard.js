@@ -4,18 +4,15 @@ import { FaTimes } from 'react-icons/fa';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
 
-import { parseDate } from '../lib/ParseDate';
-
 const ListingCard = ({ setPopupOpen, listingObj }) => {
 
-  const [ hover, setHover ] = React.useState(false);
+  const [hover, setHover] = React.useState(false);
   const { id } = useParams();
   const history = useHistory();
 
   const handleClick = () => {
-    if(!hover) {
-      setPopupOpen(false);
-      history.goBack();
+    if (!hover) {
+      handleClose();
     }
   };
   const handleClose = () => {
@@ -23,23 +20,23 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
     history.goBack();
   };
 
-  if(!listingObj){
+  if (!listingObj) {
     // TODO
     // add logic for getting data from backend with listing id, and use SetPopupOpen to add that data,
     // This should make the react-router links work when they are directly accessed
     // A hook maybe?
     return <></>;
   }
-  else{
-    const date = parseDate(listingObj.createdAt);
+  else {
+    const date = new Date(listingObj.createdAt);
     return (
-      <div 
+      <div
         className='listing-card-container'
         onClick={handleClick}
       >
-        <div 
+        <div
           className='listing-card'
-          onMouseEnter={()=> setHover(true)}
+          onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
           <div className='listing-header'>
@@ -50,8 +47,8 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
                 <p id='st-break'>•</p>
                 <p id='popup-exp-level'>
                   {
-                    listingObj.minYearsExperience === 0 ? 
-                      'Entry Level' : 
+                    listingObj.minYearsExperience === 0 ?
+                      'Entry Level' :
                       `${listingObj.minYearsExperience} Years Experience`
                   }
                 </p>
@@ -59,7 +56,7 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
             </div>
             <div className='popup-header-right'>
               <div className='popup-mng-pos'>
-                <p id='manager-name'>            
+                <p id='manager-name'>
                   {listingObj.manager.firstName + ' ' + listingObj.manager.lastName}
                 </p>
                 <p id='manager-pos'>
@@ -79,8 +76,13 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
             </ul>
             <p id='popup-date'>
               {
-                `${date.month}.${date.day}.${date.year} 
-                at ${date.hour}:${date.minute} ${date.pm ? 'PM' : 'AM'}`
+                date.toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })
               }
             </p>
           </div>

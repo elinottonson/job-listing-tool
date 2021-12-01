@@ -11,7 +11,8 @@ nav {
   justify-content: space-between;
   background-color: var(--background);
   margin-bottom: 10px; 
-  box-shadow: 3px 3px 8px var(--light-shadow);
+  box-shadow: 
+      0px 3px 8px var(--light-shadow);
 }
 
 .header-left, .header-right {
@@ -49,6 +50,44 @@ nav img {
   margin-bottom: 1px;
 }
 
+.dark-theme-toggle {
+  display: flex;
+  height: 100%;
+}
+
 .header-icon {
   width: 54px;
+}
+
+/* User dropdown styling */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 54px;
+  background-color: var(--background);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px -1px var(--light-shadow);
+}
+
+.dropdown-content a {
+  color: var(--font-color);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--light-shadow);
+  cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

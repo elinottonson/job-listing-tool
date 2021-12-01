@@ -1,0 +1,352 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a simple API for With some fries",
+    "version": "1.0.0",
+    "title": "Swagger.io file for with some fries",
+    "contact": {
+      "email": "you@your-company.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/Jc1552/CS320/1.0.0",
+  "tags": [
+    {
+      "name": "manager",
+      "description": "Secured access users who write lsitings"
+    },
+    {
+      "name": "user",
+      "description": "Operations available to regular developers"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/auth": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "requests for user log in and verification the user is a proper user",
+        "description": "By passing in the appropriate options, you can get specific infomation from the system\n",
+        "operationId": "getUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "The email for login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for login in clear text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/api/listings": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "gets listing for a given listingId",
+        "description": "By passing in the appropriate listingId, you can get specific list of the listings following that id\n",
+        "operationId": "listingFromlistingIdGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "description": "ID of listing to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Listings"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "post the listings from the Database",
+        "description": "By passing the log in the user should see listings if there are any to leave anything on\n",
+        "operationId": "listingsPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyName",
+            "in": "query",
+            "description": "created instance for express where if the user has a companyName they can look for listings",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Listings"
+            }
+          },
+          "400": {
+            "description": "No company sent to look for listings"
+          }
+        }
+      }
+    },
+    "/api/referrals/:listingId": {
+      "get": {
+        "tags": [
+          "manager"
+        ],
+        "summary": "gets listing for a given listingId",
+        "description": "By passing in the appropriate listingId, you can get the referals from the listings following that id\n",
+        "operationId": "referralsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Login to the website",
+        "description": "By passing in the appropriate email and password combination, you can get access to the website\n",
+        "operationId": "loginPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/api/new-referral": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Process to add a new referal for a listing",
+        "description": "By passing in the correct fields, the user can leave a new referral for a listing\n",
+        "operationId": "referralPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid referral"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "using the function the user can log out the webpage",
+        "description": "By requesting the log out function the user deletes their token keeping them logged in and is then logged out and has to re-enter their credentials before logging in next time\n",
+        "operationId": "logOut",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Listings": {
+      "type": "object",
+      "required": [
+        "companyName",
+        "createdAt",
+        "description",
+        "id",
+        "managerId",
+        "minYearsExperience",
+        "salary",
+        "tags",
+        "title",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 52
+        },
+        "title": {
+          "type": "string",
+          "example": "Software Engineer I"
+        },
+        "companyName": {
+          "type": "string",
+          "example": "Techgenix"
+        },
+        "description": {
+          "type": "string",
+          "example": "Entry level Software Engineering role on an Agile team"
+        },
+        "minYearsExperience": {
+          "type": "integer",
+          "example": 0
+        },
+        "managerId": {
+          "type": "integer",
+          "example": 111
+        },
+        "salary": {
+          "type": "integer",
+          "example": 66880
+        },
+        "tags": {
+          "type": "array",
+          "example": [
+            "Git",
+            "SQL",
+            "MongoDB",
+            "Jenkins"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-10-14T18:40:02.987Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-10-14T18:40:02.987Z"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "companyId",
+        "companyName",
+        "createdAt",
+        "employeeId",
+        "firstName",
+        "id",
+        "isManager",
+        "lastName",
+        "managerId",
+        "positionTitle",
+        "startDate",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 10
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Elise"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Larsen"
+        },
+        "employeeId": {
+          "type": "integer",
+          "example": 10
+        },
+        "companyId": {
+          "type": "integer",
+          "example": 3
+        },
+        "companyName": {
+          "type": "string",
+          "example": "Techgenix"
+        },
+        "managerId": {
+          "type": "integer",
+          "example": 4
+        },
+        "positionTitle": {
+          "type": "string",
+          "example": "Engineering Manager"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "example": "1994-04-17"
+        },
+        "isManager": {
+          "type": "boolean",
+          "example": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-10-14T18:40:02.987Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-10-14T18:40:02.987Z"
+        }
+      }
+    }
+  }
+}
