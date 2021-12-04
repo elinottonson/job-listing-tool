@@ -14,14 +14,14 @@ const Header = ({ darkTheme, setDarkTheme }) => {
           <p id='header-title-text'>Referrals</p>
         </div>
         <div className='header-right'>
-          <div className='header-btn' id='help-text'><a>Help</a></div>
+          <div className='header-btn help-text'><a>Help</a></div>
           <DarkThemeToggle darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
           <FaRegBell className='header-btn header-icon' id='notification-icon' />
-          <div class="dropdown">
-            <FaRegUserCircle className='header-btn header-icon' id='user-icon' />
-            <div class="dropdown-content">
-              <a onClick={logout}>Logout</a>
-            </div>
+          <div
+            className='header-btn help-text'
+            onClick={logout}
+            onKeyPress={(e) => { if (e.code == 'Enter') logout; }}
+            tabIndex="0">Logout
           </div>
         </div>
       </nav>

@@ -45,11 +45,11 @@ nav img {
   margin-right: 10px;
 }
 
-#help-text {
+.help-text {
   display: flex;
   align-items: center;
 }
-#help-text a {
+.help-text a {
   margin-bottom: 1px;
 }
 

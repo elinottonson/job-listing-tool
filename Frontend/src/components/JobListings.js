@@ -3,7 +3,7 @@ import './../styles/Listings.css';
 
 import JobListing from './JobListing';
 
-const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags }) => {
+const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags, popupOpen }) => {
   
   const [listings, setListings] = React.useState([]);
   const [ managerListings, setManagerListings ] = React.useState(false);
@@ -65,7 +65,7 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags 
    */
   const getFilteredListings = (l) => {
     return l.filter(listing => filterFromOptions(filterObj, listing, managerListings))
-      .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />);
+      .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} popupOpen={popupOpen} />);
   };  
 
   /**

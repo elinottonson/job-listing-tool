@@ -21,11 +21,9 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
     "updatedAt": "2021-10-14T18:40:02.987Z"
   }
 */
-const JobListing = ({ listingObj, setPopupOpen }) => {
-
+const JobListing = ({ listingObj, setPopupOpen, popupOpen }) => {
   const history = useHistory();
   const { url } = useRouteMatch();
-  const [ hover, setHover ] = React.useState(false);
 
   const date = new Date(listingObj.createdAt);
 
@@ -36,6 +34,8 @@ const JobListing = ({ listingObj, setPopupOpen }) => {
         history.push(`${url}job/${listingObj.id}`);
         setPopupOpen(listingObj);
       }}
+      onKeyPress={(e) => { if (e.code == 'Enter') e.target.click(); }}
+      tabIndex={popupOpen ? "-1" : "0"}
     >
       <div className='listing-header'>
         <div className='title-sal'>
