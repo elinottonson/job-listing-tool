@@ -60,7 +60,7 @@
 
 .select-tag-container * {
   background-color: var(--input-background);
-  color: black;
+  color: var(--font-sub);
   box-shadow: none;
 }
 

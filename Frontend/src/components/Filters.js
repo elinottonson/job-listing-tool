@@ -37,6 +37,14 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
             options={tags.map(tag => { return {value: tag, label: tag}; })}
             maxMenuHeight={200}
             onChange={handleChangeSelect}
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                neutral50: 'black',
+              },
+            })}
+            aria-label='select tags to filter by'
           />
         </div>
       </div>

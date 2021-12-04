@@ -1,6 +1,11 @@
 :root{
   --header-height:64px;
 }
+
+* {
+  vertical-align: middle;
+}
+
 .header {
   display: flex;
   height: var(--header-height);

@@ -11,7 +11,7 @@ const Header = ({ darkTheme, setDarkTheme }) => {
       <nav>
         <div className='header-left'>
           <div id='header-title'><img src={logo} alt='UKG Logo' /></div>
-          <p id='header-title-text'>Referrals</p>
+          <h1>Job Referral Page</h1>
         </div>
         <div className='header-right'>
           <div className='header-btn help-text'><a>Help</a></div>
