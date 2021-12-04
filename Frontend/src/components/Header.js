@@ -20,7 +20,7 @@ const Header = ({ darkTheme, setDarkTheme }) => {
           <div
             className='header-btn help-text'
             onClick={logout}
-            onKeyPress={(e) => { if (e.code == 'Enter') logout; }}
+            onKeyPress={(e) => { if (e.code == 'Enter') logout(); }}
             tabIndex="0">Logout
           </div>
         </div>
