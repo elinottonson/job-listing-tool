@@ -1,5 +1,4 @@
 const getReferrals = require('../databaseInteraction/getReferrals');
-const { teardown } = require('./sharedMethods');
 
 describe('getReferrals testing', () => {
   const ValidListingId = 51;
@@ -28,5 +27,3 @@ describe('getReferrals testing', () => {
     }
   });
 });
-
-afterAll(teardown);

@@ -1,5 +1,4 @@
 const getUserById = require('../databaseInteraction/getUserById');
-const { teardown } = require('./sharedMethods');
 
 describe('getUserById testing', () => {
 
@@ -14,5 +13,3 @@ describe('getUserById testing', () => {
     expect(user.companyId).toEqual(3);
   });
 });
-
-afterAll(teardown);

@@ -1,5 +1,4 @@
 const postReferrals = require('../databaseInteraction/postReferrals');
-const { teardown } = require('./sharedMethods');
 const {models} = require('../sequelizeSetup/sequalizeConstructor');
 
 describe('postReferrals testing', () => {
@@ -39,5 +38,3 @@ describe('postReferrals testing', () => {
     });
   });
 });
-
-afterAll(teardown);

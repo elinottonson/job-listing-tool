@@ -1,6 +1,6 @@
 const getPositions = require('../databaseInteraction/getPositions');
 
-const { listingMatch, teardown } = require('./sharedMethods');
+const { listingMatch } = require('./sharedMethods');
 
 describe('getPositions testing', () => {
   const ValidCompany = 'Techgenix';
@@ -18,5 +18,3 @@ describe('getPositions testing', () => {
     }
   });
 });
-
-afterAll(teardown);

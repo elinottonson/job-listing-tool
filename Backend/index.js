@@ -41,7 +41,9 @@ const endpoints = [
   require('./endpoints/referralsFromListingGet'),
   require('./endpoints/referralPost'),
   require('./endpoints/listingFromlistingIdGet'),
-  require('./endpoints/swaggerGet'),
+  require('./endpoints/createListings'),
+  require('./endpoints/deleteListing'),
+  require('./endpoints/swaggerGet')
 ];
 
 for(const endpoint of endpoints){
