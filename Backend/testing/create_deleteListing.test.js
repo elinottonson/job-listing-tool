@@ -1,6 +1,5 @@
 const createListingDB = require('../databaseInteraction/createListingDB');
 const deleteListingDB = require('../databaseInteraction/deleteListingDB');
-const { teardown } = require('./sharedMethods');
 const {models} = require('../sequelizeSetup/sequalizeConstructor');
 
 describe ('createListing and deleteListing testing', () => {
@@ -47,5 +46,3 @@ describe ('createListing and deleteListing testing', () => {
             );
     });
 });
-
-afterAll(teardown);
