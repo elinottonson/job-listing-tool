@@ -30,7 +30,7 @@ html {
 
 :root {
   --font-color: black;
-  --font-sub: gray;
+  --font-sub: var(--ukg-dark-green);
 
   /* main background color (navbar, page body, listings) */
   --background: hsl(0, 0%, 95%);
@@ -67,6 +67,7 @@ html {
 }
 
 [dark-theme='true'] {
+  --font-sub: var(--ukg-cyan);
   --font-color: hsl(0, 0%, 88%);
   --background: hsl(226, 14.3%, 17.5%);
 

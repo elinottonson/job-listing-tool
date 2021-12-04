@@ -1,6 +1,9 @@
+:root{
+  --header-height:64px;
+}
 .header {
   display: flex;
-  height: 64px;
+  height: var(--header-height);
   width: 100%;
 }
 
