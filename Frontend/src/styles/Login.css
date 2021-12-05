@@ -2,19 +2,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height:100vh;
 }
 
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  top: 30%;
   border-radius: 10px;
   width: 300px;
   padding: 50px 25px;
   box-shadow: 0px 0px 15px var(--darkest-shadow);
   background-color: var(--background);
+}
+
+#login-page-h1{
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: var(--font-sub)
 }
 
 .login-form {
@@ -88,12 +94,13 @@ label {
   align-self: flex;
   margin: 0;
   font-size: 0.8rem;
-  color: var(--font-sub);
+  color: var(--card-close-button);
   text-decoration: none;
 }
 #forgot-password:hover {
   cursor: pointer;
-  color: lightgray;
+  text-decoration: underline;
+  /* color: lightgray; */
 }
 
 .bringBackTendiesCredit {

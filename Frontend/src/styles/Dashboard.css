@@ -7,9 +7,16 @@
   background-color: var(--background);
 }
 
+:root{
+  --dashboard-nav-height:50px;
+  --dashboard-nav-margin-top:10px;
+  --dashboard-nav-margin-bottom:30px;
+}
+
 .dashboard-nav {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  height:var(--dashboard-nav-height);
+  margin-top: var(--dashboard-nav-margin-top);
+  margin-bottom: var(--dashboard-nav-margin-bottom);
   width: 35%;
   max-width: 700px;
   min-width: 400px;

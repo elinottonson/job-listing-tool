@@ -78,7 +78,8 @@ const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
             setPopupOpen={setPopupOpen} 
             searchInput={searchInput} 
             filterObj={filterObj} 
-            setTags={setTags} 
+            setTags={setTags}
+            popupOpen={popupOpen}
           />
         </div>
         <Footer />

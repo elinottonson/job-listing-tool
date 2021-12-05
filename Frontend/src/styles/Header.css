@@ -1,6 +1,19 @@
+:root{
+  --header-height:64px;
+}
+
+#header-label{
+  color:var(--font-color);
+  font-size:20px;
+}
+
+* {
+  vertical-align: middle;
+}
+
 .header {
   display: flex;
-  height: 64px;
+  height: var(--header-height);
   width: 100%;
 }
 
@@ -38,15 +51,16 @@ nav {
 
 nav img {
   height: 20px;
-  margin-bottom: -2px;
+  margin-bottom: 2px;
   margin-right: 10px;
+
 }
 
-#help-text {
+.help-text {
   display: flex;
   align-items: center;
 }
-#help-text a {
+.help-text a {
   margin-bottom: 1px;
 }
 

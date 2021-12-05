@@ -125,34 +125,39 @@ const Login = ({ setUser }) => {
     This is to accomodate the workaround seen above.
   */
   return (
-    <div className='login-center-container'>
+    <div>
       <div style={bgImageStyle}></div>
       <BringBackTendiesCredit />
-      <div className='login-container'>
-        <img className='ukglogo' src={logo} alt='UKG Logo' />
-        <form onSubmit={handleSubmit} className='login-form'>
-          <input
-            className='inputForm'
-            type='text'
-            placeholder='Email'
-            name='email'
-            ref={emailText}
-            id={validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'}
-          />
-          <input
-            className='inputForm'
-            type='password'
-            placeholder='Password'
-            onChange={handleChange}
-            id='password'
-            name='password'
-          />
-          <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
-          <a href='' id='forgot-password'>Forgot Password?</a>
-          {/* ^^^ This should probably be a react-router <Link> eventually instead */}
-          <input type='submit' value={loading ? 'Loading...' : 'Submit'} id='submit' />
-        </form>
-      </div>
+      <main className='login-center-container'>
+        <div className='login-container'>
+          <img className='ukglogo' src={logo} alt='UKG Logo' />
+          <h1 id='login-page-h1'>Sign in</h1>
+          <form onSubmit={handleSubmit} className='login-form'>
+            <input
+              className='inputForm'
+              type='text'
+              placeholder='Email'
+              name='email'
+              aria-label='email input for login'
+              ref={emailText}
+              id={validEmail || !userInput.email.length ? 'email-valid' : 'email-invalid'}
+            />
+            <input
+              className='inputForm'
+              type='password'
+              placeholder='Password'
+              onChange={handleChange}
+              aria-label='password input for login'
+              id='password'
+              name='password'
+            />
+            <p id='err-msg'>{errorMsg.error ? errorMsg.msg : ''}</p>
+            <a href='' id='forgot-password'>Forgot Password?</a>
+            {/* ^^^ This should probably be a react-router <Link> eventually instead */}
+            <input type='submit' tabIndex='0' value={loading ? 'Loading...' : 'Submit'} id='submit' />
+          </form>
+        </div>
+      </main>
     </div>
 
   );
