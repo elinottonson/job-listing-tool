@@ -2,6 +2,11 @@
   --header-height:64px;
 }
 
+#header-label{
+  color:var(--font-color);
+  font-size:20px;
+}
+
 * {
   vertical-align: middle;
 }
@@ -46,8 +51,9 @@ nav {
 
 nav img {
   height: 20px;
-  margin-bottom: -2px;
+  margin-bottom: 2px;
   margin-right: 10px;
+
 }
 
 .help-text {

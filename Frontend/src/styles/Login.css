@@ -94,7 +94,7 @@ label {
   align-self: flex;
   margin: 0;
   font-size: 0.8rem;
-  color: hsl(0,0%,10%);
+  color: var(--card-close-button);
   text-decoration: none;
 }
 #forgot-password:hover {
