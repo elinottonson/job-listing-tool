@@ -44,6 +44,7 @@ html {
   /* UKG colors */
   --ukg-dark-green: #014747;
   --ukg-cyan: #2ac7b4;
+  --dim-ukg-cyan: #3e9e93;
 
   /* misc */
   --invalid-email-shadow: hsla(0, 90%, 40%, 0.3);
@@ -67,7 +68,7 @@ html {
 }
 
 [dark-theme='true'] {
-  --font-sub: var(--ukg-cyan);
+  --font-sub: var(--dim-ukg-cyan);
   --font-color: hsl(0, 0%, 88%);
   --background: hsl(226, 14.3%, 17.5%);
 
