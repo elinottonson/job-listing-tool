@@ -131,7 +131,7 @@ const Login = ({ setUser }) => {
       <main className='login-center-container'>
         <div className='login-container'>
           <img className='ukglogo' src={logo} alt='UKG Logo' />
-          <h1 id='login-page-h1'>Login Page</h1>
+          <h1 id='login-page-h1'>Sign in</h1>
           <form onSubmit={handleSubmit} className='login-form'>
             <input
               className='inputForm'

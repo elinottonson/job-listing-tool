@@ -19,6 +19,8 @@
 
 #login-page-h1{
   margin-bottom: 10px;
+  font-size: 20px;
+  color: var(--font-sub)
 }
 
 .login-form {
@@ -92,12 +94,13 @@ label {
   align-self: flex;
   margin: 0;
   font-size: 0.8rem;
-  color: var(--font-sub);
+  color: hsl(0,0%,10%);
   text-decoration: none;
 }
 #forgot-password:hover {
   cursor: pointer;
-  color: lightgray;
+  text-decoration: underline;
+  /* color: lightgray; */
 }
 
 .bringBackTendiesCredit {
