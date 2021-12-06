@@ -3,7 +3,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import ReferralWizard from './ReferralWizard.js';
 import './../styles/ListingCard.css';
-import './../styles/Listings.css';
 
 const ListingCard = ({ setPopupOpen, listingObj }) => {
 
