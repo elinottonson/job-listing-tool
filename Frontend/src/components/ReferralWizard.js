@@ -24,6 +24,17 @@ import './../styles/ReferralWizard.css';
   }
 */
 
+/*
+  Sample Job Referral Object
+  {
+    firstName: 'John',
+    lastName: 'Smith',
+    email: 'johnsmith@gmail.com',
+    referralText: 'Has many years of experience and...',
+    listingId: 112
+  }
+*/
+
 const ReferralWizard = ({ setOpenReferral, listingObj }) => {
 
   const [userInput, setUserInput] = React.useState({
@@ -33,8 +44,9 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
     referralText: '',
     listingId: listingObj.id
   });
-  const [errorMsg, setErrorMsg] = React.useState({ error: false, msg: '' });
+  const [errorMsg, setErrorMsg] = React.useState('');
   const [submittingForm, setSubmittingForm] = React.useState(false);
+  const [wizardObj, setWizardObj] = React.useState({});
 
   // Called on every onChange event
   const handleChange = (event) => {
@@ -69,21 +81,19 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
           }
           return res.json();
         })
-        .then((data) => {
-          //TODO: Add alert that referral was added succesfully
-          console.log(data);
+        .then(() => {
+          wizardObj.lastStep();
           setSubmittingForm(false);
-          setOpenReferral(false);
         })
         .catch((e) => {
-          setErrorMsg({ error: true, msg: e.message });
+          setErrorMsg(e.message);
         });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <StepWizard transitions='nothing'>
+    <form onSubmit={handleSubmit} className='referral-form'>
+      <StepWizard transitions='nothing' instance={(obj) => { setWizardObj(obj); }}>
         <CandidateName userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
         <ContactInfo userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
         <CandidateDescription
@@ -93,7 +103,7 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
           errorMsg={errorMsg}
           submittingForm={submittingForm}
         />
-        <SubmitPage></SubmitPage>
+        <SubmitPage setOpenReferral={setOpenReferral} />
       </StepWizard>
     </form>
   );
@@ -109,14 +119,14 @@ const CandidateName = (props) => {
   };
 
   return (
-    <div className = 'name-container'>
+    <div className='name-container'>
       <label>
         First Name<input type="text" name='firstName' onChange={props.handleChange} />
       </label>
       <label>
         Last Name<input type="text" name='lastName' onChange={props.handleChange} />
       </label>
-      <button className = 'nextButton' type='button' onClick={filledRequired}>Next Step</button>
+      <button className='right-button' type='button' onClick={filledRequired}>Next Step</button>
     </div>
   );
 };
@@ -131,35 +141,40 @@ const ContactInfo = (props) => {
 
   //Get contact info of referral -- used to contain phone number but our database currently doesn't handle that
   return (
-    <div className= 'email-container'>
+    <div className='email-container'>
       <label>
         Email<input type='email' name='email' onChange={props.handleChange} />
       </label>
-      <button className = 'previousButton' type='button' onClick={props.previousStep}>Previous Step</button>
-      <button className = 'nextButton' type='button' onClick={filledRequired}>Next Step</button>
+      <button className='left-button' type='button' onClick={props.previousStep}>Previous Step</button>
+      <button className='right-button' type='button' onClick={filledRequired}>Next Step</button>
     </div>
   );
 };
 
 const CandidateDescription = (props) => {
   return (
-    <div className = '.explain-container'>
+    <div className='.explain-container'>
       <label>
         Please briefly describe why you chose to refer this candidate:
         <textarea type='text' name='referralText' onChange={props.handleChange} />
       </label>
-      <p id='err-msg'>{props.errorMsg.error ? props.errorMsg.msg : ''}</p>
-      <button className = 'previousButton' type='button' onClick={props.previousStep}>Previous Step</button>
-      <button className = 'finishButton' type = 'button' onClick={props.nextStep}>Finish</button>    
+      <p id='err-msg'>{props.errorMsg}</p>
+      <button className='left-button' type='button' onClick={props.previousStep}>Previous Step</button>
+      <button className='right-button'>{props.setSubmittingForm ? 'Submitting...' : 'Finish'}</button>
     </div>
   );
 };
 
 const SubmitPage = (props) => {
+  const exitReferral = () => {
+    props.setOpenReferral(false);
+  };
+
   return (
-  <div>
-    <p>Referral Submitted</p>
-  </div>
+    <div>
+      <p>Thank you, your referral has been sucessfully submitted!</p>
+      <button type='button' onClick={exitReferral}>Return to Listings</button>
+    </div>
   );
 };
 
