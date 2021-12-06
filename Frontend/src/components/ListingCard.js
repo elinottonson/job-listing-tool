@@ -74,6 +74,8 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
               <FaTimes
                 id='close-btn'
                 onClick={handleClose}
+                onKeyPress={(e) => { if (e.code == 'Enter') handleClose(); }}
+                tabIndex="0"
               />
             </div>
           </div>

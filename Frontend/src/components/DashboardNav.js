@@ -12,8 +12,8 @@ const DashboardNav = ({ setSearchInput }) => {
   return (
     <div className='dashboard-nav'>
       <form className='dashboard-search' onSubmit={handleSearchSubmit}>
-        <input type='text' placeholder='Search...' className='search-box'></input>
-        <button type='submit'><FaSearch id='search-icon' /></button>
+        <input type='text' placeholder='Search...' className='search-box' aria-label='search listings search box' />
+        <button type='submit' aria-label='submit search for listings'><FaSearch id='search-icon' /></button>
       </form>
     </div>
   );

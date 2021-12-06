@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  min-height: 100%;
+  min-height: 100vh;
+  width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -15,7 +16,10 @@ code {
 }
 
 html {
+  display: flex;
   height: 100%;
+  min-height: 100vh;
+  width: 100%;
 }
 
 * {
@@ -25,15 +29,66 @@ html {
 }
 
 :root {
+  --font-color: black;
+  --font-sub: var(--ukg-dark-green);
+
   /* main background color (navbar, page body, listings) */
   --background: hsl(0, 0%, 95%);
 
   /* dropdown shadow colors */
   --light-shadow: hsla(0, 100%, 0%, 0.1);
   --dark-shadow: hsla(0, 100%, 0%, 0.2);
-  --highlight: hsla(0, 0%, 100%, 1);
+  --darkest-shadow: hsla(0, 100%, 0%, 0.5);
+  --highlight: white;
 
   /* UKG colors */
   --ukg-dark-green: #014747;
   --ukg-cyan: #2ac7b4;
+  --dim-ukg-cyan: #3e9e93;
+
+  /* misc */
+  --invalid-email-shadow: hsla(0, 90%, 40%, 0.3);
+  --invalid-email-shadow-outer: hsla(0, 90%, 40%, 0.3);
+
+  --scrollbar-handle: #888;
+  --scrollbar-handle-hover: #555;
+  --scrollbar-track: #d8d8d8;
+
+  --input-background: white;
+
+  --tags: hsl(0, 0%, 85%);
+  --tags-hover: hsl(0, 0%, 90%);
+
+  --card-close-button: hsl(0, 0%, 10%);
+  --card-close-button-hover: lightgray;
+
+  --filter-range-white: white;
+
+  background-color: var(--background);
+}
+
+[dark-theme='true'] {
+  --font-sub: var(--dim-ukg-cyan);
+  --font-color: hsl(0, 0%, 88%);
+  --background: hsl(226, 14.3%, 17.5%);
+
+  --highlight: hsl(224, 14.3%, 21%);
+  --light-shadow: rgba(0, 0, 0, 0.3);
+  --dark-shadow: rgba(0, 0, 0, 0.5);
+
+  --invalid-email-shadow-outer: hsla(0, 90%, 40%, 0.5);
+
+  --scrollbar-handle: hsl(226, 15%, 30%);
+  --scrollbar-handle-hover: hsl(226, 15%, 35%);
+  --scrollbar-track: hsl(225, 15%, 15%);
+
+  --input-background: hsl(0, 0%, 90%);
+
+  --tags: hsl(226, 10%, 25%);
+  --tags-hover: hsl(226, 10%, 35%);
+
+  --card-close-button: hsl(0, 0%, 88%);
+  --card-close-button-hover: hsl(0, 0%, 50%);
+
+  --filter-range-white: hsl(0, 0%, 88%);
 }

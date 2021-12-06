@@ -56,7 +56,7 @@
   top: 50%;
   margin-left: -27rem;
   margin-top: -10%;
-  box-shadow: 2px 2px 10px hsla(0, 0%, 0%, 0.2);
+  box-shadow: 2px 2px 10px var(--dark-shadow);
 }
 
 #popup-title-sal {
@@ -78,7 +78,7 @@
 
 #close-btn {
   font-size: large;
-  color: hsl(0, 0%, 10%);
+  color: var(--card-close-button);
   width: 30px;
   height: 30px;
   padding: 4px;
@@ -87,7 +87,7 @@
   margin-top: -2px;
 }
 #close-btn:hover {
-  background-color: lightgray;
+  background-color: var(--card-close-button-hover);
   cursor: pointer;
 }
 
@@ -97,11 +97,12 @@
 }
 
 #popup-date {
-  color: gray;
+  color: var(--font-sub);
   font-size: small;
 }
 
 #ref-btn {
+  color: var(--font-color);
   margin-top: 20px;
   width: 25%;
   height: 42px;
@@ -111,12 +112,12 @@
   background-color: var(--background);
   box-shadow: 
     5px 5px 8px var(--light-shadow),
-    -5px -5px 10px white;
+    -5px -5px 10px var(--highlight);
   border-radius: 10px;
 }
 #ref-btn:hover {
   cursor: pointer;
   box-shadow: 
     inset 5px 5px 6px var(--light-shadow),
-    inset -5px -5px 8px white;
+    inset -5px -5px 8px var(--highlight);
 }
