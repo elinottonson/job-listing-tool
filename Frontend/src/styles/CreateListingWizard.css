@@ -8,6 +8,22 @@
 
 .step-container {
     text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.step-container h1 {
+    margin: 5px;
+
+}
+
+.step-container p {
+    margin-left: 5px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
 }
 
 textarea {
@@ -33,9 +49,38 @@ textarea {
 
 .selectTag {
     width: 80%;
+    margin: 5px;
+}
+
+.field-error {
+    color: red;
 }
 
 .wizard button:hover {
     box-shadow: inset 3px 3px 6px var(--light-shadow),
     inset -3px -3px 8px var(--highlight);
+}
+
+.nav {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.dot {
+    color: var(--ukg-dark-green);
+    cursor: pointer;
+    font-size: 36px;
+    line-height: 1;
+    margin: 0 15px;
+    opacity: .4;
+    text-shadow: none;
+    transition: opacity 1s ease,
+        text-shadow 1s ease;
+    will-change: opacity, text-shadow;
+}
+
+.active {
+    color: var(--ukg-dark-green);
+    opacity: 1;
+    text-shadow: 0 0px 8px;
 }
