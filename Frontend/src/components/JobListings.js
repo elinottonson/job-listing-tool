@@ -72,7 +72,7 @@ const JobListings = ({ user, tags, setPopupOpen, searchInput = '', filterObj, se
    */
   const getFilteredListings = (l) => {
     return l.filter(listing => filterFromOptions(filterObj, listing, managerListings))
-      .map((listing,i) => {console.log(i);return <JobListing key={i} listingObj={listing} setPopupOpen={setPopupOpen} />});
+      .map(listing => <JobListing listingObj={listing} setPopupOpen={setPopupOpen} />);
   };  
 
   /**
