@@ -101,6 +101,9 @@ const Nav = (props) => {
         props.userInput.description == ''))  {
       props.goToStep(i);
     } 
+    else {
+      props.setShowErr(true);
+    }
   };
 
   const dots = [];
