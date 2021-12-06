@@ -35,6 +35,7 @@ const CreateListingWizard = ({ setOpenCreateListing, tags, setTags, createListin
   });
 
   const [showErr, setShowErr] = React.useState(false);
+  const [showErrFill, setShowErrFill] = React.useState(false);
 
   // Called on every onChange event
   const handleChange = (event) => {
@@ -68,12 +69,16 @@ const CreateListingWizard = ({ setOpenCreateListing, tags, setTags, createListin
         <JobTitle 
           showErr={showErr}
           setShowErr={setShowErr}
+          showErrFill={showErrFill}
+          setShowErrFill={setShowErrFill}
           userInput={userInput} 
           setUserInput={setUserInput} 
           handleChange={handleChange} />
         <JobDescription
           showErr={showErr}
           setShowErr={setShowErr}
+          showErrFill={showErrFill}
+          setShowErrFill={setShowErrFill}
           userInput={userInput} 
           setUserInput={setUserInput} 
           handleChange={handleChange} />
@@ -93,19 +98,6 @@ const CreateListingWizard = ({ setOpenCreateListing, tags, setTags, createListin
 
 const Nav = (props) => {
 
-  const filledRequired = (i) => {
-
-    if (!(props.userInput.jobTitle == '' &&
-        props.userInput.minYearsExperience == '' &&
-        props.userInput.salary == '' &&
-        props.userInput.description == ''))  {
-      props.goToStep(i);
-    } 
-    else {
-      props.setShowErr(true);
-    }
-  };
-
   const dots = [];
   for (let i = 1; i <= props.totalSteps; i += 1) {
     const isActive = props.currentStep === i;
@@ -113,7 +105,6 @@ const Nav = (props) => {
       <span
         key={`step-${i}`}
         className={`${'dot'} ${isActive ?  'active' : ''}`}
-        onClick={() => filledRequired(i)}
       >&bull;</span>
     ));
   }
@@ -136,7 +127,6 @@ const JobTitle = (props) => {
     }
   };
 
-
   return (
     <div  className='step-container'>
       <h1>Job Information</h1>
@@ -144,11 +134,11 @@ const JobTitle = (props) => {
       <div className='input-container'>
         <input type="text" placeholder="Job Title" name='jobTitle' onChange={props.handleChange} />
         <input 
-          type="text" 
+          type="number" 
           placeholder="Minimum Years of Experience Required" 
           name='minYearsExperience' 
           onChange={props.handleChange} />
-        <input type="text" placeholder="Salary" name='salary' onChange={props.handleChange}/>
+        <input type="number" placeholder="Salary" name='salary' onChange={props.handleChange}/>
       </div>
       <button type='button' onClick={filledRequired}>Next Step</button>
     </div>
