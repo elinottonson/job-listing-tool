@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaTrash } from 'react-icons/fa';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
 
-const ListingCard = ({ setPopupOpen, listingObj }) => {
+const ListingCard = ({ user, setPopupOpen, listingObj }) => {
 
   const [hover, setHover] = React.useState(false);
   const { id } = useParams();
@@ -88,7 +88,14 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
               }
             </p>
           </div>
-          <button type='button' id='ref-btn' tabIndex='0'>Leave Referral</button>
+          <div className='listing-btn-container'>
+            <button type='button' id='ref-btn' tabIndex='0'>Leave Referral</button>
+            {/* TODO: delete listing */}
+            {listingObj.managerId === user.employeeId ? 
+              <FaTrash id='delete-btn'/> :
+              <></>
+            }
+          </div>
         </div>
       </div>
     );
