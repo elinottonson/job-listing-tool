@@ -38,6 +38,12 @@
   margin-bottom: 15px;
 }
 
+label {
+  font-size: small;
+  align-self: flex-start;
+  margin-bottom: -4px;
+}
+
 input {
   outline: none;
   padding: 10px;

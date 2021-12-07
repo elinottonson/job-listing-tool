@@ -11,10 +11,13 @@ import JobListings from './JobListings';
 import Footer from './Footer';
 import Filters from './Filters.js';
 import ListingCard from './ListingCard';
+import PopupCard from './PopupCard';
+import CreateListingWizard from './CreateListingWizard';
 
 const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
 
-  const [popupOpen, setPopupOpen] = React.useState(false); 
+  const [popupOpen, setPopupOpen] = React.useState(false);
+  const [ refreshListings, setRefreshListings ] = React.useState(true);
   const [searchInput, setSearchInput] = React.useState('');
   const [filterObj, setFilterObj] = React.useState({});
   const [tags, setTags] = React.useState(['Loading...']);
@@ -75,11 +78,15 @@ const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
           <Filters className='filters' setFilterObj={setFilterObj} filterObj={filterObj} tags={tags}/>
           <JobListings 
             user={user} 
+            tags={tags}
             setPopupOpen={setPopupOpen} 
+            listingObj={popupOpen}
             searchInput={searchInput} 
             filterObj={filterObj} 
             setTags={setTags}
             popupOpen={popupOpen}
+            refreshListings={refreshListings}
+            setRefreshListings={setRefreshListings}
           />
         </div>
         <Footer />
@@ -87,6 +94,24 @@ const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
           <Route
             path='/job/:id'
             children={<ListingCard setPopupOpen={setPopupOpen} listingObj={popupOpen} />}
+          />
+          <Route 
+            path='/create-listing'
+            children={
+              <PopupCard 
+                setPopupOpen={setPopupOpen} 
+                title='Create New Job Listing'
+                content={
+                  <CreateListingWizard
+                    user={user}
+                    tags={tags}
+                    setTags={setTags}
+                    setPopupOpen={setPopupOpen}
+                    setRefreshListings={setRefreshListings}
+                  />
+                } 
+              />
+            }
           />
         </Switch>
       </div>

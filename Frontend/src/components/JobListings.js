@@ -1,39 +1,48 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import './../styles/Listings.css';
 
 import JobListing from './JobListing';
 
-const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags, popupOpen }) => {
+const JobListings = (
+  { user, setPopupOpen, searchInput = '', filterObj, setTags, popupOpen, refreshListings, setRefreshListings }
+) => {
   
   const [listings, setListings] = React.useState([]);
   const [ managerListings, setManagerListings ] = React.useState(false);
+  const [ createListingOpen, setCreateListingOpen ] = React.useState(false);
+
+  const history = useHistory();
 
   React.useEffect(() => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ company: user.companyName })
-    };
-
-    console.log('Sending job listings request...');
-
-    fetch('/api/listings', options)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log('Received response:');
-        console.log(data);
-        setListings(data);
-        const tags = new Set(); // So No duplicates
-        data.forEach(listing=>listing.tags.forEach(tag=>tags.add(tag)));
-        setTags(Array.from(tags));
-      })
-      .catch(e => { throw e; });
-  }, []);
+    if(refreshListings) {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ company: user.companyName })
+      };
+  
+      console.log('Sending job listings request...');
+  
+      fetch('/api/listings', options)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log('Received response:');
+          console.log(data);
+          setListings(data);
+          const tags = new Set(); // So No duplicates
+          data.forEach(listing=>listing.tags.forEach(tag=>tags.add(tag)));
+          setTags(Array.from(tags));
+          setRefreshListings(false);
+        })
+        .catch(e => { throw e; });
+    }
+  }, [refreshListings]);
 
   /**
    * 
@@ -117,10 +126,20 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags,
           }
         </p>
         {user.isManager ? 
-          <button
-            onClick={() => setManagerListings(!managerListings)}
-            id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
-          >Show Only Own Listings</button> : <></>}
+          <div>
+            <button
+              onClick={() => {
+                history.push('/create-listing');
+                setPopupOpen(true);
+              }}
+              id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
+            >Create New Listing</button>
+            <button
+              onClick={() => setManagerListings(!managerListings)}
+              id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
+            >Show Only Own Listings</button>
+          </div>
+          : <></>}
       </div>
       <ul className='job-listings'>
         {searchInput ? 

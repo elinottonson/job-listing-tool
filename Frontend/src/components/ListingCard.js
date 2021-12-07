@@ -43,7 +43,7 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
             <div className='title-sal' id='popup-title-sal'>
               <h2 id='title'>{listingObj.title}</h2>
               <div id='subtitle'>
-                <p id='salary'>{'$' + listingObj.salary}</p>
+                <p id='salary'>{'$' + listingObj.salary.toLocaleString()}</p>
                 <p id='st-break'>•</p>
                 <p id='popup-exp-level'>
                   {
