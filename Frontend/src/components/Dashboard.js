@@ -99,7 +99,8 @@ const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
                 setPopupOpen={setPopupOpen} 
                 title='Create New Job Listing'
                 content={
-                  <CreateListingWizard 
+                  <CreateListingWizard
+                    user={user}
                     tags={tags}
                     setTags={setTags}
                     setPopupOpen={setPopupOpen}

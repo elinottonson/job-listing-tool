@@ -26,10 +26,10 @@ import { useHistory } from 'react-router';
   }
 */
 
-const CreateListingWizard = ({ tags, setTags, setPopupOpen }) => {
+const CreateListingWizard = ({ user, tags, setTags, setPopupOpen }) => {
 
   const [userInput, setUserInput] = React.useState({
-    jobTitle: '',
+    title: '',
     description: '',
     minYearsExperience: NaN,
     salary: NaN,
@@ -57,7 +57,7 @@ const CreateListingWizard = ({ tags, setTags, setPopupOpen }) => {
     event.preventDefault();
 
     if(
-      !userInput.jobTitle || !userInput.description || Number.isNaN(userInput.minYearsExperience) || 
+      !userInput.title || !userInput.description || Number.isNaN(userInput.minYearsExperience) || 
       Number.isNaN(userInput.salary)
     ) {
       return;
@@ -69,11 +69,21 @@ const CreateListingWizard = ({ tags, setTags, setPopupOpen }) => {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userInput)
+        body: JSON.stringify({
+          listing: {
+            title: userInput.title,
+            description: userInput.description,
+            minYearsExperience: Number(userInput.minYearsExperience),
+            salary: Number(userInput.salary),
+            tags: userInput.tags
+          },
+          user: user
+        }),
       };
 
       console.log('Sending new listing request:');
       console.log(userInput);
+      console.log(user);
 
       fetch('/api/new-listing', options)
         .then(res => {
@@ -85,7 +95,11 @@ const CreateListingWizard = ({ tags, setTags, setPopupOpen }) => {
           else {
             console.log('Error creating listing');
             console.log(res.status);
+            return res.json();
           }
+        })
+        .then(data => {
+          console.log(data);
         })
         .catch(e => { throw e; });
     }
@@ -146,7 +160,7 @@ const JobTitle = ({ nextStep, userInput, handleChange }) => {
 
   //function to make sure required fields are filled in before proceeding
   const filledRequired = () => {
-    if (!userInput.jobTitle || !userInput.minYearsExperience || !userInput.salary || experienceNaN || salaryNaN) {
+    if (!userInput.title || !userInput.minYearsExperience || !userInput.salary || experienceNaN || salaryNaN) {
       setErr(true);
     }
     else {
@@ -173,11 +187,11 @@ const JobTitle = ({ nextStep, userInput, handleChange }) => {
       <h1>Job Information</h1>
       <div className='input-container'>
         {err ? <p id='job-info-err-msg'>Please enter valid information.</p> : <></>}
-        <label htmlFor='jobTitle'>Job Title *</label>
+        <label htmlFor='title'>Job Title *</label>
         <input 
           type="text" 
           placeholder="Title" 
-          name='jobTitle' 
+          name='title' 
           onChange={(event) => {
             handleChange(event);
             setErr(false);
