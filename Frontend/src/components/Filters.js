@@ -19,7 +19,6 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
     obj.maxSalary = maxSalary ?? filterObj.maxSalary;
     obj.tags = newTags ?? filterObj.tags;
     setFilterObj(obj);
-    console.log(filterObj);
   }
 
   // TODO: JSdoc entry for handleChangeSelect()
@@ -32,7 +31,6 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
       <div className="tags-container">
         <p id='tags-label'>Tags</p>
         <div class="form">
-          {console.log(tags)}
           <Select className='selectTag' 
             isMulti={true} 
             options={tags.map(tag => { return {value: tag, label: tag}; })}

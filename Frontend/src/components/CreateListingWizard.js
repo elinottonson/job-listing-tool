@@ -3,6 +3,7 @@ import Select from 'react-select';
 import ReactTooltip from 'react-tooltip';
 import React from'react';
 import './../styles/CreateListingWizard.css';
+import { useHistory } from 'react-router';
 
 /*
   Sample Job Listing Object
@@ -35,6 +36,8 @@ const CreateListingWizard = ({ tags, setTags, setPopupOpen }) => {
     tags: []
   });
 
+  const history = useHistory();
+
   // Called on every onChange event
   const handleChange = (event) => {
     const name = event.target.name.trim();
@@ -53,7 +56,39 @@ const CreateListingWizard = ({ tags, setTags, setPopupOpen }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // TODO: fetch request
+    if(
+      !userInput.jobTitle || !userInput.description || Number.isNaN(userInput.minYearsExperience) || 
+      Number.isNaN(userInput.salary)
+    ) {
+      return;
+    }
+    else {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userInput)
+      };
+
+      console.log('Sending new listing request:');
+      console.log(userInput);
+
+      fetch('/api/new-listing', options)
+        .then(res => {
+          if(res.status === 200) {
+            console.log('Successfully created new listing');
+            history.goBack();
+            setPopupOpen(false);
+          }
+          else {
+            console.log('Error creating listing');
+            console.log(res.status);
+          }
+        })
+        .catch(e => { throw e; });
+    }
   };
 
   return (
