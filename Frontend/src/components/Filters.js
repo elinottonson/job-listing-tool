@@ -31,11 +31,19 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
       <div className="tags-container">
         <p id='tags-label'>Tags</p>
         <div class="form">
-          <Select className='selectTag' 
+          <Select className='select-tag-container' classNamePrefix='select-tag' 
             isMulti={true} 
             options={tags.map(tag => { return {value: tag, label: tag}; })}
             maxMenuHeight={200}
             onChange={handleChangeSelect}
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                neutral50: 'black',
+              },
+            })}
+            aria-label='select tags to filter by'
           />
         </div>
       </div>

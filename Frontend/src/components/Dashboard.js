@@ -14,7 +14,7 @@ import ListingCard from './ListingCard';
 import PopupCard from './PopupCard';
 import CreateListingWizard from './CreateListingWizard';
 
-const Dashboard = ({ user, setUser }) => {
+const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
 
   const [popupOpen, setPopupOpen] = React.useState(false); 
   const [searchInput, setSearchInput] = React.useState('');
@@ -71,7 +71,7 @@ const Dashboard = ({ user, setUser }) => {
   return (
     <Router basename='/dashboard'>
       <div className='dashboard'>
-        <Header />
+        <Header darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
         <DashboardNav setSearchInput={setSearchInput} />
         <div className='dashboard-content'>
           <Filters className='filters' setFilterObj={setFilterObj} filterObj={filterObj} tags={tags}/>
@@ -82,7 +82,8 @@ const Dashboard = ({ user, setUser }) => {
             listingObj={popupOpen}
             searchInput={searchInput} 
             filterObj={filterObj} 
-            setTags={setTags} 
+            setTags={setTags}
+            popupOpen={popupOpen}
           />
         </div>
         <Footer />

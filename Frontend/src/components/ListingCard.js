@@ -66,6 +66,8 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
               <FaTimes
                 id='close-btn'
                 onClick={handleClose}
+                onKeyPress={(e) => { if (e.code == 'Enter') handleClose(); }}
+                tabIndex="0"
               />
             </div>
           </div>
@@ -86,7 +88,7 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
               }
             </p>
           </div>
-          <button type='button' id='ref-btn'>Leave Referral</button>
+          <button type='button' id='ref-btn' tabIndex='0'>Leave Referral</button>
         </div>
       </div>
     );

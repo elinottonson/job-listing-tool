@@ -13,26 +13,32 @@
   margin-left: -5px;
   width: 93%;
 }
-#manager-listings-off, #manager-listings-on:hover {
-  height: 28px;
+
+:root {
+  --listings-descritption-height:28px;
+}
+
+#manager-listings-off,
+#manager-listings-on:hover {
+  color: var(--font-color);
+  height: var(--listings-descritption-height);
   background-color: var(--background);
   border-style: none;
   padding: 2px 8px;
   margin: 10px;
   border-radius: 10px;
-  box-shadow: 
-    5px 5px 8px var(--light-shadow),
-    -5px -5px 10px var(--highlight);
+  box-shadow: 5px 5px 8px var(--light-shadow), -5px -5px 10px var(--highlight);
 }
-#manager-listings-off:hover, #manager-listings-on {
+#manager-listings-off:hover,
+#manager-listings-on {
+  color: var(--font-color);
   cursor: pointer;
   height: 28px;
   background-color: var(--background);
   border-style: none;
   padding: 2px 8px;
   border-radius: 10px;
-  box-shadow: 
-    inset 3px 3px 6px var(--light-shadow),
+  box-shadow: inset 3px 3px 6px var(--light-shadow),
     inset -3px -3px 8px var(--highlight);
 }
 
@@ -40,15 +46,26 @@ ul {
   list-style-type: none;
 }
 
+@media screen and (min-width: 1001px) {
+  .job-listings {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-handle) var(--scrollbar-track);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+}
+
 .job-listings {
   display: flex;
   flex-direction: column;
   padding: 0px 20px;
-  height: 83.7vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  scrollbar-color: #888 #d8d8d8;
+  height: calc(
+    100vh - var(--dashboard-nav-height) - var(--dashboard-nav-margin-top) -
+      var(--dashboard-nav-margin-bottom) - var(--header-height) - var(--listings-descritption-height)
+  );
 }
 
 .job-listing {
@@ -58,9 +75,7 @@ ul {
   border-radius: 10px;
   margin: 15px 0px;
   padding: 10px 15px 15px 15px;
-  box-shadow: 
-    5px 5px 8px var(--light-shadow),
-    -5px -5px 10px var(--highlight);
+  box-shadow: 5px 5px 8px var(--light-shadow), -5px -5px 10px var(--highlight);
 }
 
 .job-listing:hover {
@@ -70,8 +85,7 @@ ul {
   border-radius: 10px;
   margin: 15px 0px;
   padding: 10px 15px 15px 15px;
-  box-shadow: inset 
-    5px 5px 6px var(--light-shadow),
+  box-shadow: inset 5px 5px 6px var(--light-shadow),
     inset -5px -5px 8px var(--highlight);
   cursor: pointer;
 }
@@ -92,7 +106,7 @@ ul {
 #subtitle {
   display: flex;
   flex-direction: row;
-  color: grey;
+  color: var(--font-sub);
 }
 #salary {
   width: fit-content;
@@ -108,7 +122,7 @@ ul {
   margin-bottom: -5px;
 }
 #manager-pos {
-  color: gray;
+  color: var(--font-sub);
 }
 
 .listing-desc {
@@ -131,28 +145,28 @@ ul {
   margin-right: 16px;
   padding: 2px 8px;
   font-size: small;
-  background-color: hsl(0, 0%, 85%);
+  background-color: var(--tags);
   border-radius: 8px;
 }
 .tags li:hover {
   cursor: pointer;
-  background-color: hsl(0, 0%, 90%);
+  background-color: var(--tags-hover);
 }
 
 #date {
-  color: gray;
+  color: var(--font-sub);
   font-size: small;
 }
 
 /*SCROLLBAR STUFF*/
- /* width */
+/* width */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #d8d8d8;
+  background: var(--scrollbar-track);
   border-start-end-radius: 10px;
   border-start-start-radius: 10px;
   border-end-end-radius: 10px;
@@ -161,7 +175,7 @@ ul {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--scrollbar-handle);
   height: 10px;
   border-start-end-radius: 10px;
   border-start-start-radius: 10px;
@@ -171,5 +185,5 @@ ul {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-} 
+  background: var(--scrollbar-handle-hover);
+}

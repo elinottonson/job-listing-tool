@@ -1,5 +1,4 @@
 const doCredentialsMatch = require('../databaseInteraction/doCredentialsMatch');
-const { teardown } = require('./sharedMethods');
 
 describe('doCredentialsMatch testing', () => {
   const Email = 'Elise_Larsen@techgenix.com';
@@ -31,5 +30,3 @@ describe('doCredentialsMatch testing', () => {
       }));
   });
 });
-
-afterAll(teardown);

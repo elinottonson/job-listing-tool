@@ -1,5 +1,5 @@
 const getListings = require('../databaseInteraction/getFilteredListings');
-const { listingMatch, teardown } = require('./sharedMethods');
+const { listingMatch } = require('./sharedMethods');
 
 describe('getListings testing', () => {
   const InvalidListingId = -1;
@@ -36,5 +36,3 @@ describe('getListings testing', () => {
     }
   });
 });
-
-afterAll(teardown);
