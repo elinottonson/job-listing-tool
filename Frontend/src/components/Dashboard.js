@@ -16,7 +16,8 @@ import CreateListingWizard from './CreateListingWizard';
 
 const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
 
-  const [popupOpen, setPopupOpen] = React.useState(false); 
+  const [popupOpen, setPopupOpen] = React.useState(false);
+  const [ refreshListings, setRefreshListings ] = React.useState(true);
   const [searchInput, setSearchInput] = React.useState('');
   const [filterObj, setFilterObj] = React.useState({});
   const [tags, setTags] = React.useState(['Loading...']);
@@ -84,6 +85,8 @@ const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
             filterObj={filterObj} 
             setTags={setTags}
             popupOpen={popupOpen}
+            refreshListings={refreshListings}
+            setRefreshListings={setRefreshListings}
           />
         </div>
         <Footer />
@@ -104,6 +107,7 @@ const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
                     tags={tags}
                     setTags={setTags}
                     setPopupOpen={setPopupOpen}
+                    setRefreshListings={setRefreshListings}
                   />
                 } 
               />

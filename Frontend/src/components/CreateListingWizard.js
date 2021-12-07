@@ -26,7 +26,7 @@ import { useHistory } from 'react-router';
   }
 */
 
-const CreateListingWizard = ({ user, tags, setTags, setPopupOpen }) => {
+const CreateListingWizard = ({ user, tags, setTags, setPopupOpen, setRefreshListings }) => {
 
   const [userInput, setUserInput] = React.useState({
     title: '',
@@ -91,6 +91,7 @@ const CreateListingWizard = ({ user, tags, setTags, setPopupOpen }) => {
             console.log('Successfully created new listing');
             history.goBack();
             setPopupOpen(false);
+            setRefreshListings(true);
           }
           else {
             console.log('Error creating listing');

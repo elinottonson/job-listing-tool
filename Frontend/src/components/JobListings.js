@@ -1,12 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import './../styles/Listings.css';
-import CreateListingWizard from './CreateListingWizard';
 
 import JobListing from './JobListing';
-import PopupCard from './PopupCard';
 
-const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags, popupOpen }) => {
+const JobListings = (
+  { user, setPopupOpen, searchInput = '', filterObj, setTags, popupOpen, refreshListings, setRefreshListings }
+) => {
   
   const [listings, setListings] = React.useState([]);
   const [ managerListings, setManagerListings ] = React.useState(false);
@@ -15,31 +15,34 @@ const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags,
   const history = useHistory();
 
   React.useEffect(() => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ company: user.companyName })
-    };
-
-    console.log('Sending job listings request...');
-
-    fetch('/api/listings', options)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log('Received response:');
-        console.log(data);
-        setListings(data);
-        const tags = new Set(); // So No duplicates
-        data.forEach(listing=>listing.tags.forEach(tag=>tags.add(tag)));
-        setTags(Array.from(tags));
-      })
-      .catch(e => { throw e; });
-  }, []);
+    if(refreshListings) {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ company: user.companyName })
+      };
+  
+      console.log('Sending job listings request...');
+  
+      fetch('/api/listings', options)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log('Received response:');
+          console.log(data);
+          setListings(data);
+          const tags = new Set(); // So No duplicates
+          data.forEach(listing=>listing.tags.forEach(tag=>tags.add(tag)));
+          setTags(Array.from(tags));
+          setRefreshListings(false);
+        })
+        .catch(e => { throw e; });
+    }
+  }, [refreshListings]);
 
   /**
    * 
