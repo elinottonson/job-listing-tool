@@ -31,7 +31,7 @@ const Filters = ({ setFilterObj, filterObj, tags }) => {
       <div className="tags-container">
         <p id='tags-label'>Tags</p>
         <div class="form">
-          <Select className='select-tag-container' classNamePrefix='select-tag' 
+          <Select className='select-tag-container' classNamePrefix='select-tag'
             isMulti={true} 
             options={tags.map(tag => { return {value: tag, label: tag}; })}
             maxMenuHeight={200}

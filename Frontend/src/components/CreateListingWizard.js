@@ -295,7 +295,7 @@ const Tags = ({ previousStep, handleChange, handleSubmit, tags, setTags }) => {
       <h1>Tags</h1>
       <div className='input-container'>
         <p id='inner-title'>Select tags to add to the listing:</p>
-        <Select className='selectTag' 
+        <Select className='tag-container' classNamePrefix='tags'
           placeholder="Select Tags"
           isMulti={true} 
           options={tags.map(tag => { return {value: tag, label: tag}; })}

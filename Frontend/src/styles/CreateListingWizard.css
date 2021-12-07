@@ -54,7 +54,7 @@
   box-shadow: 
     inset 2px 2px 6px var(--light-shadow),
     3px 3px 8px var(--light-shadow),
-    -3px -3px 10px white;
+    -3px -3px 10px var(--highlight);
 }
 
 .wizard input {
@@ -69,9 +69,9 @@
 
 #invalid-text {
   box-shadow: 
-    inset 2px 2px 6px hsla(0, 90%, 40%, 0.3),
-    3px 3px 8px hsla(0, 90%, 40%, 0.3),
-    -3px -3px 10px hsla(0, 90%, 100%, 1);
+    inset 2px 2px 6px var(--invalid-email-shadow),
+    3px 3px 8px var(--invalid-email-shadow-outer),
+    -3px -3px 10px var(--highlight);
 }
 
 #rf-text {
@@ -109,9 +109,19 @@
     -5px -5px 10px var(--highlight);
 }
 
-.selectTag {
+.tag-container {
   width: 100%;
   margin: 5px;
+}
+
+.tag-container * {
+  background-color: var(--input-background);
+  color: black;
+  box-shadow: none;
+}
+
+.tags__multi-value * {
+  background-color: lightgray;
 }
 
 .add-tag-container {
@@ -143,7 +153,7 @@
 }
 
 .dot {
-  color: var(--ukg-dark-green);
+  color: var(--font-sub);
   font-size: 36px;
   line-height: 1;
   margin: 0 15px;
@@ -155,6 +165,6 @@
 }
 
 .active {
-  color: var(--ukg-dark-green);
+  color: var(--font-sub);
   opacity: 1;
 }
