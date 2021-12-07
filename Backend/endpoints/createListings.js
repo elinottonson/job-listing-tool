@@ -21,7 +21,7 @@ function isListingValid (req) {
     var listingValid = false;
     if (req.body.title != null && req.body.description != null &&
         req.body.minYearsExperience != null && req.body.salary != null &&
-        req.body.tags != null && req.body.managerId != null) {
+        req.body.tags != null && req.user.employeeId != null) {
         listingValid = isInteger(req.body.salary) && isInteger(req.body.minYearsExperience);
     }
     return listingValid;
@@ -41,7 +41,7 @@ function isListingValid (req) {
                 companyName: req.user.companyName,
                 description: req.body.description,
                 minYearsExperience: req.body.minYearsExperience,
-                managerId: req.user.managerId,
+                managerId: req.user.employeeId,
                 salary: req.body.salary,
                 tags: req.body.tags
             }
