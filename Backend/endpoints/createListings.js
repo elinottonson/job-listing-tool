@@ -37,7 +37,7 @@ function createListing(app) {
         companyName: user.companyName,
         description: listing.description,
         minYearsExperience: listing.minYearsExperience,
-        managerId: user.managerId,
+        managerId: user.id,
         salary: listing.salary,
         tags: listing.tags
       };
