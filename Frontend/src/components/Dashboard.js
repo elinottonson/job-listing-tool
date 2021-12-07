@@ -11,6 +11,8 @@ import JobListings from './JobListings';
 import Footer from './Footer';
 import Filters from './Filters.js';
 import ListingCard from './ListingCard';
+import PopupCard from './PopupCard';
+import CreateListingWizard from './CreateListingWizard';
 
 const Dashboard = ({ user, setUser }) => {
 
@@ -88,6 +90,22 @@ const Dashboard = ({ user, setUser }) => {
           <Route
             path='/job/:id'
             children={<ListingCard setPopupOpen={setPopupOpen} listingObj={popupOpen} />}
+          />
+          <Route 
+            path='/create-listing'
+            children={
+              <PopupCard 
+                setPopupOpen={setPopupOpen} 
+                title='Create New Job Listing'
+                content={
+                  <CreateListingWizard 
+                    tags={tags}
+                    setTags={setTags}
+                    setPopupOpen={setPopupOpen}
+                  />
+                } 
+              />
+            }
           />
         </Switch>
       </div>

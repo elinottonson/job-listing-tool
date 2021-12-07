@@ -1,5 +1,6 @@
 import StepWizard from 'react-step-wizard';
 import Select from 'react-select';
+import ReactTooltip from 'react-tooltip';
 import React from'react';
 import './../styles/CreateListingWizard.css';
 
@@ -24,18 +25,15 @@ import './../styles/CreateListingWizard.css';
   }
 */
 
-const CreateListingWizard = ({ setOpenCreateListing, tags, setTags, createListing}) => {
+const CreateListingWizard = ({ tags, setTags, setPopupOpen }) => {
 
   const [userInput, setUserInput] = React.useState({
     jobTitle: '',
     description: '',
-    minYearsExperience: '',
-    salary: '',
+    minYearsExperience: NaN,
+    salary: NaN,
     tags: []
   });
-
-  const [showErr, setShowErr] = React.useState(false);
-  const [showErrFill, setShowErrFill] = React.useState(false);
 
   // Called on every onChange event
   const handleChange = (event) => {
@@ -54,53 +52,43 @@ const CreateListingWizard = ({ setOpenCreateListing, tags, setTags, createListin
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setOpenCreateListing(false);
+
+    // TODO: fetch request
   };
 
   return (
     <form onSubmit={handleSubmit} className='wizard'> 
-      <StepWizard 
-        nav={<Nav 
+      <StepWizard
+        className='stepwizard'
+        nav={<Nav />} 
+        transitions='nothing'
+      >
+        <JobTitle
           userInput={userInput} 
-          showErr={showErr}
-          setShowErr={setShowErr}/>} 
-        transitions='nothing'>
-
-        <JobTitle 
-          showErr={showErr}
-          setShowErr={setShowErr}
-          showErrFill={showErrFill}
-          setShowErrFill={setShowErrFill}
-          userInput={userInput} 
-          setUserInput={setUserInput} 
-          handleChange={handleChange} />
+          handleChange={handleChange} 
+        />
         <JobDescription
-          showErr={showErr}
-          setShowErr={setShowErr}
-          showErrFill={showErrFill}
-          setShowErrFill={setShowErrFill}
-          userInput={userInput} 
-          setUserInput={setUserInput} 
-          handleChange={handleChange} />
+          userInput={userInput}  
+          handleChange={handleChange} 
+        />
         <Tags 
           tags={tags} 
           setTags={setTags} 
-          createListing={createListing}
-          setOpenCreateListing={setOpenCreateListing}
           userInput={userInput} 
-          setUserInput={setUserInput} 
-          handleChange={handleChangeTags} />
+          handleChange={handleChangeTags} 
+          handleSubmit={handleSubmit}
+        />
       </StepWizard>
     </form>
   );
 };
 
 
-const Nav = (props) => {
+const Nav = ({ totalSteps, currentStep }) => {
 
   const dots = [];
-  for (let i = 1; i <= props.totalSteps; i += 1) {
-    const isActive = props.currentStep === i;
+  for (let i = 1; i <= totalSteps; i++) {
+    const isActive = currentStep === i;
     dots.push((
       <span
         key={`step-${i}`}
@@ -114,46 +102,101 @@ const Nav = (props) => {
   );
 };
 
-// TODO: display error message when conditions for moving to the next step have not been met
-const JobTitle = (props) => {
+
+const JobTitle = ({ nextStep, userInput, handleChange }) => {
+
+  const [ err, setErr ] = React.useState(false);
+  const [ experienceNaN, setExperienceNaN ] = React.useState(false);
+  const [ salaryNaN, setSalaryNaN ] = React.useState(false);
 
   //function to make sure required fields are filled in before proceeding
   const filledRequired = () => {
-    if (props.userInput.jobTitle == '' || props.userInput.minYearsExperience == '' || props.userInput.salary == '') {
-      props.setShowErr(true);
+    if (!userInput.jobTitle || !userInput.minYearsExperience || !userInput.salary || experienceNaN || salaryNaN) {
+      setErr(true);
     }
     else {
-      props.nextStep();
+      nextStep();
     }
   };
 
+  const checkNumberReq = (event) => {
+    const input = event.target.value;
+    if(Number.isNaN(Number(input))) {
+      return true;
+    }
+    else if(!input.length) {
+      return false;
+    }
+    else {
+      return false;
+    }
+  };
+
+  // TODO: finish implementing react-tooltip
   return (
     <div  className='step-container'>
       <h1>Job Information</h1>
-      {props.showErr ? <p className="field-error">*Required Fields</p> : <p>*Required Fields</p>}
       <div className='input-container'>
-        <input type="text" placeholder="Job Title" name='jobTitle' onChange={props.handleChange} />
+        {err ? <p id='job-info-err-msg'>Please enter valid information.</p> : <></>}
+        <label htmlFor='jobTitle'>Job Title *</label>
         <input 
-          type="number" 
-          placeholder="Minimum Years of Experience Required" 
+          type="text" 
+          placeholder="Title" 
+          name='jobTitle' 
+          onChange={(event) => {
+            handleChange(event);
+            setErr(false);
+          }} 
+          id={err ? 'invalid-text' : ''}
+        />
+        <label htmlFor='minYearsExperience'>Minimum Years of Experience *</label>
+        <input 
+          type="text" 
+          placeholder="Years"
           name='minYearsExperience' 
-          onChange={props.handleChange} />
-        <input type="number" placeholder="Salary" name='salary' onChange={props.handleChange}/>
+          onChange={(event) => {
+            setErr(false);
+            setExperienceNaN(checkNumberReq(event));
+            handleChange(event);
+          }}
+          id={experienceNaN || err ? 'invalid-text' : ''}
+          //data-tip='custom show'
+          //data-for='test-tt'
+          //data-event='focus'
+        />
+        {/*<ReactTooltip id='test-tt' effect='solid' globalEventOff='click' getContent={() => 'test'}/>*/}
+        <label htmlFor='salary'>Salary *</label>
+        <input 
+          type="text" 
+          placeholder="Salary" 
+          name='salary' 
+          onChange={(event) => {
+            setErr(false);
+            setSalaryNaN(checkNumberReq(event));
+            handleChange(event);
+          }}
+          id={salaryNaN || err ? 'invalid-text' : ''}
+        />
+        <p id='rf-text'>*Required Fields</p>
       </div>
-      <button type='button' onClick={filledRequired}>Next Step</button>
+      <div className='step-button-container'>
+        <button type='button' onClick={filledRequired}>Next Step</button>
+      </div>
     </div>
   );
 };
 
-const JobDescription = (props) => {
+const JobDescription = ({ nextStep, previousStep, userInput, handleChange }) => {
+
+  const [ err, setErr ] = React.useState(false);
 
   //function to make sure required fields are filled in before proceeding
   const filledRequired = () => {
-    if (props.userInput.description == '') {
-      props.setFieldError(true);
+    if (userInput.description == '') {
+      setErr(true);
     }
     else {
-      props.nextStep();
+      nextStep();
     }
   };
 
@@ -161,21 +204,29 @@ const JobDescription = (props) => {
     <div  className='step-container'>
       <h1>Job Description</h1>
       <div className='input-container'>
+        {err ? <p id='job-info-err-msg'>Please add a description.</p> : <></>}
         <textarea className='jobdesc'  
           placeholder="Job Description" 
           rows='8'
           name='description' 
-          onChange={props.handleChange} />
-        {props.fieldError ? <p className="field-error">*Required</p> : <p>*Required</p>}
+          onChange={(event) => {
+            setErr(false);
+            handleChange(event);
+          }}
+          id={err ? 'invalid-text' : ''}
+        />
+        <p id='rf-text'>*Required</p>
       </div>
-      <button type='button' onClick={props.previousStep}>Previous Step</button>
-      <button type='button' onClick={filledRequired}>Next Step</button>
+      <div className='step-button-container step-two-buttons'>
+        <button type='button' onClick={previousStep}>Previous Step</button>
+        <button type='button' onClick={filledRequired}>Next Step</button>
+      </div>
     </div>
   );
 };
 
 
-const Tags = (props) => {
+const Tags = ({ previousStep, handleChange, handleSubmit, tags, setTags }) => {
 
   const [addNewTag, setAddNewTag] = React.useState('');
 
@@ -185,30 +236,33 @@ const Tags = (props) => {
 
   const handleAddNewTag = (event) => {
     event.preventDefault();
-    if (addNewTag != '' && addNewTag in props.tags == false) {
-      props.setTags(props.tags.concat(addNewTag));
+    if (addNewTag != '' && addNewTag in tags == false) {
+      setTags(tags.concat(addNewTag));
     }
   };
   
   return (
     <div className='step-container'>
       <h1>Tags</h1>
-      <p>Please select any tags you wish to add to the listing:</p>
       <div className='input-container'>
+        <p id='inner-title'>Select tags to add to the listing:</p>
         <Select className='selectTag' 
           placeholder="Select Tags"
           isMulti={true} 
-          options={props.tags.map(tag => { return {value: tag, label: tag}; })}
+          options={tags.map(tag => { return {value: tag, label: tag}; })}
           maxMenuHeight={200}
-          onChange={props.handleChange}
+          onChange={handleChange}
         />
-        <div>
-          <input type='text' placeholder="Or, Create a New Tag" onChange={addTag}/>
-          <button onClick={handleAddNewTag}>Add New Tag</button>
+        <p id='inner-title'>Or, create a new tag:</p>
+        <div className='add-tag-container'>
+          <input type='text' placeholder="New Tag" onChange={addTag} id='new-tag'/>
+          <button id='add-tag-btn' onClick={handleAddNewTag}>Add Tag</button>
         </div>
       </div>
-      <button type='button' onClick={props.previousStep}>Previous Step</button>
-      <button >Finish</button>    
+      <div className='step-button-container step-two-buttons'>
+        <button type='button' onClick={previousStep}>Previous Step</button>
+        <button onClick={handleSubmit}>Finish</button>
+      </div>
     </div>
   );
 };

@@ -1,15 +1,18 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import './../styles/Listings.css';
 import CreateListingWizard from './CreateListingWizard';
 
 import JobListing from './JobListing';
 import PopupCard from './PopupCard';
 
-const JobListings = ({ user, tags, setPopupOpen, searchInput = '', filterObj, setTags }) => {
+const JobListings = ({ user, setPopupOpen, searchInput = '', filterObj, setTags }) => {
   
   const [listings, setListings] = React.useState([]);
   const [ managerListings, setManagerListings ] = React.useState(false);
-  const [ createListing, setOpenCreateListing ] = React.useState(false);
+  const [ createListingOpen, setCreateListingOpen ] = React.useState(false);
+
+  const history = useHistory();
 
   React.useEffect(() => {
     const options = {
@@ -54,10 +57,6 @@ const JobListings = ({ user, tags, setPopupOpen, searchInput = '', filterObj, se
           || listing.description.toLowerCase().includes(searchInput.toLowerCase())
       )
     );
-  };
-
-  const createListingForm = () => {
-    setOpenCreateListing(true);
   };
 
   /**
@@ -126,23 +125,18 @@ const JobListings = ({ user, tags, setPopupOpen, searchInput = '', filterObj, se
         {user.isManager ? 
           <div>
             <button
-              onClick={() => createListingForm()}
+              onClick={() => {
+                history.push('/create-listing');
+                setPopupOpen(true);
+              }}
               id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
-            >Create a New Listing</button>
+            >Create New Listing</button>
             <button
               onClick={() => setManagerListings(!managerListings)}
               id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
             >Show Only Own Listings</button>
           </div>
           : <></>}
-        {createListing ? <PopupCard  
-          className='create-referral-popup' 
-          setPopupOpen={setOpenCreateListing} 
-          content={ <CreateListingWizard 
-            setOpenCreateListing={setOpenCreateListing} 
-            tags={tags} 
-            setTags={setTags} 
-            createListing={createListing}/> }/> : <></>}
       </div>
       <ul className='job-listings'>
         {searchInput ? 

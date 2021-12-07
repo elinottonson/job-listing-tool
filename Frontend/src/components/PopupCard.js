@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import './../styles/PopupCard.css';
 
-const PopupCard = ({ setPopupOpen, content}) => {
+const PopupCard = ({ setPopupOpen, title, content}) => {
 
   const [hover, setHover] = React.useState(false);
   const history = useHistory();
@@ -13,9 +13,9 @@ const PopupCard = ({ setPopupOpen, content}) => {
       handleClose();
     }
   };
-  const handleClose = (event) => {
-    event.preventDefault();
+  const handleClose = () => {
     setPopupOpen(false);
+    history.goBack();
   };
 
   return (
@@ -29,8 +29,9 @@ const PopupCard = ({ setPopupOpen, content}) => {
         onMouseLeave={() => setHover(false)}
       >
         <div className='popup-header'>
+          <h1 id='popup-title'>{title}</h1>
           <FaTimes
-            id='close-btn'
+            id='close-btn-alt'
             onClick={handleClose}
           />
         </div>
