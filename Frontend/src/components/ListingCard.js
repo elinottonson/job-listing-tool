@@ -1,12 +1,15 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { FaTimes, FaTrash } from 'react-icons/fa';
+import { FaRegFilePdf, FaTimes, FaTrash } from 'react-icons/fa';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
+
+import Referral from './../components/Referral.js';
 
 const ListingCard = ({ user, setPopupOpen, listingObj }) => {
 
   const [hover, setHover] = React.useState(false);
+  const [ referrals, setReferrals ] = React.useState([]);
   const { id } = useParams();
   const history = useHistory();
 
@@ -20,8 +23,30 @@ const ListingCard = ({ user, setPopupOpen, listingObj }) => {
     history.goBack();
   };
 
+  React.useEffect(() => {
+    if(!referrals.length) {
+      const options = {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      };
+
+      console.log(`Sending referral request for listing ${listingObj.id}`);
+
+      fetch(`/api/referrals/${listingObj.id}`, options)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          setReferrals(data);
+        })
+        .catch(e => { throw e; });
+    }
+  }, []);
+
   if (!listingObj) {
-    // TODO
+    // TODO:
     // add logic for getting data from backend with listing id, and use SetPopupOpen to add that data,
     // This should make the react-router links work when they are directly accessed
     // A hook maybe?
@@ -96,6 +121,16 @@ const ListingCard = ({ user, setPopupOpen, listingObj }) => {
               <></>
             }
           </div>
+          {user.employeeId === listingObj.managerId ? 
+            <div className='referrals-container'>
+              <hr />
+              {referrals.length ? 
+                (referrals.map(referral => <Referral referralObj={referral} />))
+                : <p>No referrals on this listing.</p>
+              }
+            </div> 
+            : <></>
+          }
         </div>
       </div>
     );

@@ -13,6 +13,7 @@ const {Express} = require('express');
  */
 function referralsGet(app) {
   app.get('/api/referrals/:listingId', async (req, res) => {
+    console.log(req.params);
     res.send(await getReferrals(req.params.listingId));
   });
 }
