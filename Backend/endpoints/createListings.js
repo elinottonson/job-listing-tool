@@ -19,7 +19,9 @@ function isInteger(posNum){
  */
 function isListingValid (req) {
     var listingValid = false;
-    if (req.body.title != null && req.body.description != null && req.body.minYearsExperience != null && req.body.salary != null && req.body.tags != null) {
+    if (req.body.title != null && req.body.description != null &&
+        req.body.minYearsExperience != null && req.body.salary != null &&
+        req.body.tags != null && req.body.managerId != null) {
         listingValid = isInteger(req.body.salary) && isInteger(req.body.minYearsExperience);
     }
     return listingValid;
