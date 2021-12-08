@@ -38,6 +38,13 @@
   box-shadow: 2px 2px 10px var(--dark-shadow);
 }
 
+@media screen and (max-width: 1000px) {
+  .listing-card {
+    width: 36rem;
+    left: 69%; /* it's actually centered I promise */
+  }
+}
+
 #popup-title-sal {
   align-self: flex-start;
   margin-top: 2px;

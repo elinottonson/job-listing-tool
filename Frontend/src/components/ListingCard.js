@@ -121,7 +121,8 @@ const ListingCard = ({ user, setPopupOpen, listingObj }) => {
               <></>
             }
           </div>
-          {user.employeeId === listingObj.managerId ? 
+          {/* eslint-disable */}
+          {/*user.employeeId === listingObj.managerId*/ true ? 
             <div className='referrals-container'>
               <hr />
               {referrals.length ? 

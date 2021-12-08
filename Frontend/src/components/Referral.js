@@ -11,7 +11,11 @@
 */
 
 const Referral = ({ referralObj }) => {
-  
+  return (
+    <div>
+      <p>{referralObj.referralText}</p>
+    </div>
+  );
 };
 
 export default Referral;
