@@ -1,3 +1,4 @@
+import React from 'react';
 /* SAMPLE REFERRAL OBJECT
   const referral = {
     firstName: 'referral's first name',
@@ -11,9 +12,35 @@
 */
 
 const Referral = ({ referralObj }) => {
+
+  const [ referrer, setReferrer ] = React.useState({});
+
+  React.useEffect(() => {
+    if(!referrer) {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      };
+    }
+  }, []);
+
   return (
-    <div>
-      <p>{referralObj.referralText}</p>
+    <div className='referral-container'>
+      <div className='referral-header'>
+        <div className='referral-header-referrer'>
+          <p id='referrer-name'>REFERRER_NAME</p>
+          <p id='referrer-pos'>REFERRER_POSITION</p>
+        </div>
+        <p id='referral-splitter-text'>→</p>
+        <div className='referral-name-email'>
+          <p id='referree-name'>{referralObj.firstName + ' ' + referralObj.lastName}</p>
+          <p id='referree-email'>{referralObj.email}</p>
+        </div>
+      </div>
+      <p className='referral-text'>{referralObj.referralText}</p>
     </div>
   );
 };

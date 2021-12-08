@@ -1,0 +1,48 @@
+hr {
+  border: none;
+  border-top: 1px solid var(--tags);
+  margin: 28px 0px -8px 0px;
+}
+
+.referral-container {
+  margin: 30px 0px 10px 0px;
+}
+
+.referral-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.referral-name-email {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.referral-header-referrer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#referral-splitter-text {
+  margin: 0px 20px;
+  font-size: large;
+}
+
+#referree-name, #referrer-name {
+  color: var(--font-color);
+  font-size: large;
+  font-weight: 700;
+  margin-bottom: -6px;
+}
+
+#referree-email, #referrer-pos {
+  color: var(--font-sub);
+}
+
+.referral-text {
+  text-align: left;
+  margin: 10px 5px 0px 5px;
+}

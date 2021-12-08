@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { FaRegFilePdf, FaTimes, FaTrash } from 'react-icons/fa';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
+import './../styles/Referral.css';
 
 import Referral from './../components/Referral.js';
 
