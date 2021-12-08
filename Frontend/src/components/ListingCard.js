@@ -23,7 +23,7 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
 
   const openReferralCard = (event) => {
     event.preventDefault();
-    setOpenReferral(true);
+    setOpenReferral(!openReferral);
   };
 
   if (!listingObj) {
@@ -95,10 +95,13 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
               }
             </p>
           </div>
-          <div className='referral-button-container'>
-            {openReferral ? <ReferralWizard setOpenReferral={setOpenReferral} listingObj={listingObj} />
-              : <button className='referralButton' onClick={openReferralCard}>Leave a Referral</button>}
+          <div className='listing-btn-container'>
+            <button
+              className='referralButton' 
+              onClick={openReferralCard}
+            >{openReferral ? 'Cancel' : 'Leave a Referral'}</button>
           </div>
+          {openReferral ? <ReferralWizard setOpenReferral={setOpenReferral} listingObj={listingObj} /> : <></>}
         </div>
       </div>
     );

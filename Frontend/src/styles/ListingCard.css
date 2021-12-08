@@ -19,15 +19,17 @@
 
 .referralButton {
   width: fit-content;
-  padding: 10px;
-  box-shadow: 3px 3px 8px var(--light-shadow), -3px -3px 10px var(--highlight);
+  padding: 10px 20px;
+  box-shadow: 
+    3px 3px 8px var(--light-shadow), 
+    -3px -3px 10px var(--highlight);
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: hidden;
-  border-radius: 5px;
-
-
+  border-radius: 10px;
+  background-color: var(--background);
+  color: var(--font-color)
 }
 
 .referralButton:hover {

@@ -93,6 +93,7 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
 
   return (
     <form onSubmit={handleSubmit} className='referral-form'>
+      <p id='ref-wiz-title'>Leave a Referral</p>
       <StepWizard transitions='nothing' instance={(obj) => { setWizardObj(obj); }}>
         <CandidateName userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
         <ContactInfo userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
