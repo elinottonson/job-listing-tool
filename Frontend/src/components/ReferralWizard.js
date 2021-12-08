@@ -23,7 +23,6 @@ import './../styles/ReferralWizard.css';
     "updatedAt": "2021-10-14T18:40:02.987Z"
   }
 */
-
 /*
   Sample Job Referral Object
   {
