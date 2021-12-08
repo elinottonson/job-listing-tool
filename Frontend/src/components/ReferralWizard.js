@@ -2,6 +2,7 @@ import StepWizard from 'react-step-wizard';
 import React from 'react';
 import { isValidEmail } from '../lib/Validation';
 import './../styles/ReferralWizard.css';
+import './../styles/CreateListingWizard.css';
 
 /*
   Sample Job Listing Object
@@ -92,8 +93,14 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
 
   return (
     <form onSubmit={handleSubmit} className='referral-form'>
+      <hr/>
       <p id='ref-wiz-title'>Leave a Referral</p>
-      <StepWizard transitions='nothing' instance={(obj) => { setWizardObj(obj); }}>
+      <StepWizard 
+        className='stepwizard'
+        transitions='nothing' 
+        instance={(obj) => { setWizardObj(obj); }}
+        nav={<Nav />}
+      >
         <CandidateName userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
         <ContactInfo userInput={userInput} setUserInput={setUserInput} handleChange={handleChange} />
         <CandidateDescription
@@ -109,6 +116,24 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
   );
 };
 
+const Nav = ({ totalSteps, currentStep }) => {
+
+  const dots = [];
+  for (let i = 1; i < totalSteps; i++) {
+    const isActive = currentStep === i;
+    dots.push((
+      <span
+        key={`step-${i}`}
+        className={`${'dot'} ${isActive ?  'active' : ''}`}
+      >&bull;</span>
+    ));
+  }
+  
+  return (
+    <div>{dots}</div>
+  );
+};
+
 // TODO: display error message when conditions for moving to the next step have not been met
 const CandidateName = (props) => {
   //function to make sure required fields are filled in before proceeding
@@ -119,14 +144,18 @@ const CandidateName = (props) => {
   };
 
   return (
-    <div className='name-container'>
-      <label>
-        First Name<input type="text" name='firstName' onChange={props.handleChange} />
-      </label>
-      <label>
-        Last Name<input type="text" name='lastName' onChange={props.handleChange} />
-      </label>
-      <button className='right-button' type='button' onClick={filledRequired}>Next Step</button>
+    <div className='step-container'>
+      <h1>Candidate Information</h1>
+      <div className='input-container'>
+        <label htmlFor='firstName'>First Name *</label>
+        <input classNametype="text" name='firstName' placeholder='First name' onChange={props.handleChange} />
+        <label htmlFor='lastName'>Last Name *</label>
+        <input type="text" name='lastName' placeholder='Last name' onChange={props.handleChange} />
+        <p id='rf-text'>*Required Fields</p>
+      </div>
+      <div className='step-button-container'>
+        <button className='right-button' type='button' onClick={filledRequired}>Next Step</button>
+      </div>
     </div>
   );
 };
@@ -141,26 +170,43 @@ const ContactInfo = (props) => {
 
   //Get contact info of referral -- used to contain phone number but our database currently doesn't handle that
   return (
-    <div className='email-container'>
-      <label>
-        Email<input type='email' name='email' onChange={props.handleChange} />
-      </label>
-      <button className='left-button' type='button' onClick={props.previousStep}>Previous Step</button>
-      <button className='right-button' type='button' onClick={filledRequired}>Next Step</button>
+    <div className='step-container'>
+      <h1>Candidate Information</h1>
+      <div className='input-container'>
+        <label htmlFor='email'>Email *</label>
+        <input type='email' name='email' onChange={props.handleChange} />
+        <p id='rf-text'>*Required Fields</p>
+      </div>
+      <div className='step-button-container step-two-buttons'>
+        <button className='left-button' type='button' onClick={props.previousStep}>Previous Step</button>
+        <button className='right-button' type='button' onClick={filledRequired}>Next Step</button>
+      </div>
+      
     </div>
   );
 };
 
 const CandidateDescription = (props) => {
   return (
-    <div className='.explain-container'>
-      <label>
-        Please briefly describe why you chose to refer this candidate:
-        <textarea type='text' name='referralText' onChange={props.handleChange} />
-      </label>
-      <p id='err-msg'>{props.errorMsg}</p>
-      <button className='left-button' type='button' onClick={props.previousStep}>Previous Step</button>
-      <button className='right-button'>{props.setSubmittingForm ? 'Submitting...' : 'Finish'}</button>
+    <div className='step-container'>
+      <div className='input-container'>
+        <label htmlFor='referralText' id='ref-text-label'>
+          Please briefly describe why you chose to refer this candidate: *
+        </label>
+        <textarea 
+          type='text' 
+          name='referralText' 
+          placeholder='Description' 
+          className='text-box' 
+          onChange={props.handleChange} 
+        />
+        <p id='rf-text'>*Required Fields</p>
+        <p id='err-msg'>{props.errorMsg}</p>
+      </div>
+      <div className='step-button-container step-two-buttons'>
+        <button className='left-button' type='button' onClick={props.previousStep}>Previous Step</button>
+        <button className='right-button'>{props.setSubmittingForm ? 'Submitting...' : 'Finish'}</button>
+      </div>
     </div>
   );
 };

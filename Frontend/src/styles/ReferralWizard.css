@@ -3,8 +3,18 @@
   align-self: flex-start;
 }
 
+.referral-form hr {
+  border: none;
+  border-top: 1px solid var(--tags);
+  margin: 0px 0px 16px 0px;
+}
+
 .referral-form {
   display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  width: 100%;
+  height: 100%;
   margin-top: 20px;
   margin-bottom: 10px;
   align-content: center;
@@ -30,43 +40,22 @@
   cursor: pointer;
 }
 
-.left-button {
-  float: left;
-}
-
-.right-button {
-  float: right;
-}
-
-.explain-container {
-  padding: 20px;
-}
-
 .name-container {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
+  width: 100%;
+  align-items: center;
 }
 
 .email-container {
   padding: 20px;
 }
 
-textarea {
-  width: 98%;
-  padding: 30px;
-  outline: none;
-  margin: 10px;
-  box-shadow: 
-    inset 2px 2px 6px var(--light-shadow), 
-    3px 3px 8px var(--light-shadow), 
-    -3px -3px 10px var(--highlight);
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: hidden;
-  border-radius: 5px;
-  display: block;
+#ref-text-label {
+  margin-bottom: 4px;
 }
 
-input {
-    width: 85%;
+.referral-form input {
+  width: 100%;
 }
