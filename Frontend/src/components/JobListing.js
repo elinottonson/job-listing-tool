@@ -35,7 +35,7 @@ const JobListing = ({ listingObj, setPopupOpen, popupOpen }) => {
         setPopupOpen(listingObj);
       }}
       onKeyPress={(e) => { if (e.code == 'Enter') e.target.click(); }}
-      tabIndex={popupOpen ? "-1" : "0"}
+      tabIndex={popupOpen ? '-1' : '0'}
     >
       <div className='listing-header'>
         <div className='title-sal'>

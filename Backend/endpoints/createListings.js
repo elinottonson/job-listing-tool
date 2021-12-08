@@ -2,27 +2,21 @@ const {Express} = require('express');
 const createListingDB = require('../databaseInteraction/createListingDB');
 
 /**
- * Determines if parameter is integer.
- * 
- * @param {integer} posNum Expected integer value.
- * @returns {boolean} true if posNum is an integer, false otherwise.
- */
-function isInteger(posNum){
-    return Number.isInteger(posNum);
-}
-
-/**
  * Checks if listing is valid.
  * 
- * @param {object} req The request sent to backend.
+ * @param {object} listing The listing object.
  * @returns {boolean} True if listing is valid, false otherwise.
  */
-function isListingValid (req) {
-    var listingValid = false;
-    if (req.body.title != null && req.body.description != null && req.body.minYearsExperience != null && req.body.salary != null && req.body.tags != null) {
-        listingValid = isInteger(req.body.salary) && isInteger(req.body.minYearsExperience);
-    }
-    return listingValid;
+function isListingValid (listing) {
+  let listingValid = false;
+  if (
+    listing.title !== null && listing.description !== null && listing.minYearsExperience !== null && 
+    listing.salary !== null && listing.tags !== null
+  ) {
+    listingValid = Number.isInteger(listing.salary) && Number.isInteger(listing.minYearsExperience);
+  }
+  console.log(listingValid);
+  return listingValid;
 }
 
 /**
@@ -31,28 +25,32 @@ function isListingValid (req) {
  * @param {Express} app The express instance to setup the endpoint on
  * @returns {void} Create listing endpoint
  */
- function createListing(app) {
-    app.post('/api/new-listing', async(req, res) => {
-        if (isListingValid(req) && req.user.isManager){
-            const listing = {
-                title: req.body.title,
-                companyName: req.user.companyName,
-                description: req.body.description,
-                minYearsExperience: req.body.minYearsExperience,
-                managerId: req.user.managerId,
-                salary: req.body.salary,
-                tags: req.body.tags
-            }
-            res.status(200);
-            res.send( await createListingDB(listing));
-        } else if (!req.user.isManager){
-            res.status(400);
-            res.send({ Error: 'User not a manager.'})
-        } else {
-            res.status(400);
-            res.send({ Error: 'Invalid Listing.'})
-        }
-    });
+function createListing(app) {
+  app.post('/api/new-listing', async(req, res) => {
+    console.log(req.body);
+    const listing = req.body.listing;
+    const user = req.body.user;
+
+    if (isListingValid(listing) && user.isManager){
+      const listingObj = {
+        title: listing.title,
+        companyName: user.companyName,
+        description: listing.description,
+        minYearsExperience: listing.minYearsExperience,
+        managerId: user.employeeId,
+        salary: listing.salary,
+        tags: listing.tags
+      };
+      res.status(200);
+      res.send( await createListingDB(listingObj));
+    } else if (!user.isManager){
+      res.status(400);
+      res.send({ Error: 'User not a manager.'});
+    } else {
+      res.status(400);
+      res.send({ Error: 'Invalid Listing.'});
+    }
+  });
 }
 
 module.exports = createListing;

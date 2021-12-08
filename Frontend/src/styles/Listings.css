@@ -25,6 +25,7 @@
   background-color: var(--background);
   border-style: none;
   padding: 2px 8px;
+  margin: 10px;
   border-radius: 10px;
   box-shadow: 5px 5px 8px var(--light-shadow), -5px -5px 10px var(--highlight);
 }
