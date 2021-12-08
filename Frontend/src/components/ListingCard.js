@@ -7,10 +7,11 @@ import './../styles/Referral.css';
 
 import Referral from './../components/Referral.js';
 
-const ListingCard = ({ user, setPopupOpen, listingObj }) => {
+const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => {
 
   const [hover, setHover] = React.useState(false);
   const [ referrals, setReferrals ] = React.useState([]);
+  const [ error, setError ] = React.useState(false);
   const { id } = useParams();
   const history = useHistory();
 
@@ -22,6 +23,37 @@ const ListingCard = ({ user, setPopupOpen, listingObj }) => {
   const handleClose = () => {
     setPopupOpen(false);
     history.goBack();
+  };
+
+  const handleDelete = () => {
+    setError(false);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        listingId: listingObj.id,
+        user: user
+      })
+    };
+
+    console.log(`Sending delete request for listing ${listingObj.id}`);
+
+    fetch('/api/delete-listing', options)
+      .then(res => {
+        if(res.status === 200) {
+          setPopupOpen(false);
+          history.goBack();
+          setRefreshListings(true);
+        }
+        else {
+          setError(true);
+        }
+      })
+      .catch(e => { throw e; });
   };
 
   React.useEffect(() => {
@@ -116,19 +148,18 @@ const ListingCard = ({ user, setPopupOpen, listingObj }) => {
           </div>
           <div className='listing-btn-container'>
             <button type='button' id='ref-btn' tabIndex='0'>Leave Referral</button>
-            {/* TODO: delete listing */}
             {listingObj.managerId === user.employeeId ? 
-              <FaTrash id='delete-btn'/> :
+              <FaTrash id='delete-btn' onClick={handleDelete}/> :
               <></>
             }
           </div>
-          {/* eslint-disable */}
-          {/*user.employeeId === listingObj.managerId*/ true ? 
+          {error ? <p id='err-text'>Error deleting listing</p> : <></>}
+          {user.employeeId === listingObj.managerId ?
             <div className='referrals-container'>
               <hr />
               {referrals.length ? 
                 (referrals.map(referral => <Referral referralObj={referral} />))
-                : <p>No referrals on this listing.</p>
+                : <p id='no-referrals-text'>No referrals on this listing.</p>
               }
             </div> 
             : <></>

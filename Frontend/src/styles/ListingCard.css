@@ -134,3 +134,13 @@
     inset 5px 5px 6px var(--light-shadow),
     inset -5px -5px 8px var(--highlight);
 }
+
+#err-text {
+  color: red;
+  margin-top: 10px;
+  margin-bottom: -16px;
+}
+
+#no-referrals-text {
+  margin-top: 30px;
+}
