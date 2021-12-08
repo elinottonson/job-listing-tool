@@ -16,14 +16,25 @@ const Referral = ({ referralObj }) => {
   const [ referrer, setReferrer ] = React.useState({});
 
   React.useEffect(() => {
-    if(!referrer) {
+    if(!Object.keys(referrer).length) {
       const options = {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
       };
+
+      fetch(`/api/user/${referralObj.authorId}`, options)
+        .then(res => {
+          if(res.status === 200) {
+            return res.json();
+          }
+        })
+        .then(data => {
+          setReferrer(data);
+        })
+        .catch(e => { throw e; });
     }
   }, []);
 
@@ -31,8 +42,16 @@ const Referral = ({ referralObj }) => {
     <div className='referral-container'>
       <div className='referral-header'>
         <div className='referral-header-referrer'>
-          <p id='referrer-name'>REFERRER_NAME</p>
-          <p id='referrer-pos'>REFERRER_POSITION</p>
+          <p id='referrer-name'>{
+            referrer.firstName && referrer.lastName ? 
+              referrer.firstName + ' ' + referrer.lastName 
+              : 'Error retreiving referrer name'
+          }
+          </p>
+          <p id='referrer-pos'>{
+            referrer.positionTitle ? referrer.positionTitle : 'Error retreiving referrer position'
+          }
+          </p>
         </div>
         <p id='referral-splitter-text'>→</p>
         <div className='referral-name-email'>
