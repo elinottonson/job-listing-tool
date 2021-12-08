@@ -35,7 +35,7 @@ import './../styles/CreateListingWizard.css';
   }
 */
 
-const ReferralWizard = ({ setOpenReferral, listingObj }) => {
+const ReferralWizard = ({ handleClose, setOpenReferral, listingObj }) => {
 
   const [userInput, setUserInput] = React.useState({
     firstName: '',
@@ -44,7 +44,6 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
     referralText: '',
     listingId: listingObj.id
   });
-  const [errorMsg, setErrorMsg] = React.useState('');
   const [submittingForm, setSubmittingForm] = React.useState(false);
   const [wizardObj, setWizardObj] = React.useState({});
 
@@ -86,7 +85,7 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
           setSubmittingForm(false);
         })
         .catch((e) => {
-          setErrorMsg(e.message);
+          throw e;
         });
     }
   };
@@ -107,10 +106,9 @@ const ReferralWizard = ({ setOpenReferral, listingObj }) => {
           userInput={userInput}
           setUserInput={setUserInput}
           handleChange={handleChange}
-          errorMsg={errorMsg}
           submittingForm={submittingForm}
         />
-        <SubmitPage setOpenReferral={setOpenReferral} />
+        <SubmitPage setOpenReferral={setOpenReferral} handleClose={handleClose} />
       </StepWizard>
     </form>
   );
@@ -134,12 +132,17 @@ const Nav = ({ totalSteps, currentStep }) => {
   );
 };
 
-// TODO: display error message when conditions for moving to the next step have not been met
 const CandidateName = (props) => {
+
+  const [ err, setErr ] = React.useState(false);
+
   //function to make sure required fields are filled in before proceeding
   const filledRequired = () => {
     if (props.userInput.firstName !== '' && props.userInput.lastName !== '') {
       props.nextStep();
+    }
+    else {
+      setErr(true);
     }
   };
 
@@ -147,23 +150,42 @@ const CandidateName = (props) => {
     <div className='step-container'>
       <h1>Candidate Information</h1>
       <div className='input-container'>
+        {err ? <p id='job-info-err-msg'>Please enter valid information.</p> : <></>}
         <label htmlFor='firstName'>First Name *</label>
-        <input classNametype="text" name='firstName' placeholder='First name' onChange={props.handleChange} />
+        <input 
+          classNametype="text" 
+          name='firstName' 
+          placeholder='First name' 
+          onChange={props.handleChange} 
+          id={err ? 'invalid-text' : ''}
+        />
         <label htmlFor='lastName'>Last Name *</label>
-        <input type="text" name='lastName' placeholder='Last name' onChange={props.handleChange} />
+        <input 
+          type="text" 
+          name='lastName' 
+          placeholder='Last name' 
+          onChange={props.handleChange} 
+          id={err ? 'invalid-text' : ''}  
+        />
         <p id='rf-text'>*Required Fields</p>
       </div>
       <div className='step-button-container'>
-        <button className='right-button' type='button' onClick={filledRequired}>Next Step</button>
+        <button type='button' onClick={filledRequired}>Next Step</button>
       </div>
     </div>
   );
 };
 
 const ContactInfo = (props) => {
+
+  const [ err, setErr ] = React.useState(false);
+
   //function to make sure required fields are filled in before proceeding
   const filledRequired = () => {
-    if (isValidEmail(props.userInput.email)) {
+    if (!isValidEmail(props.userInput.email)) {
+      setErr(true);
+    }
+    else {
       props.nextStep();
     }
   };
@@ -173,13 +195,19 @@ const ContactInfo = (props) => {
     <div className='step-container'>
       <h1>Candidate Information</h1>
       <div className='input-container'>
+        {err ? <p id='job-info-err-msg'>Please enter a valid email.</p> : <></>}
         <label htmlFor='email'>Email *</label>
-        <input type='email' name='email' onChange={props.handleChange} />
+        <input 
+          type='email' 
+          name='email' 
+          onChange={props.handleChange} 
+          id={err ? 'invalid-text' : ''}  
+        />
         <p id='rf-text'>*Required Fields</p>
       </div>
       <div className='step-button-container step-two-buttons'>
-        <button className='left-button' type='button' onClick={props.previousStep}>Previous Step</button>
-        <button className='right-button' type='button' onClick={filledRequired}>Next Step</button>
+        <button type='button' onClick={props.previousStep}>Previous Step</button>
+        <button type='button' onClick={filledRequired}>Next Step</button>
       </div>
       
     </div>
@@ -187,9 +215,23 @@ const ContactInfo = (props) => {
 };
 
 const CandidateDescription = (props) => {
+
+  const [ err, setErr ] = React.useState(false);
+
+  const filledRequired = () => {
+    if (!props.userInput.referralText.length) {
+      setErr(true);
+    }
+    else {
+      props.nextStep();
+    }
+  };
+
   return (
     <div className='step-container'>
+      <h1>Candidate Description</h1>
       <div className='input-container'>
+        {err ? <p id='job-info-err-msg'>Please enter a description.</p> : <></>}
         <label htmlFor='referralText' id='ref-text-label'>
           Please briefly describe why you chose to refer this candidate: *
         </label>
@@ -198,14 +240,14 @@ const CandidateDescription = (props) => {
           name='referralText' 
           placeholder='Description' 
           className='text-box' 
-          onChange={props.handleChange} 
+          onChange={props.handleChange}
+          id={err ? 'invalid-text' : ''}
         />
         <p id='rf-text'>*Required Fields</p>
-        <p id='err-msg'>{props.errorMsg}</p>
       </div>
       <div className='step-button-container step-two-buttons'>
-        <button className='left-button' type='button' onClick={props.previousStep}>Previous Step</button>
-        <button className='right-button'>{props.setSubmittingForm ? 'Submitting...' : 'Finish'}</button>
+        <button type='button' onClick={props.previousStep}>Previous Step</button>
+        <button onClick={filledRequired}>{props.setSubmittingForm ? 'Submitting...' : 'Finish'}</button>
       </div>
     </div>
   );
@@ -213,12 +255,12 @@ const CandidateDescription = (props) => {
 
 const SubmitPage = (props) => {
   const exitReferral = () => {
-    props.setOpenReferral(false);
+    props.handleClose();
   };
 
   return (
     <div>
-      <p>Thank you, your referral has been sucessfully submitted!</p>
+      <p id='thankyou-text'>Thank you, your referral has been sucessfully submitted!</p>
       <button type='button' onClick={exitReferral}>Return to Listings</button>
     </div>
   );

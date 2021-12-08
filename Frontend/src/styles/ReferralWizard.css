@@ -20,20 +20,18 @@
   align-content: center;
 }
 .referral-form button {
+  height: 32px;
+  width: 150px;
   background-color: var(--ukg-dark-green);
-  color: var(--font-color);
-  width: fit-content;
-  padding: 10px;
-  display: inline-block;
+  color: hsl(0, 0%, 95%);
+  cursor: pointer;
+  border-style: none;
+  padding: 2px 8px;
+  margin: 10px 2px;
+  border-radius: 10px;
   box-shadow: 
-    3px 3px 8px var(--light-shadow), 
-    -3px -3px 10px var(--highlight);
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: hidden;
-  border-radius: 5px;
-  margin-top: 10px;
+    5px 5px 8px var(--light-shadow), 
+    -5px -5px 10px var(--highlight);
 }
 
 .referral-form button:hover {
@@ -58,4 +56,8 @@
 
 .referral-form input {
   width: 100%;
+}
+
+#thankyou-text {
+  margin: 10px 0px 16px 0px;
 }

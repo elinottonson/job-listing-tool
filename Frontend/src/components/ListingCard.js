@@ -101,7 +101,13 @@ const ListingCard = ({ setPopupOpen, listingObj }) => {
               onClick={openReferralCard}
             >{openReferral ? 'Cancel' : 'Leave a Referral'}</button>
           </div>
-          {openReferral ? <ReferralWizard setOpenReferral={setOpenReferral} listingObj={listingObj} /> : <></>}
+          {openReferral ? 
+            <ReferralWizard 
+              handleClose={handleClose} 
+              setOpenReferral={setOpenReferral} 
+              listingObj={listingObj} 
+            /> : <></>
+          }
         </div>
       </div>
     );

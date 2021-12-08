@@ -65,6 +65,7 @@
   color: red;
   font-size: small;
   align-self: flex-start;
+  margin-left: 0px;
 }
 
 #invalid-text {
@@ -139,7 +140,7 @@
 #add-tag-btn {
   width: 96px;
   background-color: var(--background);
-  color: black; /* placeholder */
+  color: var(--font-color);
 }
 #add-tag-btn:hover {
   box-shadow: 
