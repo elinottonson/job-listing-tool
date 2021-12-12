@@ -143,9 +143,6 @@ const Login = ({ setUser , darktheme, setDarkTheme}) => {
     <div>
       { darktheme ? <div style={dmImageStyle}></div> : <div style={bgImageStyle}></div>}
       <div className='extras'>
-        <div className='darkmode-toggle'>
-          <DarkThemeToggle darkTheme={darktheme} setDarkTheme={setDarkTheme}/>
-        </div>
         <BringBackTendiesCredit />
       </div>
       <main className='login-center-container'>
@@ -180,6 +177,9 @@ const Login = ({ setUser , darktheme, setDarkTheme}) => {
             {/* ^^^ This should probably be a react-router <Link> eventually instead */}
             <input type='submit' tabIndex='0' value={loading ? 'Loading...' : 'Submit'} id='submit' />
           </form>
+          <div className='darkmode-toggle'>
+            <DarkThemeToggle className='darkthemetoggle' darkTheme={darktheme} setDarkTheme={setDarkTheme}/>
+          </div>
         </div>
       </main>
     </div>
