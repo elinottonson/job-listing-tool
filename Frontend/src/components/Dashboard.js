@@ -93,14 +93,7 @@ const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
         <Switch>
           <Route
             path='/job/:id'
-            children={
-              <ListingCard 
-                user={user} 
-                setPopupOpen={setPopupOpen} 
-                listingObj={popupOpen} 
-                setRefreshListings={setRefreshListings}
-              />
-            }
+            children={<ListingCard setPopupOpen={setPopupOpen} listingObj={popupOpen} />}
           />
           <Route 
             path='/create-listing'

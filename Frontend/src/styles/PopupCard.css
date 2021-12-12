@@ -53,14 +53,14 @@
 #close-btn-alt {
   justify-self: right;
   font-size: large;
-  color: var(--card-close-button);
+  color: hsl(0, 0%, 10%);
   width: 30px;
   height: 30px;
   padding: 4px;
-  border-radius: 10px;
+  border-radius: 30px;
   margin-top: -2px;
 }
 #close-btn-alt:hover {
-  background-color: var(--card-close-button-hover);
+  background-color: lightgray;
   cursor: pointer;
 }

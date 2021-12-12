@@ -35,8 +35,7 @@ app.use(methodOverride('_method'));
 
 const endpoints = [
   require('./endpoints/testGet'),
-  require('./endpoints/getUserById'),
-  require('./endpoints/reAuth'),
+  require('./endpoints/getUser'),
   require('./endpoints/logout'),
   require('./endpoints/listingsPost'),
   require('./endpoints/referralsFromListingGet'),
