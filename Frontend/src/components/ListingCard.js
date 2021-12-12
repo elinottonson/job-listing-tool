@@ -1,20 +1,13 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-
-import { FaRegFilePdf, FaTimes, FaTrash } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
+import ReferralWizard from './ReferralWizard.js';
 import './../styles/ListingCard.css';
-import './../styles/Listings.css';
-import './../styles/Referral.css';
 
-
-import Referral from './../components/Referral.js';
-
-const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => {
+const ListingCard = ({ setPopupOpen, listingObj }) => {
 
   const [hover, setHover] = React.useState(false);
-  const [ referrals, setReferrals ] = React.useState([]);
-  const [ error, setError ] = React.useState(false);
-  
+  const [openReferral, setOpenReferral] = React.useState(false);
   const { id } = useParams();
   const history = useHistory();
 
@@ -28,62 +21,13 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
     history.goBack();
   };
 
-  const handleDelete = () => {
-    setError(false);
-
-    const options = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        listingId: listingObj.id,
-        user: user
-      })
-    };
-
-    console.log(`Sending delete request for listing ${listingObj.id}`);
-
-    fetch('/api/delete-listing', options)
-      .then(res => {
-        if(res.status === 200) {
-          setPopupOpen(false);
-          history.goBack();
-          setRefreshListings(true);
-        }
-        else {
-          setError(true);
-        }
-      })
-      .catch(e => { throw e; });
+  const openReferralCard = (event) => {
+    event.preventDefault();
+    setOpenReferral(!openReferral);
   };
 
-  React.useEffect(() => {
-    if(!referrals.length) {
-      const options = {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      };
-
-      console.log(`Sending referral request for listing ${listingObj.id}`);
-
-      fetch(`/api/referrals/${listingObj.id}`, options)
-        .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          setReferrals(data);
-        })
-        .catch(e => { throw e; });
-    }
-  }, []);
-
-
   if (!listingObj) {
-    // TODO:
+    // TODO
     // add logic for getting data from backend with listing id, and use SetPopupOpen to add that data,
     // This should make the react-router links work when they are directly accessed
     // A hook maybe?
@@ -152,23 +96,17 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
             </p>
           </div>
           <div className='listing-btn-container'>
-            <button type='button' id='ref-btn' tabIndex='0'>Leave Referral</button>
-            {listingObj.managerId === user.employeeId ? 
-              <FaTrash id='delete-btn' onClick={handleDelete}/> :
-              <></>
-            }
+            <button
+              className='referralButton' 
+              onClick={openReferralCard}
+            >{openReferral ? 'Cancel' : 'Leave a Referral'}</button>
           </div>
-          {error ? <p id='err-text'>Error deleting listing</p> : <></>}
-          {user.employeeId === listingObj.managerId ?
-            <div className='referrals-container'>
-              <hr />
-              {referrals.length ? 
-                (referrals.map(referral => <Referral referralObj={referral} />))
-                : <p id='no-referrals-text'>No referrals on this listing.</p>
-              }
-            </div> 
-            : <></>
-
+          {openReferral ? 
+            <ReferralWizard 
+              handleClose={handleClose} 
+              setOpenReferral={setOpenReferral} 
+              listingObj={listingObj} 
+            /> : <></>
           }
         </div>
       </div>

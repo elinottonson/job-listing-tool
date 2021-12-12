@@ -88,7 +88,7 @@ html {
   --tags-hover: hsl(226, 10%, 35%);
 
   --card-close-button: hsl(0, 0%, 88%);
-  --card-close-button-hover: hsl(226, 10%, 35%);
+  --card-close-button-hover: hsl(0, 0%, 50%);
 
   --filter-range-white: hsl(0, 0%, 88%);
 }
