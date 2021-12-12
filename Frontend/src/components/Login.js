@@ -5,6 +5,8 @@ import { isValidUser, isValidEmail } from '../lib/Validation';
 import BringBackTendiesCredit from './BringBackTendiesCredit';
 import logo from './../images/ukglogo.png';
 import bgImage from './../images/login-background.jpg';
+import dmImage from './../images/darkmode_login_background.jpg';
+import DarkThemeToggle from './DarkThemeToggle';
 
 /*
   email/pw for testing:
@@ -120,13 +122,25 @@ const Login = ({ setUser }) => {
     position: 'fixed'
   };
 
+  const dmImageStyle = {
+    backgroundImage: `url(${dmImage})`,
+    backgroundAttachment: 'fixed',
+    minWidth: '100%',
+    minHeight: '100%',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    transform: 'scale(1.03)',
+    zIndex: '-5',
+    position: 'fixed'
+  };
+
   /*
     You'll notice that the <input> for email uses 'ref' instead of 'onChange'. 
     This is to accomodate the workaround seen above.
   */
   return (
     <div>
-      <div style={bgImageStyle}></div>
+      {DarkThemeToggle ? <div style={dmImageStyle}></div> : <div style={bgImageStyle}></div>}
       <BringBackTendiesCredit />
       <main className='login-center-container'>
         <div className='login-container'>
