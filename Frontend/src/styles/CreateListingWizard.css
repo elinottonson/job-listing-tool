@@ -41,7 +41,7 @@
   width: 100%;
 }
 
-.text-box {
+.jobdesc {
   font-family: sans-serif;
   font-size: small;
   resize: vertical;
@@ -65,7 +65,6 @@
   color: red;
   font-size: small;
   align-self: flex-start;
-  margin-left: 0px;
 }
 
 #invalid-text {
@@ -140,7 +139,7 @@
 #add-tag-btn {
   width: 96px;
   background-color: var(--background);
-  color: var(--font-color);
+  color: black; /* placeholder */
 }
 #add-tag-btn:hover {
   box-shadow: 

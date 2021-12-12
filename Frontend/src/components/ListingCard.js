@@ -1,11 +1,9 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-
 import { FaRegFilePdf, FaTimes, FaTrash } from 'react-icons/fa';
 import './../styles/ListingCard.css';
 import './../styles/Listings.css';
 import './../styles/Referral.css';
-
 
 import Referral from './../components/Referral.js';
 
@@ -14,7 +12,6 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
   const [hover, setHover] = React.useState(false);
   const [ referrals, setReferrals ] = React.useState([]);
   const [ error, setError ] = React.useState(false);
-  
   const { id } = useParams();
   const history = useHistory();
 
@@ -81,13 +78,11 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
     }
   }, []);
 
-
   if (!listingObj) {
     // TODO:
     // add logic for getting data from backend with listing id, and use SetPopupOpen to add that data,
     // This should make the react-router links work when they are directly accessed
     // A hook maybe?
-
     return <></>;
   }
   else {
@@ -168,7 +163,6 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
               }
             </div> 
             : <></>
-
           }
         </div>
       </div>
