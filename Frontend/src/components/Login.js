@@ -7,6 +7,7 @@ import logo from './../images/ukglogo.png';
 import darklogo from './../images/darkukglogoed.png';
 import bgImage from './../images/login-background.jpg';
 import dmImage from './../images/darkmode_login_background3.jpg';
+import DarkThemeToggle from './DarkThemeToggle';
 
 /*
   email/pw for testing:
@@ -32,7 +33,7 @@ import dmImage from './../images/darkmode_login_background3.jpg';
       }
     }
 */
-const Login = ({ setUser , darktheme}) => {
+const Login = ({ setUser , darktheme, setDarkTheme}) => {
 
   // State Varaibles
   const emailText = React.useRef(null); // for auto-fill workaround
@@ -141,7 +142,12 @@ const Login = ({ setUser , darktheme}) => {
   return (
     <div>
       { darktheme ? <div style={dmImageStyle}></div> : <div style={bgImageStyle}></div>}
-      <BringBackTendiesCredit />
+      <div className='extras'>
+        <div className='darkmode-toggle'>
+          <DarkThemeToggle darkTheme={darktheme} setDarkTheme={setDarkTheme}/>
+        </div>
+        <BringBackTendiesCredit />
+      </div>
       <main className='login-center-container'>
         <div className='login-container'>
           <div className='logo-container'>
