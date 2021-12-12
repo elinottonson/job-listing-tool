@@ -1,4 +1,4 @@
-const {Express} = require('express');
+const { Express } = require('express');
 const postReferrals = require('../databaseInteraction/postReferrals');
 const mailer = require('../nodemailer/mailer');
 
@@ -8,7 +8,7 @@ const mailer = require('../nodemailer/mailer');
  * @param {string} email the email being checked
  * @returns {boolean} true if the email is valid, false otherwise
  */
-function emailIsValid (email) {
+function emailIsValid(email) {
     return /\S+@\S+\.\S+/.test(email);
 }
 
@@ -28,7 +28,7 @@ function nameHasNumbers(_string) {
 * @param {object} req the request send to backend.
 * @returns {boolean} true is referral is valid, false otherwise
 */
-function isReferralValid (req) {
+function isReferralValid(req) {
     var refValid = false;
     if (req.body.firstName != null && req.body.lastName != null && req.body.email != null && req.body.listingId != null) {
         refValid = emailIsValid(req.body.email) && nameHasNumbers(req.body.firstName) && nameHasNumbers(req.body.lastName);
@@ -43,21 +43,30 @@ function isReferralValid (req) {
  * @returns {void} Sets up new referral endpoint
  */
 function referralPost(app) {
-    app.post('/api/new-referral', async(req, res) => {
-        if (isReferralValid(req)){
+    app.post('/api/new-referral', async (req, res) => {
+        if (isReferralValid(req)) {
+            if (!req.user) {
+                res.status(400);
+                res.send({ Error: 'deprecated user object' });
+                return;
+            }
+            const company = req.user.companyName;
+            const authorId = req.user.employeeId;
+
             const referral = {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
                 referralText: req.body.referralText,
                 listingId: req.body.listingId,
-                companyName: req.body.companyName,
-                authorId: req.body.authorId
-            }
+                companyName: company,
+                authorId: authorId
+            };
             res.status(200);
             mailer(referral);
             res.send(await postReferrals(referral));
-        } else {
+        }
+        else {
             res.status(400);
             res.send({ Error: 'Invalid referral.' });
         }

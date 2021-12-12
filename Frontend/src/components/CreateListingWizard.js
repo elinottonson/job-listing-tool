@@ -255,7 +255,7 @@ const JobDescription = ({ nextStep, previousStep, userInput, handleChange }) => 
       <h1>Job Description</h1>
       <div className='input-container'>
         {err ? <p id='job-info-err-msg'>Please add a description.</p> : <></>}
-        <textarea className='jobdesc'  
+        <textarea className='text-box'  
           placeholder="Job Description" 
           rows='8'
           name='description' 
