@@ -4,9 +4,9 @@ import './../styles/Login.css';
 import { isValidUser, isValidEmail } from '../lib/Validation';
 import BringBackTendiesCredit from './BringBackTendiesCredit';
 import logo from './../images/ukglogo.png';
+import darklogo from './../images/darkukglogoed.png';
 import bgImage from './../images/login-background.jpg';
-import dmImage from './../images/darkmode_login_background.jpg';
-import DarkThemeToggle from './DarkThemeToggle';
+import dmImage from './../images/darkmode_login_background3.jpg';
 
 /*
   email/pw for testing:
@@ -32,7 +32,7 @@ import DarkThemeToggle from './DarkThemeToggle';
       }
     }
 */
-const Login = ({ setUser }) => {
+const Login = ({ setUser , darktheme}) => {
 
   // State Varaibles
   const emailText = React.useRef(null); // for auto-fill workaround
@@ -140,11 +140,15 @@ const Login = ({ setUser }) => {
   */
   return (
     <div>
-      {DarkThemeToggle ? <div style={dmImageStyle}></div> : <div style={bgImageStyle}></div>}
+      { darktheme ? <div style={dmImageStyle}></div> : <div style={bgImageStyle}></div>}
       <BringBackTendiesCredit />
       <main className='login-center-container'>
         <div className='login-container'>
-          <img className='ukglogo' src={logo} alt='UKG Logo' />
+          <div className='logo-container'>
+            {darktheme ? 
+              <img className='darkukglogo' src={darklogo} alt='UKG Logo' /> :
+              <img className='ukglogo' src={logo} alt='UKG Logo' />}
+          </div>
           <h1 id='login-page-h1'>Sign in</h1>
           <form onSubmit={handleSubmit} className='login-form'>
             <input

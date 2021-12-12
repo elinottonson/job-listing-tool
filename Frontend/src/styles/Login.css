@@ -30,11 +30,26 @@
   width: 100%;
 }
 
+.logo-container {
+  width: fit-content;
+
+  /* overflow:hidden; */
+  align-items: center;
+}
+
 .ukglogo {
   width: 75%;
   padding: 5px;
   border-radius: 10%;
   margin: 0px 25px;
+  margin-bottom: 15px;
+}
+
+.darkukglogo {
+  width: 200px;
+  /* padding: 5px; */
+  border-radius: 10px;
+  margin-right: 5px;
   margin-bottom: 15px;
 }
 

@@ -39,7 +39,7 @@ function App() {
             {
               Object.keys(user).length ? 
                 <Redirect to='/dashboard'/> : 
-                <Login setUser={setUser} />
+                <Login setUser={setUser} darktheme={darkTheme} />
             }
           </Route>
           <Route path='/dashboard'>
