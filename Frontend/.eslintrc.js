@@ -25,8 +25,6 @@ module.exports = {
     'quote-props': ['off'],
     'space-infix-ops':['warn'],
     'react/prop-types': [0],
-    'no-unused-vars': ['off'],
-    'no-constant-condition': ['off'],
-    'no-empty': ['warn']
+    'no-unused-vars': ['off']
   }
 };

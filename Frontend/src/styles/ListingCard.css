@@ -38,13 +38,6 @@
   box-shadow: 2px 2px 10px var(--dark-shadow);
 }
 
-@media screen and (max-width: 1000px) {
-  .listing-card {
-    width: 36rem;
-    left: 69%; /* it's actually centered I promise */
-  }
-}
-
 #popup-title-sal {
   align-self: flex-start;
   margin-top: 2px;
@@ -68,7 +61,7 @@
   width: 30px;
   height: 30px;
   padding: 4px;
-  border-radius: 10px;
+  border-radius: 30px;
   margin-left: 30px;
   margin-top: -2px;
 }
@@ -85,33 +78,6 @@
 #popup-date {
   color: var(--font-sub);
   font-size: small;
-}
-
-.listing-btn-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-#delete-btn {
-  color: var(--font-color);
-  width: 42px;
-  height: 42px;
-  padding: 10px;
-  align-self: center;
-  margin-top: 20px;
-  margin-left: 20px;
-  border-radius: 10px;
-  box-shadow: 
-    5px 5px 8px var(--light-shadow),
-    -5px -5px 10px var(--highlight);
-}
-#delete-btn:hover {
-  cursor: pointer;
-  box-shadow: 
-    inset 5px 5px 6px var(--light-shadow),
-    inset -5px -5px 8px var(--highlight);
 }
 
 #ref-btn {
@@ -133,14 +99,4 @@
   box-shadow: 
     inset 5px 5px 6px var(--light-shadow),
     inset -5px -5px 8px var(--highlight);
-}
-
-#err-text {
-  color: red;
-  margin-top: 10px;
-  margin-bottom: -16px;
-}
-
-#no-referrals-text {
-  margin-top: 30px;
 }

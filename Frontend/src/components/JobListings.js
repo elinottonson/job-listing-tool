@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import { FaPlus } from 'react-icons/fa';
 import './../styles/Listings.css';
 
 import JobListing from './JobListing';
@@ -129,16 +128,16 @@ const JobListings = (
         {user.isManager ? 
           <div>
             <button
-              onClick={() => setManagerListings(!managerListings)}
-              id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
-            >Show Only Own Listings</button>
-            <FaPlus
               onClick={() => {
                 history.push('/create-listing');
                 setPopupOpen(true);
               }}
-              id='add-listing-btn'
-            />
+              id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
+            >Create New Listing</button>
+            <button
+              onClick={() => setManagerListings(!managerListings)}
+              id={managerListings ? 'manager-listings-on' : 'manager-listings-off'}
+            >Show Only Own Listings</button>
           </div>
           : <></>}
       </div>
