@@ -11,7 +11,6 @@ const JobListings = (
   
   const [listings, setListings] = React.useState([]);
   const [ managerListings, setManagerListings ] = React.useState(false);
-  const [ createListingOpen, setCreateListingOpen ] = React.useState(false);
 
   const history = useHistory();
 
