@@ -37,8 +37,27 @@
   background-color: var(--background);
   border-style: none;
   padding: 2px 8px;
+  margin: 10px;
   border-radius: 10px;
-  box-shadow: inset 3px 3px 6px var(--light-shadow),
+  box-shadow: 
+    inset 3px 3px 6px var(--light-shadow),
+    inset -3px -3px 8px var(--highlight);
+}
+
+#add-listing-btn {
+  color: var(--font-color);
+  height: 30px;
+  width: 30px;
+  padding: 6px;
+  border-radius: 30px;
+  box-shadow: 
+    5px 5px 8px var(--light-shadow), 
+    -5px -5px 10px var(--highlight);
+}
+#add-listing-btn:hover {
+  cursor: pointer;
+  box-shadow: 
+    inset 3px 3px 6px var(--light-shadow),
     inset -3px -3px 8px var(--highlight);
 }
 
@@ -101,7 +120,7 @@ ul {
   text-align: left;
 }
 #title {
-  margin-bottom: -5px;
+  margin-bottom: -4px;
 }
 #subtitle {
   display: flex;
@@ -119,7 +138,7 @@ ul {
   text-align: right;
 }
 #manager-name {
-  margin-bottom: -5px;
+  margin-bottom: -4px;
 }
 #manager-pos {
   color: var(--font-sub);

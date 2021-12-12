@@ -126,7 +126,7 @@ const Nav = ({ totalSteps, currentStep }) => {
       >&bull;</span>
     ));
   }
-  
+
   return (
     <div>{dots}</div>
   );
@@ -209,7 +209,7 @@ const ContactInfo = (props) => {
         <button type='button' onClick={props.previousStep}>Previous Step</button>
         <button type='button' onClick={filledRequired}>Next Step</button>
       </div>
-      
+
     </div>
   );
 };
@@ -266,4 +266,4 @@ const SubmitPage = (props) => {
   );
 };
 
-export default ReferralWizard;
+export default ReferralWizard; 

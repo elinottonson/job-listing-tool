@@ -7,14 +7,14 @@ const {models} = require('../sequelizeSetup/sequalizeConstructor');
  * @returns {Promise<object?>} a promise evaluating to the user object, if found, otherwise null
  */
 function getUserById(id) {
-    user = models.Employee.findOne({
-        raw:true,
-        attributes: { exclude: ['id'] },
-        where: {
-          id: id,
-        }
-    });
-    return user;
+  let user = models.Employee.findOne({
+    raw:true,
+    attributes: { exclude: ['id'] },
+    where: {
+      employeeId: id
+    }
+  });
+  return user;
 }
 
 module.exports = getUserById;
