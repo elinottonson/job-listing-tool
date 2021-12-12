@@ -41,7 +41,7 @@
   width: 100%;
 }
 
-.jobdesc {
+.text-box {
   font-family: sans-serif;
   font-size: small;
   resize: vertical;
@@ -139,7 +139,7 @@
 #add-tag-btn {
   width: 96px;
   background-color: var(--background);
-  color: black; /* placeholder */
+  color: var(--font-color);
 }
 #add-tag-btn:hover {
   box-shadow: 

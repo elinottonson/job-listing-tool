@@ -9,7 +9,7 @@ const mailer = require('../nodemailer/mailer');
  * @returns {boolean} true if the email is valid, false otherwise
  */
 function emailIsValid (email) {
-    return /\S+@\S+\.\S+/.test(email);
+  return /\S+@\S+\.\S+/.test(email);
 }
 
 /**
@@ -19,7 +19,7 @@ function emailIsValid (email) {
 * @returns {boolean} true if no numbers, false otherwise
 */
 function nameHasNumbers(_string) {
-    return !(/\d/.test(_string));
+  return !(/\d/.test(_string));
 }
 
 /**
@@ -29,11 +29,11 @@ function nameHasNumbers(_string) {
 * @returns {boolean} true is referral is valid, false otherwise
 */
 function isReferralValid (req) {
-    var refValid = false;
-    if (req.body.firstName != null && req.body.lastName != null && req.body.email != null && req.body.listingId != null) {
-        refValid = emailIsValid(req.body.email) && nameHasNumbers(req.body.firstName) && nameHasNumbers(req.body.lastName);
-    }
-    return refValid;
+  var refValid = false;
+  if (req.body.firstName != null && req.body.lastName != null && req.body.email != null && req.body.listingId != null) {
+    refValid = emailIsValid(req.body.email) && nameHasNumbers(req.body.firstName) && nameHasNumbers(req.body.lastName);
+  }
+  return refValid;
 }
 
 /**
@@ -43,25 +43,25 @@ function isReferralValid (req) {
  * @returns {void} Sets up new referral endpoint
  */
 function referralPost(app) {
-    app.post('/api/new-referral', async(req, res) => {
-        if (isReferralValid(req)){
-            const referral = {
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                referralText: req.body.referralText,
-                listingId: req.body.listingId,
-                companyName: req.body.companyName,
-                authorId: req.body.authorId
-            }
-            res.status(200);
-            mailer(referral);
-            res.send(await postReferrals(referral));
-        } else {
-            res.status(400);
-            res.send({ Error: 'Invalid referral.' });
-        }
-    });
+  app.post('/api/new-referral', async(req, res) => {
+    if (isReferralValid(req)){
+      const referral = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        referralText: req.body.referralText,
+        listingId: req.body.listingId,
+        companyName: req.body.companyName,
+        authorId: req.body.authorId
+      };
+      res.status(200);
+      mailer(referral);
+      res.send(await postReferrals(referral));
+    } else {
+      res.status(400);
+      res.send({ Error: 'Invalid referral.' });
+    }
+  });
 }
 
 module.exports = referralPost;

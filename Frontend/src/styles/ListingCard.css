@@ -94,13 +94,34 @@
   justify-content: center;
 }
 
+.referralButton {
+  width: fit-content;
+  height: 42px;
+  padding: 10px 20px;
+  box-shadow: 
+    3px 3px 8px var(--light-shadow), 
+    -3px -3px 10px var(--highlight);
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+  border-radius: 10px;
+  background-color: var(--background);
+  color: var(--font-color)
+}
+
+.referralButton:hover {
+  cursor: pointer;
+  box-shadow: inset 3px 3px 6px var(--light-shadow),
+    inset -3px -3px 8px var(--highlight);
+}
+
 #delete-btn {
   color: var(--font-color);
   width: 42px;
   height: 42px;
   padding: 10px;
   align-self: center;
-  margin-top: 20px;
   margin-left: 20px;
   border-radius: 10px;
   box-shadow: 

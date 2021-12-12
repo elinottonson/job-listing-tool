@@ -11,7 +11,8 @@ function isListingValid (listing) {
   let listingValid = false;
   if (
     listing.title !== null && listing.description !== null && listing.minYearsExperience !== null && 
-    listing.salary !== null && listing.tags !== null
+    listing.salary !== null && listing.tags !== null && listing.managerId !== null &&
+    listing.companyName !== null
   ) {
     listingValid = Number.isInteger(listing.salary) && Number.isInteger(listing.minYearsExperience);
   }
@@ -31,7 +32,7 @@ function createListing(app) {
     const listing = req.body.listing;
     const user = req.body.user;
 
-    if (isListingValid(listing) && user.isManager){
+    if (user.isManager){
       const listingObj = {
         title: listing.title,
         companyName: user.companyName,
@@ -41,8 +42,10 @@ function createListing(app) {
         salary: listing.salary,
         tags: listing.tags
       };
-      res.status(200);
-      res.send( await createListingDB(listingObj));
+      if(isListingValid(listingObj)) {
+        res.status(200);
+        res.send( await createListingDB(listingObj)); 
+      }
     } else if (!user.isManager){
       res.status(400);
       res.send({ Error: 'User not a manager.'});

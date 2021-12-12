@@ -6,10 +6,12 @@ import './../styles/Listings.css';
 import './../styles/Referral.css';
 
 import Referral from './../components/Referral.js';
+import ReferralWizard from './ReferralWizard.js';
 
 const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => {
 
   const [hover, setHover] = React.useState(false);
+  const [openReferral, setOpenReferral] = React.useState(false);
   const [ referrals, setReferrals ] = React.useState([]);
   const [ error, setError ] = React.useState(false);
   const { id } = useParams();
@@ -23,6 +25,11 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
   const handleClose = () => {
     setPopupOpen(false);
     history.goBack();
+  };
+
+  const openReferralCard = (event) => {
+    event.preventDefault();
+    setOpenReferral(!openReferral);
   };
 
   const handleDelete = () => {
@@ -147,13 +154,23 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
             </p>
           </div>
           <div className='listing-btn-container'>
-            <button type='button' id='ref-btn' tabIndex='0'>Leave Referral</button>
+            <button
+              className='referralButton' 
+              onClick={openReferralCard}
+            >{openReferral ? 'Cancel' : 'Leave a Referral'}</button>
             {listingObj.managerId === user.employeeId ? 
               <FaTrash id='delete-btn' onClick={handleDelete}/> :
               <></>
             }
           </div>
           {error ? <p id='err-text'>Error deleting listing</p> : <></>}
+          {openReferral ? 
+            <ReferralWizard 
+              handleClose={handleClose} 
+              setOpenReferral={setOpenReferral} 
+              listingObj={listingObj} 
+            /> : <></>
+          }
           {user.employeeId === listingObj.managerId ?
             <div className='referrals-container'>
               <hr />
