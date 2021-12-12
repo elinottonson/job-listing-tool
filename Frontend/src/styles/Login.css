@@ -50,7 +50,6 @@
   /* padding: 5px; */
   border-radius: 10px;
   margin-right: 5px;
-  margin-top: -5px;
   margin-bottom: 15px;
 }
 
@@ -125,13 +124,7 @@ label {
   /* color: lightgray; */
 }
 
-.bbtLogo {
-  width: 100%;
-}
-
-.extras {
-  display: flex;
-  flex-direction: row;
+.bringBackTendiesCredit {
   width: 15%;
   align-items: right;
   position: absolute;

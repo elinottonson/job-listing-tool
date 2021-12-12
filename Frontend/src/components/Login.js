@@ -7,7 +7,6 @@ import logo from './../images/ukglogo.png';
 import darklogo from './../images/darkukglogoed.png';
 import bgImage from './../images/login-background.jpg';
 import dmImage from './../images/darkmode_login_background3.jpg';
-import DarkThemeToggle from './DarkThemeToggle';
 
 /*
   email/pw for testing:
@@ -177,9 +176,9 @@ const Login = ({ setUser , darktheme, setDarkTheme}) => {
             {/* ^^^ This should probably be a react-router <Link> eventually instead */}
             <input type='submit' tabIndex='0' value={loading ? 'Loading...' : 'Submit'} id='submit' />
           </form>
-          <div className='darkmode-toggle'>
+          {/* <div className='darkmode-toggle'>
             <DarkThemeToggle className='darkthemetoggle' darkTheme={darktheme} setDarkTheme={setDarkTheme}/>
-          </div>
+          </div> */}
         </div>
       </main>
     </div>
