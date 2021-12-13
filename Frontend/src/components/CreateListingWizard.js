@@ -36,6 +36,8 @@ const CreateListingWizard = ({ user, tags, setTags, setPopupOpen, setRefreshList
     tags: []
   });
 
+  const [newTagAdded, setNewTagAdded] = React.useState({});
+
   const history = useHistory();
 
   // Called on every onChange event
@@ -276,9 +278,10 @@ const JobDescription = ({ nextStep, previousStep, userInput, handleChange }) => 
 };
 
 
-const Tags = ({ previousStep, handleChange, handleSubmit, tags, setTags }) => {
+const Tags = ({ previousStep, handleChange, handleSubmit, tags, setTags}) => {
 
   const [addNewTag, setAddNewTag] = React.useState('');
+  const [newTagAdded, setNewTagAdded] = React.useState(false);
 
   const addTag = (event)=> {
     setAddNewTag(event.target.value);
@@ -288,9 +291,11 @@ const Tags = ({ previousStep, handleChange, handleSubmit, tags, setTags }) => {
     event.preventDefault();
     if (addNewTag != '' && addNewTag in tags == false) {
       setTags(tags.concat(addNewTag));
+      document.getElementById('new-tag').value = '';
+      setNewTagAdded(true);
     }
   };
-  
+
   return (
     <div className='step-container'>
       <h1>Tags</h1>
@@ -298,12 +303,14 @@ const Tags = ({ previousStep, handleChange, handleSubmit, tags, setTags }) => {
         <p id='inner-title'>Select tags to add to the listing:</p>
         <Select className='tag-container' classNamePrefix='tags'
           placeholder="Select Tags"
+          id='selecttags'
           isMulti={true} 
           options={tags.map(tag => { return {value: tag, label: tag}; })}
           maxMenuHeight={200}
           onChange={handleChange}
         />
         <p id='inner-title'>Or, create a new tag:</p>
+        {newTagAdded ? <p  id='rf-text'>New Tag Added!</p> : <></>}
         <div className='add-tag-container'>
           <input type='text' placeholder="New Tag" onChange={addTag} id='new-tag'/>
           <button id='add-tag-btn' onClick={handleAddNewTag}>Add Tag</button>

@@ -83,10 +83,12 @@ const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
             listingObj={popupOpen}
             searchInput={searchInput} 
             filterObj={filterObj} 
+            setFilterObj={setFilterObj}
             setTags={setTags}
             popupOpen={popupOpen}
             refreshListings={refreshListings}
             setRefreshListings={setRefreshListings}
+             
           />
         </div>
         <Footer />
