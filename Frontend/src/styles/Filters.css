@@ -11,16 +11,16 @@
 }
 
 @media screen and (min-width: 1001px) {
-  .filter{
+  .filter {
     flex-direction: column;
     max-width: 50%;
-    margin-top: 42px;
+    margin-top: 64px;
     margin-right: 10px;
   }
 }
 
 @media screen and (max-width: 1000px) {
-  .filter{
+  .filter {
     flex-direction: row;
     width: 95%;
     margin-bottom: 30px;

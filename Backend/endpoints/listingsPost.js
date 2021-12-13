@@ -9,7 +9,7 @@ const {Express} = require('express');
  */
 function listingsPost(app) {
   app.post('/api/listings', async (req, res) => {
-    const company = req.user.companyName;
+    const company = req.body.company;
     if(!company){
       res.status(400);
       res.send({ Error: 'No company sent to look for listings' });
