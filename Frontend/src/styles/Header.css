@@ -38,6 +38,13 @@ nav {
   margin-bottom: 2px;
 }
 
+#dark-header-title img {
+  width: 70px;
+  height: 30px;
+  margin-left: -5px;
+  border-radius: 10px;
+}
+
 .header-btn {
   padding: 0px 18px;
   height: 100%;
