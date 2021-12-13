@@ -50,6 +50,7 @@
   /* padding: 5px; */
   border-radius: 10px;
   margin-right: 5px;
+  margin-top: -5px;
   margin-bottom: 15px;
 }
 
@@ -124,7 +125,13 @@ label {
   /* color: lightgray; */
 }
 
-.bringBackTendiesCredit {
+.bbtLogo {
+  width: 100%;
+}
+
+.extras {
+  display: flex;
+  flex-direction: row;
   width: 15%;
   align-items: right;
   position: absolute;
@@ -132,13 +139,18 @@ label {
   right: 0px;
 }
 
+.darkmode-toggle-container {
+  display: flex;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
 .darkmode-toggle {
-  width: 100%;
+  width: 50px;
   height: 50px;
-  position: inherit;
-  right: 500px;
+  margin-top: 50px;
   border-radius: 10px;
-  background-color: var(--background)s;
-  display:flex;
-  flex-direction: row-reverse;
+  background-color: var(--background);
+  
 }
