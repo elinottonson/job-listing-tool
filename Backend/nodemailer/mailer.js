@@ -28,7 +28,7 @@ async function mailer(ref){
 
         await transporter.sendMail({
             from: '"no-reply" <joblistintest@gmail.com>', // sender address
-            to: "alenna.sprio@gmail.com", // list of receivers
+            to: "alenna.spiro@gmail.com", // list of receivers
             subject: "Job Referral", // Subject line
             text: text, // plain text body,
             html: text + "<p>Click <a>https://job-listing-tool-320.herokuapp.com/dashboard</a> to see the referral.</p>"
