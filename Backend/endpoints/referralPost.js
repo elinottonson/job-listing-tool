@@ -52,7 +52,7 @@ function referralPost(app) {
         referralText: req.body.referralText,
         listingId: req.body.listingId,
         companyName: req.body.companyName,
-        authorId: req.body.authorId
+        authorId: req.body.user.id
       };
       res.status(200);
       mailer(referral);
