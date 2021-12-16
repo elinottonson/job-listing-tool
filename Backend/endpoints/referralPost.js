@@ -51,8 +51,8 @@ function referralPost(app) {
         email: req.body.email,
         referralText: req.body.referralText,
         listingId: req.body.listingId,
-        companyName: req.body.companyName,
-        authorId: req.body.authorId
+        companyName: req.body.user.companyName,
+        authorId: req.body.user.employeeId
       };
       res.status(200);
       mailer(referral);

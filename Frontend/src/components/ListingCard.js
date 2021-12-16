@@ -22,6 +22,7 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
       handleClose();
     }
   };
+
   const handleClose = () => {
     setPopupOpen(false);
     history.goBack();
@@ -46,6 +47,7 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
         user: user
       })
     };
+    
 
     console.log(`Sending delete request for listing ${listingObj.id}`);
 
@@ -169,6 +171,7 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
               handleClose={handleClose} 
               setOpenReferral={setOpenReferral} 
               listingObj={listingObj} 
+              user={user}
             /> : <></>
           }
           {user.employeeId === listingObj.managerId ?

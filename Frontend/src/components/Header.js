@@ -1,6 +1,7 @@
 import React from 'react';
 import './../styles/Header.css';
 import logo from './../images/ukglogo.png';
+import dmlogo from './../images/darkukglogoed.png';
 import { FaRegBell, FaRegUserCircle } from 'react-icons/fa';
 import DarkThemeToggle from './DarkThemeToggle';
 
@@ -10,7 +11,9 @@ const Header = ({ darkTheme, setDarkTheme }) => {
     <div className='header'>
       <nav>
         <div className='header-left'>
-          <div id='header-title'><img src={logo} alt='UKG Logo' /></div>
+          {darkTheme ? 
+            <div id='dark-header-title'><img src={dmlogo} alt='UKG Logo' /></div> : 
+            <div id='header-title'><img src={logo} alt='UKG Logo' /></div>}
           <h1 id='header-label'>Job Referrals</h1>
         </div>
         <div className='header-right'>

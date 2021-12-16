@@ -21,11 +21,31 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
     "updatedAt": "2021-10-14T18:40:02.987Z"
   }
 */
-const JobListing = ({ listingObj, setPopupOpen, popupOpen }) => {
+const JobListing = ({ listingObj, setPopupOpen, popupOpen, setFilterObj, filterObj }) => {
   const history = useHistory();
   const { url } = useRouteMatch();
 
   const date = new Date(listingObj.createdAt);
+
+  function setFilter(minExperience, maxExperience, minSalary, maxSalary, newTags) {
+    const obj = {};
+    console.log(filterObj);
+    if (filterObj == {}) {
+      obj.minExperience = false;
+      obj.maxExperience = false;
+      obj.minSalary = false;
+      obj.maxSalary = false;
+      obj.tags = false;
+      setFilterObj(obj);
+    }
+
+    obj.minExperience = minExperience ?? filterObj.minExperience;
+    obj.maxExperience = maxExperience ?? filterObj.maxExperience;
+    obj.minSalary = minSalary ?? filterObj.minSalary;
+    obj.maxSalary = maxSalary ?? filterObj.maxSalary;
+    obj.tags = newTags ?? filterObj.tags;
+    setFilterObj(obj);
+  }
 
   return (
     <li 
@@ -66,7 +86,11 @@ const JobListing = ({ listingObj, setPopupOpen, popupOpen }) => {
       <p className='listing-desc'>{listingObj.description}</p>
       <div className='listing-footer'>
         <ul className='tags'>
-          {listingObj.tags.map(tag => <li>{tag}</li>)}
+          {listingObj.tags.map(tag => 
+            <li onClick={(event) => {
+              event.stopPropagation();
+              setFilter(null, null, null, null, [tag]);
+            }}>{tag}</li>)}
         </ul>
         <p id='date'>
           {
