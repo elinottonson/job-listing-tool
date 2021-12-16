@@ -4,7 +4,10 @@ import './../styles/Login.css';
 import { isValidUser, isValidEmail } from '../lib/Validation';
 import BringBackTendiesCredit from './BringBackTendiesCredit';
 import logo from './../images/ukglogo.png';
+import darklogo from './../images/darkukglogoed.png';
 import bgImage from './../images/login-background.jpg';
+import dmImage from './../images/darkmode_login_background3.jpg';
+import DarkThemeToggle from './DarkThemeToggle';
 
 /*
   email/pw for testing:
@@ -30,7 +33,7 @@ import bgImage from './../images/login-background.jpg';
       }
     }
 */
-const Login = ({ setUser }) => {
+const Login = ({ setUser , darkTheme, setDarkTheme}) => {
 
   // State Varaibles
   const emailText = React.useRef(null); // for auto-fill workaround
@@ -120,17 +123,35 @@ const Login = ({ setUser }) => {
     position: 'fixed'
   };
 
+  const dmImageStyle = {
+    backgroundImage: `url(${dmImage})`,
+    backgroundAttachment: 'fixed',
+    minWidth: '100%',
+    minHeight: '100%',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    transform: 'scale(1.03)',
+    zIndex: '-5',
+    position: 'fixed'
+  };
+
   /*
     You'll notice that the <input> for email uses 'ref' instead of 'onChange'. 
     This is to accomodate the workaround seen above.
   */
   return (
     <div>
-      <div style={bgImageStyle}></div>
-      <BringBackTendiesCredit />
+      { darkTheme ? <div style={dmImageStyle}></div> : <div style={bgImageStyle}></div>}
+      <div className='extras'>
+        <BringBackTendiesCredit />
+      </div>
       <main className='login-center-container'>
         <div className='login-container'>
-          <img className='ukglogo' src={logo} alt='UKG Logo' />
+          <div className='logo-container'>
+            {darkTheme ? 
+              <img className='darkukglogo' src={darklogo} alt='UKG Logo' /> :
+              <img className='ukglogo' src={logo} alt='UKG Logo' />}
+          </div>
           <h1 id='login-page-h1'>Sign in</h1>
           <form onSubmit={handleSubmit} className='login-form'>
             <input
@@ -156,6 +177,11 @@ const Login = ({ setUser }) => {
             {/* ^^^ This should probably be a react-router <Link> eventually instead */}
             <input type='submit' tabIndex='0' value={loading ? 'Loading...' : 'Submit'} id='submit' />
           </form>
+        </div>
+        <div className='darkmode-toggle-container'>
+          <div className='darkmode-toggle'>
+            <DarkThemeToggle darkTheme={darkTheme} setDarkTheme={setDarkTheme}/>
+          </div>
         </div>
       </main>
     </div>

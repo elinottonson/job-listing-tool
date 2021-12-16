@@ -6,13 +6,13 @@
   .popup-card-container {
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
-    background-color: hsla(0, 0%, 90%, 0.2);
+    background-color: var(--background);
   }
 }
 /* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
 @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .popup-card-container {
-    background-color: hsla(0, 0%, 90%, 0.8);
+    background-color: var(--dark-shadow);
   }
 }
   

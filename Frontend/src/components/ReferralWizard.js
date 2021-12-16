@@ -35,9 +35,10 @@ import './../styles/CreateListingWizard.css';
   }
 */
 
-const ReferralWizard = ({ handleClose, setOpenReferral, listingObj }) => {
+const ReferralWizard = ({ handleClose, setOpenReferral, listingObj, user}) => {
 
   const [userInput, setUserInput] = React.useState({
+    user: user,
     firstName: '',
     lastName: '',
     email: '',
