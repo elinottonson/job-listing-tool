@@ -22,15 +22,16 @@ async function mailer(ref){
         const rec = await getUserById(listing.managerId);
 
         let text = 
-        `${ref.firstName} ${ref.lastName} been referred for position ${listing.title}.\n\n` + 
-        `Referral Description: \n${ref.referralText}\n\n` + 
-        `Referee Email: ${ref.email}`;
+        `<p>${ref.firstName} ${ref.lastName} been referred for position ${listing.title}.</p>` + 
+        `<p>Referral Description: ${ref.referralText}</p>` + 
+        `<p>Referee Email: ${ref.email}</p>`;
 
         await transporter.sendMail({
             from: '"no-reply" <joblistintest@gmail.com>', // sender address
-            to: rec.email, // list of receivers
+            to: "alenna.spiro@gmail.com", // list of receivers
             subject: "Job Referral", // Subject line
-            text: text, // plain text body
+            text: text, // plain text body,
+            html: text + "<p>Click <a>https://job-listing-tool-320.herokuapp.com/dashboard</a> to see the referral.</p>"
         });
         console.log('Email Sent to ' + rec.email);
     } catch(err) {

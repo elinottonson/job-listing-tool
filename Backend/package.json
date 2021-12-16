@@ -32,7 +32,7 @@
     "pg": "^8.7.1",
     "react-step-wizard": "^5.3.9",
     "sequelize": "^6.6.5",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.2.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
