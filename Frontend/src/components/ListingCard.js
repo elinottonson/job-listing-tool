@@ -171,6 +171,7 @@ const ListingCard = ({ user, setPopupOpen, listingObj, setRefreshListings }) => 
               handleClose={handleClose} 
               setOpenReferral={setOpenReferral} 
               listingObj={listingObj} 
+              user={user}
             /> : <></>
           }
           {user.employeeId === listingObj.managerId ?

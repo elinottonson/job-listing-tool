@@ -43,6 +43,7 @@ nav {
   height: 30px;
   margin-left: -5px;
   border-radius: 10px;
+  box-shadow: 0px 0px 15px var(--darkest-shadow);
 }
 
 .header-btn {
@@ -61,7 +62,6 @@ nav img {
   height: 20px;
   margin-bottom: 2px;
   margin-right: 10px;
-
 }
 
 .help-text {

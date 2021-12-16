@@ -12,6 +12,7 @@
   align-items: center;
   border-radius: 10px;
   width: 300px;
+  height: 410px;
   padding: 50px 25px 10px 25px;
   box-shadow: 0px 0px 15px var(--darkest-shadow);
   background-color: var(--background);
@@ -32,7 +33,6 @@
 
 .logo-container {
   width: fit-content;
-
   /* overflow:hidden; */
   align-items: center;
 }
@@ -49,6 +49,7 @@
   width: 200px;
   /* padding: 5px; */
   border-radius: 10px;
+  box-shadow: 0px 0px 15px var(--darkest-shadow);
   margin-right: 5px;
   margin-top: -5px;
   margin-bottom: 15px;

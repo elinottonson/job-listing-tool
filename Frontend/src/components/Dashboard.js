@@ -13,6 +13,20 @@ import Filters from './Filters.js';
 import ListingCard from './ListingCard';
 import PopupCard from './PopupCard';
 import CreateListingWizard from './CreateListingWizard';
+import dmImage from './../images/darkmode_login_background3.jpg';
+
+
+const dmImageStyle = {
+  backgroundImage: `url(${dmImage})`,
+  backgroundAttachment: 'fixed',
+  minWidth: '100%',
+  minHeight: '100%',
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  transform: 'scale(1.03)',
+  zIndex: '-5',
+  position: 'fixed'
+};
 
 const Dashboard = ({ user, setUser, darkTheme, setDarkTheme }) => {
 
