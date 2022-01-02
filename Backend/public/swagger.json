@@ -65,6 +65,92 @@
         }
       }
     },
+    "/api/new-listing": {
+      "post": {
+        "tags": [
+          "manager"
+        ],
+        "summary": "managers create new listings for jobs",
+        "description": "By passing in the appropriate fields the manager can create a new listing for users to apply to\n",
+        "operationId": "createListing",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "isManager",
+            "in": "query",
+            "description": "confirmation that the user is a manager",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "isValidListing",
+            "in": "query",
+            "description": "confirmation that the listing data is valid",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Listings"
+            }
+          },
+          "400": {
+            "description": "User not a manager "
+          },
+          "401": {
+            "description": "Invalid Listing "
+          }
+        }
+      }
+    },
+    "/api/delete-listing": {
+      "post": {
+        "tags": [
+          "manager"
+        ],
+        "summary": "managers create new listings for jobs",
+        "description": "By passing in the appropriate fields the manager can create a new listing for users to apply to\n",
+        "operationId": "deleteListing",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "isManager",
+            "in": "query",
+            "description": "confirmation that the user is a manager",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "ListingID",
+            "in": "query",
+            "description": "give the listing ID to delete the listing",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Listings"
+            }
+          },
+          "400": {
+            "description": "User not a manager "
+          },
+          "401": {
+            "description": "Listing ID invalid "
+          }
+        }
+      }
+    },
     "/api/listings": {
       "get": {
         "tags": [
@@ -141,10 +227,21 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "listingID",
+            "in": "query",
+            "description": "user gets referrals from a listing",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "successful operation"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Referral"
+            }
           }
         }
       }
@@ -160,7 +257,15 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "user token is checked to see if they can stay on website",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
         "responses": {
           "401": {
             "description": "User not found"
@@ -179,10 +284,21 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "referal",
+            "in": "query",
+            "description": "user created a referral for a listing",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "successful operation"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Referral"
+            }
           },
           "400": {
             "description": "Invalid referral"
@@ -211,6 +327,47 @@
     }
   },
   "definitions": {
+    "Referral": {
+      "type": "object",
+      "required": [
+        "authorId",
+        "email",
+        "firstName",
+        "lastName",
+        "listingId",
+        "referralText"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "John"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Snow"
+        },
+        "email": {
+          "type": "string",
+          "example": "jsnow@umass.edu"
+        },
+        "referralText": {
+          "type": "string",
+          "example": "He is smart"
+        },
+        "listingId": {
+          "type": "integer",
+          "example": 18
+        },
+        "companyName": {
+          "type": "string",
+          "example": "UKG"
+        },
+        "authorId": {
+          "type": "integer",
+          "example": 52
+        }
+      }
+    },
     "Listings": {
       "type": "object",
       "required": [
